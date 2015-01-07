@@ -1,5 +1,6 @@
 package com.subscreen.Subtitles;
 import com.subscreen.TextBlock;
+import com.subscreen.TimeBlock;
 import com.subscreen.UnicodeReader;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class ASSFormat implements SubtitleFormat {
 	static String[] replaceWith = {"\n","<i>","<i>",""};
 	public ArrayList<TextBlock> readFile(String path)
 	{
-		ArrayList<TextBlock> blocks = new ArrayList<TextBlock>();
+		ArrayList<TextBlock> blocks = new ArrayList<>();
 		UnicodeReader br = new UnicodeReader(path);
 		readLines(br, blocks);
 		return blocks;
@@ -57,8 +58,6 @@ public class ASSFormat implements SubtitleFormat {
 				for (i = 0; i < buffer.length(); i++)
 				{
 					char tmp = buffer.charAt(i);
-					System.out.println(tmp);
-					tmp = tmp;
 					if (buffer.charAt(i) == ',' && matchComma)
 						commasFound++;
 					if (commasFound >= lastCommaCount)
@@ -74,7 +73,7 @@ public class ASSFormat implements SubtitleFormat {
 				{
 					buffer = buffer.replace(replace[i], replaceWith[i]);
 				}
-				blocks.add(new TextBlock(buffer, beginTime, endTime));
+				blocks.add(new TimeBlock(buffer, beginTime, endTime));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

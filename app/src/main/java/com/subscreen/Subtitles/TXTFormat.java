@@ -2,8 +2,8 @@ package com.subscreen.Subtitles;
 
 import android.widget.TextView;
 
-import com.subscreen.Subtitles.SubtitleFormat;
 import com.subscreen.TextBlock;
+import com.subscreen.TimeBlock;
 import com.subscreen.UnicodeReader;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class TXTFormat implements SubtitleFormat {
     public TextView writeTo;
 
     public ArrayList<TextBlock> readFile(String path) {
-        ArrayList<TextBlock> blocks = new ArrayList<TextBlock>();
+        ArrayList<TextBlock> blocks = new ArrayList<>();
         UnicodeReader br = new UnicodeReader(path);
         readLines(br, blocks);
         return blocks;
@@ -45,7 +45,7 @@ public class TXTFormat implements SubtitleFormat {
                 text = new String(in.readLine());
                 for (int i = 0; i < replace.length; i++)
                     text = text.replace(replace[i],replaceWith[i]);
-                blocks.add(new TextBlock(text,startTime,endTime));
+                blocks.add(new TimeBlock(text,startTime,endTime));
             }
         } catch (Exception e)
         {

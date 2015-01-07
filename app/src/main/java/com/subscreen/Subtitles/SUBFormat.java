@@ -3,6 +3,7 @@ package com.subscreen.Subtitles;
 import android.widget.TextView;
 
 import com.subscreen.TextBlock;
+import com.subscreen.TimeBlock;
 import com.subscreen.UnicodeReader;
 
 import java.util.ArrayList;
@@ -16,14 +17,14 @@ public class SUBFormat implements SubtitleFormat {
     public TextView writeTo;
 
     public ArrayList<TextBlock> readFile(String path) {
-        ArrayList<TextBlock> blocks = new ArrayList<TextBlock>();
+        ArrayList<TextBlock> blocks = new ArrayList<>();
         UnicodeReader br = new UnicodeReader(path);
         readLines(br, blocks);
         return blocks;
     }
     void readLines(UnicodeReader in, ArrayList<TextBlock> blocks) {
         String[] replace = {"|"};
-        String[] replaceWith = {"/n"};
+        String[] replaceWith = {"\n"};
         //Pattern p = Pattern.compile("\\[(\\d*)\\]\\[(\\d*)\\]");
         Pattern p = Pattern.compile("\\{(\\d*)\\}\\{(\\d*)\\}(.*)");
         String buffer;
@@ -41,7 +42,7 @@ public class SUBFormat implements SubtitleFormat {
                     text = m.group(3);
                     for (int i = 0; i < replace.length; i++)
                         text = text.replace(replace[i],replaceWith[i]);
-                    blocks.add(new TextBlock(text,startTime,endTime));
+                    blocks.add(new TimeBlock(text,startTime,endTime));
                 }
             }
         }
