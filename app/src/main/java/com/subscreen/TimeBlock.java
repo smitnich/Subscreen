@@ -18,7 +18,7 @@ public class TimeBlock implements TextBlock {
 		endTime = s;
 		text = input;
 	}
-	public void FirstDelay()
+	public void firstDelay()
 	{
 		Date currentTime = new Date();
 		long toSleep = startTime - (currentTime.getTime() - Main.rootTime);

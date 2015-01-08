@@ -49,6 +49,7 @@ public class Main {
         while (i < blocks.size())
 		{
             tmp = blocks.get(i++);
+            tmp.firstDelay();
             tmp.FirstDelay();
 			tmp.getText(outputTo);
 			tmp.secondDelay();
