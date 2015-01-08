@@ -3,7 +3,7 @@ package com.subscreen.Subtitles;
 import android.widget.TextView;
 
 import com.subscreen.TextBlock;
-import com.subscreen.TimeBlock;
+import com.subscreen.FrameBlock;
 import com.subscreen.UnicodeReader;
 
 import java.util.ArrayList;
@@ -30,19 +30,19 @@ public class SUBFormat implements SubtitleFormat {
         String buffer;
         Matcher m;
         String text;
-        long startTime, endTime;
+        long startFrame, endFrame;
         try {
             while (in.available() > 0) {
                 buffer = new String(in.readLine());
                 m = p.matcher(buffer);
                 if (m.find())
                 {
-                    startTime = Integer.parseInt(m.group(1));
-                    endTime = Integer.parseInt(m.group(2));
+                    startFrame = Integer.parseInt(m.group(1));
+                    endFrame = Integer.parseInt(m.group(2));
                     text = m.group(3);
                     for (int i = 0; i < replace.length; i++)
                         text = text.replace(replace[i],replaceWith[i]);
-                    blocks.add(new TimeBlock(text,startTime,endTime));
+                    blocks.add(new FrameBlock(text,startFrame,endFrame));
                 }
             }
         }
