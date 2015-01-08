@@ -46,11 +46,11 @@ public class Main {
         long firstTime = tmp.getStartTime();
         tmp.getText(outputTo);
         tmp.secondDelay();
+        outputTo.clearText();
         while (i < blocks.size())
 		{
             tmp = blocks.get(i++);
             tmp.firstDelay();
-            tmp.FirstDelay();
 			tmp.getText(outputTo);
 			tmp.secondDelay();
 			outputTo.clearText();
