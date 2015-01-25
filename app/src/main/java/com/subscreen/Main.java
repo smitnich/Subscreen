@@ -44,6 +44,7 @@ public class Main {
         TextBlock tmp;
         tmp = blocks.get(i++);
         long firstTime = tmp.getStartTime();
+        rootTime -= firstTime;
         tmp.getText(outputTo);
         tmp.secondDelay();
         outputTo.clearText();
