@@ -11,6 +11,7 @@ public class UnicodeReader {
     int bufferOffset = 0;
 	FileInputStream fis = null;
     int limit = 0;
+    int tmp = 0;
 	public UnicodeReader(String fileName) {
 		try {
 			fis = new FileInputStream(fileName);
@@ -49,7 +50,12 @@ public class UnicodeReader {
                         out[j++] = 0;
                         break;
                     }
-                    out[j++] = (char) buffer[i++];
+                    tmp = buffer[i++];
+                    //All bytes are signed in java, meaning that they will be interpreted as negative
+                    //values by default. By casting up to an int, and masking out all but the first
+                    //8 bits, we make it positive and removing all of the leading ones in a negative
+                    //number
+                    out[j++] = (char) (tmp & 0xFF);
                 }
 		} catch (IOException e) {
 			e.printStackTrace();
