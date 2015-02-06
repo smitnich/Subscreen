@@ -12,10 +12,9 @@
 
     <TextView
         android:id="@+id/edit_message"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:gravity="center"
@@ -23,6 +22,30 @@
         android:textColor="#FFF"
         android:textScaleX="0.85"
         android:textSize="36sp"
-        android:typeface="sans" />
+        android:typeface="sans"
+        android:layout_toRightOf="@+id/controlrow"
+        android:layout_toEndOf="@+id/controlrow" />
+
+    <RelativeLayout
+        android:id="@+id/controlrow"
+        android:orientation="horizontal"
+        android:layout_width="25dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        >
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="||"
+            android:id="@+id/button"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
 
 </RelativeLayout>
