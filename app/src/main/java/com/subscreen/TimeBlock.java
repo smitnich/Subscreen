@@ -6,6 +6,7 @@ public class TimeBlock implements TextBlock {
 	public String text;
 	public long startTime;
 	public long endTime;
+    public long offset = 0;
 	public TimeBlock(String input, long s, long e)
 	{
 		startTime = s;
@@ -18,28 +19,28 @@ public class TimeBlock implements TextBlock {
 		endTime = s;
 		text = input;
 	}
-	public void firstDelay()
+	public void firstDelay() throws InterruptedException
 	{
 		Date currentTime = new Date();
-		long toSleep = startTime - (currentTime.getTime() - Main.rootTime);
+		long toSleep = startTime - (currentTime.getTime() - Main.getOffset() - Main.rootTime);
 		if (toSleep <= 0)
 			return;
 		try {
 			Thread.sleep(toSleep);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
-	public void secondDelay()
+	public void secondDelay() throws InterruptedException
 	{
 		Date currentTime = new Date();
-		long toSleep = endTime - (currentTime.getTime() - Main.rootTime);
+		long toSleep = endTime - (currentTime.getTime() - Main.getOffset() - Main.rootTime);
 		if (toSleep <= 0)
 			return;
 		try {
 			Thread.sleep(toSleep);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			throw e;
 		}		
 	}
 	public void getText(Output _outputTo)

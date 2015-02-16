@@ -15,6 +15,8 @@ public class FrameBlock implements TextBlock {
     public String text;
     public long startFrame;
     public long endFrame;
+    //Since the time that a user pauses for is not related to the framerate, this should not
+    //be based on the framerate modifier
     public FrameBlock(String input, long s, long e)
     {
         startFrame = s;
@@ -26,32 +28,32 @@ public class FrameBlock implements TextBlock {
     {
         frameRateModifier = 1000.0/frameRates[choice];
     }
-    public void firstDelay()
+    public void firstDelay() throws InterruptedException
     {
         Date currentTime = new Date();
-        long toSleep = (long) Math.floor(startFrame*frameRateModifier) - (currentTime.getTime() - Main.rootTime);
+        long toSleep = (long) Math.floor(startFrame*frameRateModifier) - (currentTime.getTime() - Main.getOffset() - Main.rootTime);
         if (toSleep <= 0)
             return;
         try {
             Thread.sleep(toSleep);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw e;
         }
     }
     public void getText(Output _outputTo)
     {
         _outputTo.outputText(text);
     }
-    public void secondDelay()
+    public void secondDelay() throws InterruptedException
     {
         Date currentTime = new Date();
-        long toSleep = (long) Math.floor(endFrame*frameRateModifier) - (currentTime.getTime() - Main.rootTime);
+        long toSleep = (long) Math.floor(endFrame*frameRateModifier) - (currentTime.getTime() - Main.getOffset() - Main.rootTime);
         if (toSleep <= 0)
             return;
         try {
             Thread.sleep(toSleep);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw e;
         }
     }
     public long getStartTime()
