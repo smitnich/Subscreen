@@ -12,6 +12,7 @@ public class UnicodeReader {
 	FileInputStream fis = null;
     int limit = 0;
     int tmp = 0;
+    boolean done = false;
 	public UnicodeReader(String fileName) {
 		try {
 			fis = new FileInputStream(fileName);
@@ -40,6 +41,10 @@ public class UnicodeReader {
                         limit = fis.read(buffer);
                         bufferOffset = 0;
                         i = 0;
+                        if (limit == -1) {
+                            done = true;
+                            return out;
+                        }
                         out[j++] = (char) buffer[i++];
                     }
                     if (buffer[i] == '\r' || buffer[i] == '\n') {
@@ -80,7 +85,9 @@ public class UnicodeReader {
 	}
 	public int available() throws IOException
 	{
-        int test = fis.available();
-		return fis.available();
+        if (done)
+            return 0;
+        else
+            return 1;
 	}
 }
