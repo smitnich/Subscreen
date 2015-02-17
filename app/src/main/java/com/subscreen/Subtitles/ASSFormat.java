@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class ASSFormat implements SubtitleFormat {
 
 	//The string that begins any dialogue data
-	static String dialogueString = "Dialogue:";
 	//The number of commas before reaching the actual text to output
 	static int lastCommaCount = 9;
 	static String[] replace = {"\\N","{\\i0}","{\\i1}","{\\pub}"};
@@ -30,18 +29,32 @@ public class ASSFormat implements SubtitleFormat {
 	}
 	public void readLines(UnicodeReader in, ArrayList<TextBlock> blocks)
 	{
+        char[] startTag = "[Events]".toCharArray();
 		int begin, end, i;
 		long beginTime, endTime;
 		int commasFound = 0;
 		boolean matchComma = true;
 		String buffer = new String();
 		try {
+            //Skip until the Events tag for now
+            while (in.available() > 0)
+            {
+                char[] tmp = in.readLine();
+                for (i = 0; i < startTag.length; i++) {
+                    if (tmp[i] != startTag[i])
+                        break;
+                }
+                if (i == startTag.length)
+                    break;
+            }
+            //We want to ignore the format text for now
+            in.readLine();
 			while (in.available() > 0)
 			{	
 				//The vast majority of data in ASS files is of no use to us; just
 				//parse the text after 'Dialogue:'
 				buffer =  new String(in.readLine()).trim();
-				if (buffer.length() < dialogueString.length() || buffer.substring(0,dialogueString.length()).compareTo(dialogueString) != 0)
+				if (buffer.length() == 0)
 					continue;
 				//Find the first and last commas and take the substring between them
 				begin = buffer.indexOf(',')+1;
@@ -58,7 +71,6 @@ public class ASSFormat implements SubtitleFormat {
 				String endTimeString = buffer.substring(begin,end);
 				beginTime = parseTimeStamp(beginTimeString);
 				endTime = parseTimeStamp(endTimeString);
-				begin = 0;
 				commasFound = 0;
 				matchComma = true;
 				for (i = 0; i < buffer.length(); i++)
@@ -97,6 +109,4 @@ public class ASSFormat implements SubtitleFormat {
 		float seconds = Float.parseFloat(input.substring(count,nextCount));
 		return (hours*60*60*1000) + (minutes*60*1000) + ((int) (seconds*1000));
 	}
-
-
 }
