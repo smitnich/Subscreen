@@ -39,12 +39,12 @@ public class UnicodeReader {
                     if (i >= limit)
                     {
                         limit = fis.read(buffer);
-                        bufferOffset = 0;
-                        i = 0;
-                        if (limit == -1) {
-                            done = true;
+                        if (limit == -1)
+                        {
                             return out;
                         }
+                        bufferOffset = 0;
+                        i = 0;
                         out[j++] = (char) buffer[i++];
                     }
                     if (buffer[i] == '\r' || buffer[i] == '\n') {
@@ -85,7 +85,7 @@ public class UnicodeReader {
 	}
 	public int available() throws IOException
 	{
-        if (done)
+        if (limit == -1)
             return 0;
         else
             return 1;
