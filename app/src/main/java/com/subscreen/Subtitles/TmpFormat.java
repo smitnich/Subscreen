@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.widget.TextView;
 
+import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
 import com.subscreen.UnicodeReader;
@@ -12,6 +13,11 @@ import com.subscreen.UnicodeReader;
 public class TmpFormat implements SubtitleFormat {
 
 	public TextView writeTo;
+    public SubtitlePlayer playerInstance = null;
+    public TmpFormat(SubtitlePlayer tmpPlayer)
+    {
+        playerInstance = tmpPlayer;
+    }
 	public ArrayList<TextBlock> readFile(String path)
 	{
 		ArrayList<TextBlock> blocks = new ArrayList<>();
@@ -58,7 +64,7 @@ public class TmpFormat implements SubtitleFormat {
                 {
                     input = input.replace(replace[i],replaceWith[i]);
                 }
-				oldBlock = new TimeBlock(input,time);
+				oldBlock = new TimeBlock(input,time,playerInstance);
 			}
 			if (oldBlock != null)
 			{

@@ -1,4 +1,5 @@
 package com.subscreen.Subtitles;
+import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
 import com.subscreen.UnicodeReader;
@@ -15,6 +16,11 @@ public class ASSFormat implements SubtitleFormat {
 	static int lastCommaCount = 9;
 	static String[] replace = {"\\N","{\\i0}","{\\i1}","{\\pub}"};
 	static String[] replaceWith = {"\n","<i>","<i>",""};
+    SubtitlePlayer playerInstance = null;
+    public ASSFormat(SubtitlePlayer tmpPlayer)
+    {
+        playerInstance = tmpPlayer;
+    }
 	public ArrayList<TextBlock> readFile(String path)
 	{
 		ArrayList<TextBlock> blocks = new ArrayList<>();
@@ -73,7 +79,7 @@ public class ASSFormat implements SubtitleFormat {
 				{
 					buffer = buffer.replace(replace[i], replaceWith[i]);
 				}
-				blocks.add(new TimeBlock(buffer, beginTime, endTime));
+				blocks.add(new TimeBlock(buffer, beginTime, endTime, playerInstance));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -15,10 +15,12 @@ public class FrameBlock implements TextBlock {
     public String text;
     public long startFrame;
     public long endFrame;
+    SubtitlePlayer playerInstance = null;
     //Since the time that a user pauses for is not related to the framerate, this should not
     //be based on the framerate modifier
-    public FrameBlock(String input, long s, long e)
+    public FrameBlock(String input, long s, long e, SubtitlePlayer tmp)
     {
+        playerInstance = tmp;
         startFrame = s;
         endFrame = e;
         text = input;
@@ -31,7 +33,8 @@ public class FrameBlock implements TextBlock {
     public void firstDelay() throws InterruptedException
     {
         Date currentTime = new Date();
-        long toSleep = (long) Math.floor(startFrame*frameRateModifier) - (currentTime.getTime() - Main.getOffset() - Main.rootTime);
+        long toSleep = (long) Math.floor(startFrame*frameRateModifier) - (currentTime.getTime()
+                - playerInstance.getOffset() - playerInstance.rootTime);
         if (toSleep <= 0)
             return;
         try {
@@ -47,7 +50,8 @@ public class FrameBlock implements TextBlock {
     public void secondDelay() throws InterruptedException
     {
         Date currentTime = new Date();
-        long toSleep = (long) Math.floor(endFrame*frameRateModifier) - (currentTime.getTime() - Main.getOffset() - Main.rootTime);
+        long toSleep = (long) Math.floor(endFrame*frameRateModifier) - (currentTime.getTime() -
+                playerInstance.getOffset() - playerInstance.rootTime);
         if (toSleep <= 0)
             return;
         try {
@@ -59,11 +63,11 @@ public class FrameBlock implements TextBlock {
     public long getStartTime()
     {
         Date currentTime = new Date();
-        return (long) Math.floor(startFrame*frameRateModifier)-(currentTime.getTime() - Main.rootTime);
+        return (long) Math.floor(startFrame*frameRateModifier)-(currentTime.getTime() - playerInstance.rootTime);
     }
     long convertFramerate(double newFPS)
     {
         Date currentTime = new Date();
-        return Math.round((currentTime.getTime()-Main.rootTime)*newFPS/1000);
+        return Math.round((currentTime.getTime()- playerInstance.rootTime)*newFPS/1000);
     }
 }

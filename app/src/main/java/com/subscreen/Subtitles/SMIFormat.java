@@ -2,6 +2,7 @@ package com.subscreen.Subtitles;
 
 import android.widget.TextView;
 
+import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
 import com.subscreen.UnicodeReader;
@@ -16,7 +17,11 @@ import java.util.ArrayList;
 public class SMIFormat implements SubtitleFormat {
 
     public TextView writeTo;
-
+    SubtitlePlayer playerInstance = null;
+    public SMIFormat(SubtitlePlayer tmpPlayer)
+    {
+        playerInstance = tmpPlayer;
+    }
     public ArrayList<TextBlock> readFile(String path) {
         ArrayList<TextBlock> blocks = new ArrayList<>();
         UnicodeReader br = new UnicodeReader(path);
@@ -46,7 +51,7 @@ public class SMIFormat implements SubtitleFormat {
                     if (m.groupCount() > 1)
                         endTime = Integer.parseInt(m.group(2));
                     buffer = in.readLine();
-                    prevBlock = new TimeBlock(new String(buffer), startTime);
+                    prevBlock = new TimeBlock(new String(buffer), startTime,playerInstance);
                     //If we didn't find an end time, we need to use the start time of the next block
                     //as the end time
                     if (m.groupCount() > 1) {

@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import android.widget.TextView;
 
+import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
 import com.subscreen.UnicodeReader;
@@ -11,6 +12,11 @@ import com.subscreen.UnicodeReader;
 public class SrtFormat implements SubtitleFormat {
 
 	public TextView writeTo;
+    SubtitlePlayer playerInstance = null;
+    public SrtFormat(SubtitlePlayer tmpPlayer)
+    {
+        playerInstance = tmpPlayer;
+    }
 	public ArrayList<TextBlock> readFile(String path)
 	{
 		ArrayList<TextBlock> blocks = new ArrayList<>();
@@ -44,7 +50,7 @@ public class SrtFormat implements SubtitleFormat {
 					tmp = new String(in.readLine()).trim();
 					buffer += tmp + "\n";
 				}
-				blocks.add(new TimeBlock(buffer, beginTime, endTime));
+				blocks.add(new TimeBlock(buffer, beginTime, endTime,playerInstance));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

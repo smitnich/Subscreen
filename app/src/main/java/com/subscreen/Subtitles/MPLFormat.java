@@ -2,6 +2,7 @@ package com.subscreen.Subtitles;
 
 import android.widget.TextView;
 
+import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.FrameBlock;
 import com.subscreen.UnicodeReader;
@@ -16,7 +17,11 @@ import java.util.ArrayList;
  */
 public class MPLFormat implements SubtitleFormat {
     public TextView writeTo;
-
+    SubtitlePlayer playerInstance = null;
+    public MPLFormat(SubtitlePlayer tmpPlayer)
+    {
+        playerInstance = tmpPlayer;
+    }
     public ArrayList<TextBlock> readFile(String path) {
         ArrayList<TextBlock> blocks = new ArrayList<>();
         UnicodeReader br = new UnicodeReader(path);
@@ -43,7 +48,7 @@ public class MPLFormat implements SubtitleFormat {
                     text = m.group(3);
                     for (int i = 0; i < replace.length; i++)
                         text = text.replace(replace[i],replaceWith[i]);
-                    blocks.add(new FrameBlock(text,startFrame,endFrame));
+                    blocks.add(new FrameBlock(text,startFrame,endFrame,playerInstance));
                 }
             }
         }

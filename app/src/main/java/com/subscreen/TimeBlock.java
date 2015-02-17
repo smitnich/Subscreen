@@ -7,22 +7,25 @@ public class TimeBlock implements TextBlock {
 	public long startTime;
 	public long endTime;
     public long offset = 0;
-	public TimeBlock(String input, long s, long e)
+    SubtitlePlayer playerInstance = null;
+	public TimeBlock(String input, long s, long e, SubtitlePlayer tmpPlayer)
 	{
+        playerInstance = tmpPlayer;
 		startTime = s;
 		endTime = e;
 		text = input;
 	}
-	public TimeBlock(String input, long s)
+	public TimeBlock(String input, long s, SubtitlePlayer tmpPlayer)
 	{
-		startTime = s;
+        playerInstance = tmpPlayer;
+        startTime = s;
 		endTime = s;
 		text = input;
 	}
 	public void firstDelay() throws InterruptedException
 	{
 		Date currentTime = new Date();
-		long toSleep = startTime - (currentTime.getTime() - Main.getOffset() - Main.rootTime);
+		long toSleep = startTime - (currentTime.getTime() - playerInstance.getOffset() - playerInstance.rootTime);
 		if (toSleep <= 0)
 			return;
 		try {
@@ -34,7 +37,7 @@ public class TimeBlock implements TextBlock {
 	public void secondDelay() throws InterruptedException
 	{
 		Date currentTime = new Date();
-		long toSleep = endTime - (currentTime.getTime() - Main.getOffset() - Main.rootTime);
+		long toSleep = endTime - (currentTime.getTime() - playerInstance.getOffset() - playerInstance.rootTime);
 		if (toSleep <= 0)
 			return;
 		try {

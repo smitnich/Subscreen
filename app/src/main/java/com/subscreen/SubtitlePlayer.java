@@ -19,18 +19,18 @@ import com.subscreen.Subtitles.TmpFormat;
 import android.widget.Button;
 import android.app.Activity;
 
-public class Main {
-    public static long rootTime = -1;
-    static long offset = 0;
-    static boolean paused = false;
-    static int subCount = -1;
-    static Thread execThread = null;
-    static long pauseTime = -1;
-    static AndroidOutput outputTo = null;
-    static ArrayList<TextBlock> blocks = null;
-    static TextBlock text;
-    static String rootPath = System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
-	public static void main(TextView toEdit, Context context, String fileName, Activity activity) {
+public class SubtitlePlayer {
+    long rootTime = -1;
+    long offset = 0;
+    boolean paused = false;
+    int subCount = -1;
+    Thread execThread = null;
+    long pauseTime = -1;
+    AndroidOutput outputTo = null;
+    ArrayList<TextBlock> blocks = null;
+    TextBlock text;
+    String rootPath = System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
+	public void main(TextView toEdit, Context context, String fileName, Activity activity) {
 		SubtitleFormat subFile = pickFormat(rootPath+fileName);
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
@@ -39,7 +39,7 @@ public class Main {
 		blocks = subFile.readFile(rootPath+fileName);
         startThread();
 	}
-    private static void startThread()
+    private void startThread()
     {
         execThread = new Thread(new Runnable() {
             public void run() {
@@ -47,7 +47,7 @@ public class Main {
             }});
         execThread.start();
     }
-    private static void startSubtitles()
+    private void startSubtitles()
     {
         if (subCount == -1) {
             subCount = 0;
@@ -68,7 +68,7 @@ public class Main {
         }
         playSubtitles(blocks,outputTo);
     }
-	private static void playSubtitles(ArrayList<TextBlock> blocks, Output outputTo) {
+	private void playSubtitles(ArrayList<TextBlock> blocks, Output outputTo) {
         try {
             if (blocks == null)
                 return;
@@ -86,7 +86,7 @@ public class Main {
             return;
         }
 	}
-	private static SubtitleFormat pickFormat(String path)
+	private SubtitleFormat pickFormat(String path)
 	{
         FileInputStream fis = null;
         byte[] buffer = new byte[1024];
@@ -97,30 +97,30 @@ public class Main {
             switch(buffer[0])
             {
                 case '{':
-                    return new SUBFormat();
+                    return new SUBFormat(this);
                 case '[':
                     if (buffer[1] >= '0' && buffer[1] <= '9')
-                        return new MPLFormat();
+                        return new MPLFormat(this);
                     else
                     {
                         while (buffer[count++] != '\n');
                         if (buffer[count] == '[')
-                            return new TXTFormat();
+                            return new TXTFormat(this);
                         else
-                            return new ASSFormat();
+                            return new ASSFormat(this);
                     }
                 //Theoretically this could actually be a different format with the first text
                 //appearing 10 hours in, so double check just to be paranoid
                 case '1':
                     if (buffer[1] == '\r' || buffer[1] == '\n')
-                        return new SrtFormat();
+                        return new SrtFormat(this);
                     else
                     //FixMe
-                        return new TmpFormat();
+                        return new TmpFormat(this);
                 case '0':
-                    return new TmpFormat();
+                    return new TmpFormat(this);
                 case '<':
-                    return new SMIFormat();
+                    return new SMIFormat(this);
             }
             fis.close();
         }
@@ -139,7 +139,7 @@ public class Main {
         }
         return null;
     }
-    public static void pause()
+    public void pause()
     {
         long timeOffset = 0;
         if (!paused) {
@@ -155,7 +155,7 @@ public class Main {
         }
         paused = !paused;
     }
-    public static long getOffset() {
+    public long getOffset() {
         return offset;
     }
 }
