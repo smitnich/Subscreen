@@ -46,7 +46,9 @@ public class TmpFormat implements SubtitleFormat {
 			{	
 				charBuffer = in.readLine();
 				System.out.println(charBuffer);
-				String buffer = new String(charBuffer);
+				String buffer = new String(charBuffer).trim();
+                if (buffer.length() == 0)
+                    break;
 				int idx = 0;
 				for (int i = 0; i < 3; i++)
 				{
