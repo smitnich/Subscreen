@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.subscreen"
 	android:versionCode="1"
-	android:versionName="1.0" >
+    android:versionName="1.0" >
 	<uses-sdk
 	android:minSdkVersion="8"
 	android:targetSdkVersion="21" />
@@ -24,5 +24,5 @@
         </intent-filter>
     </activity>
 	</application>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>
