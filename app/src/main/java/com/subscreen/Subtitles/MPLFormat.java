@@ -4,7 +4,7 @@ import android.widget.TextView;
 
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
-import com.subscreen.FrameBlock;
+import com.subscreen.TimeBlock;
 import com.subscreen.UnicodeReader;
 
 import java.util.regex.Pattern;
@@ -36,19 +36,21 @@ public class MPLFormat implements SubtitleFormat {
         String buffer;
         Matcher m;
         String text;
-        long startFrame, endFrame;
+        long startTime, endTime;
         try {
             while (in.available() > 0) {
                 buffer = new String(in.readLine());
                 m = p.matcher(buffer);
-                if (m.find())
-                {
-                    startFrame = Integer.parseInt(m.group(1));
-                    endFrame = Integer.parseInt(m.group(2));
+                if (m.find()) {
+                    //Multiple by 100 because it is in tenths of a second;
+                    //this is the same as multiplying by 1000 to convert to milliseconds
+                    //and dividing by 10
+                    startTime = Integer.parseInt(m.group(1))*100;
+                    endTime = Integer.parseInt(m.group(2))*100;
                     text = m.group(3);
                     for (int i = 0; i < replace.length; i++)
-                        text = text.replace(replace[i],replaceWith[i]);
-                    blocks.add(new FrameBlock(text,startFrame,endFrame,playerInstance));
+                        text = text.replace(replace[i], replaceWith[i]);
+                    blocks.add(new TimeBlock(text, startTime, endTime, playerInstance));
                 }
             }
         }
