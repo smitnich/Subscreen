@@ -53,11 +53,13 @@
         android:layout_height="wrap_content"
         android:text="Back"
         android:id="@+id/backButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:textColor="#ffffffff"
         android:background="#ff000000"
-        android:singleLine="false" />
+        android:singleLine="false"
+        android:layout_alignTop="@+id/pauseButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
