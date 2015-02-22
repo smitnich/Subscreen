@@ -12,10 +12,10 @@ import java.util.ArrayList;
 /**
  * Created by Nick on 12/27/2014.
  */
-public class TXTFormat implements SubtitleFormat {
+public class SubViewerTwoFormat implements SubtitleFormat {
     public TextView writeTo;
     SubtitlePlayer playerInstance = null;
-    public TXTFormat(SubtitlePlayer tmpPlayer)
+    public SubViewerTwoFormat(SubtitlePlayer tmpPlayer)
     {
         playerInstance = tmpPlayer;
     }

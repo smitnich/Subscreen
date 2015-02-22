@@ -10,13 +10,13 @@ import android.widget.TextView;
 
 import com.subscreen.Subtitles.ASSFormat;
 import com.subscreen.Subtitles.MPLFormat;
+import com.subscreen.Subtitles.MicroDVDFormat;
 import com.subscreen.Subtitles.SMIFormat;
-import com.subscreen.Subtitles.SUBFormat;
 import com.subscreen.Subtitles.SrtFormat;
+import com.subscreen.Subtitles.SubViewerTwoFormat;
 import com.subscreen.Subtitles.SubtitleFormat;
-import com.subscreen.Subtitles.TXTFormat;
 import com.subscreen.Subtitles.TmpFormat;
-import android.widget.Button;
+
 import android.app.Activity;
 
 public class SubtitlePlayer {
@@ -36,7 +36,12 @@ public class SubtitlePlayer {
 		toEdit.setTypeface(test_font);
 		outputTo = new AndroidOutput(activity);
 		outputTo.setTextView(toEdit);
-		blocks = subFile.readFile(rootPath+fileName);
+        try {
+            blocks = subFile.readFile(rootPath + fileName);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         startThread();
 	}
     private void startThread()
@@ -97,7 +102,7 @@ public class SubtitlePlayer {
             switch(buffer[0])
             {
                 case '{':
-                    return new SUBFormat(this);
+                    return new MicroDVDFormat(this);
                 case '[':
                     if (buffer[1] >= '0' && buffer[1] <= '9')
                         return new MPLFormat(this);
@@ -105,7 +110,7 @@ public class SubtitlePlayer {
                     {
                         while (buffer[count++] != '\n');
                         if (buffer[count] == '[')
-                            return new TXTFormat(this);
+                            return new SubViewerTwoFormat(this);
                         else
                             return new ASSFormat(this);
                     }

@@ -14,10 +14,10 @@ import java.util.regex.Pattern;
 /**
  * Created by Nick on 12/28/2014.
  */
-public class SUBFormat implements SubtitleFormat {
+public class MicroDVDFormat implements SubtitleFormat {
     public TextView writeTo;
     SubtitlePlayer playerInstance = null;
-    public SUBFormat(SubtitlePlayer tmpPlayer)
+    public MicroDVDFormat(SubtitlePlayer tmpPlayer)
     {
         playerInstance = tmpPlayer;
     }
@@ -140,11 +140,11 @@ public class SUBFormat implements SubtitleFormat {
                     //the values
                     char[] colors = input.substring(i+3, i+9).toCharArray();
                     char tmp = colors[0];
-                    colors[0] = colors[5];
-                    colors[5] = tmp;
-                    tmp = colors[1];
-                    colors[1] = colors[4];
+                    colors[0] = colors[4];
                     colors[4] = tmp;
+                    tmp = colors[1];
+                    colors[1] = colors[5];
+                    colors[5] = tmp;
                     startText.append("<font color=\"#");
                     startText.append(colors);
                     startText.append("\">");
