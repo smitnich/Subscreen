@@ -2,6 +2,8 @@ package com.subscreen.Subtitles;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.widget.TextView;
 
@@ -35,31 +37,35 @@ public class TmpFormat implements SubtitleFormat {
 	}
 	void readLines(UnicodeReader in, ArrayList<TextBlock> blocks)
 	{
+        //(:|=|,)(\d).")
+        Pattern p = Pattern.compile("(\\d*):(\\d*):(\\d*)(?::|=)(.*)");
         String[] replace = {"|"};
         String[] replaceWith = {"\n"};
 		long time = 0;
 		TimeBlock oldBlock = null;
 		char[] charBuffer = new char[1024];
 		long startTime = -1;
-		try {
+        Matcher m;
+        try {
 			while (in.available() > 0)
 			{	
 				charBuffer = in.readLine();
 				System.out.println(charBuffer);
-				String buffer = new String(charBuffer).trim();
+                String buffer = new String(charBuffer).trim();
                 if (buffer.length() == 0)
                     break;
-				int idx = 0;
-				for (int i = 0; i < 3; i++)
-				{
-					idx = buffer.indexOf(':', idx+1);
-				}
-				time = parseTimeStamp(buffer.substring(0,idx+1));
+                m = p.matcher(buffer);
+                if (!m.find())
+                    continue;
+                long hours = Integer.parseInt(m.group(1));
+                long minutes =  Integer.parseInt(m.group(2));
+                long seconds = Integer.parseInt(m.group(3));
+                time = (hours*60*60+minutes*60+seconds)*1000;
 				//Cut out everything after the timestamp and add it as the text string
-				String input = buffer.substring(idx+1);
+				String input = m.group(4);
 				if (oldBlock != null)
 				{
-					oldBlock.endTime = time;
+				    oldBlock.endTime = time;
 					blocks.add(oldBlock);
 				}
                 for (int i = 0; i < replace.length; i++)
@@ -76,6 +82,10 @@ public class TmpFormat implements SubtitleFormat {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 	}
 	public int parseTimeStamp(String input)
 	{
