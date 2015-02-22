@@ -25,13 +25,15 @@ public class ShowText extends FragmentActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShowText.this, SelectFile.class);
-                Bundle b = new Bundle();
-                startActivity(intent);
-                finish();
+                returnToSelectScreen();
             }
         });
 	}
+    public void returnToSelectScreen(){
+        Intent intent = new Intent(ShowText.this, SelectFile.class);
+        startActivity(intent);
+        finish();
+    }
 
     public void pause(View v)
     {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
@@ -29,9 +30,11 @@ public class SubtitlePlayer {
     AndroidOutput outputTo = null;
     ArrayList<TextBlock> blocks = null;
     TextBlock text;
+    ShowText parentActivity;
     String rootPath = System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
 	public void main(TextView toEdit, Context context, String fileName, Activity activity) {
 		SubtitleFormat subFile = pickFormat(rootPath+fileName);
+        parentActivity = (ShowText) activity;
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
 		outputTo = new AndroidOutput(activity);
@@ -90,6 +93,7 @@ public class SubtitlePlayer {
             pauseTime = new Date().getTime();
             return;
         }
+        outputTo.outputText("Playback complete");
 	}
 	private SubtitleFormat pickFormat(String path)
 	{
