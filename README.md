@@ -6,12 +6,13 @@ You will need a folder named 'Subtitles' on your external storage. This should c
 
 Formats:
 The following formats are supported:
-	SubRip (SRT)
-	MPL
-	Synchronized Accessible Media Interchange (SAMI)
-	SubStation Alpha (SSA)
-	MicroDVD (SUB)
-	SubViewer 2.0 (TXT)
-	TMP
-
+	<ul>
+	<li>SubRip (SRT)</li>
+	<li>MPL</li>
+	<li>Synchronized Accessible Media Interchange (SAMI)</li>
+	<li>SubStation Alpha (SSA)</li>
+	<li>MicroDVD (SUB)</li>
+	<li>SubViewer 2.0 (TXT)</li>
+	<li>TMP</li>
+	</ul>
 The value in parentheses is the extension listed on OpenSubtitles.org.
