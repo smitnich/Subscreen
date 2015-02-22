@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.widget.TextView;
@@ -31,22 +33,26 @@ public class SubtitlePlayer {
     ArrayList<TextBlock> blocks = null;
     TextBlock text;
     ShowText parentActivity;
+    Context context;
     String rootPath = System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
-	public void main(TextView toEdit, Context context, String fileName, Activity activity) {
-		SubtitleFormat subFile = pickFormat(rootPath+fileName);
+	public void main(TextView toEdit, Context _context, String fileName, Activity activity) {
+        context = _context;
         parentActivity = (ShowText) activity;
+        SubtitleFormat subFile = pickFormat(rootPath+fileName);
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
 		outputTo = new AndroidOutput(activity);
 		outputTo.setTextView(toEdit);
         try {
             blocks = subFile.readFile(rootPath + fileName);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
+        } catch (Exception e){
+            parentActivity.displayBackMessage("Sorry, that doesn't seem to be a known subtitle format.","Sorry");
+            //return;
+            //e.printStackTrace();
         }
         startThread();
 	}
+
     private void startThread()
     {
         execThread = new Thread(new Runnable() {
@@ -57,6 +63,8 @@ public class SubtitlePlayer {
     }
     private void startSubtitles()
     {
+        if (blocks == null)
+            return;
         if (subCount == -1) {
             subCount = 0;
             Date rootDate = new Date();
@@ -134,7 +142,7 @@ public class SubtitlePlayer {
             fis.close();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         finally
         {
@@ -143,7 +151,7 @@ public class SubtitlePlayer {
             }
             catch (Exception e)
             {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         return null;

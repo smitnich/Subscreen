@@ -1,5 +1,7 @@
 package com.subscreen;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.os.Bundle;
@@ -20,7 +22,6 @@ public class ShowText extends FragmentActivity {
         Bundle b = getIntent().getExtras();
         String fileName = b.getString("fileName");
         playerInstance = new SubtitlePlayer();
-		playerInstance.main(t, this.getApplicationContext(), fileName, this);
         backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +29,23 @@ public class ShowText extends FragmentActivity {
                 returnToSelectScreen();
             }
         });
+
+        playerInstance.main(t, this.getApplicationContext(), fileName, this);
 	}
+    void displayBackMessage(String message, String title)
+    {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setNeutralButton("Back", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        returnToSelectScreen();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+    }
     public void returnToSelectScreen(){
         Intent intent = new Intent(ShowText.this, SelectFile.class);
         startActivity(intent);

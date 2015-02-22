@@ -1,7 +1,6 @@
 package com.subscreen;
 
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +31,7 @@ public class SelectFile extends FragmentActivity {
             }
         }
     };
-    void displayMessage(String message, String title)
+    void displayExitMessage(String message, String title)
     {
         new AlertDialog.Builder(this)
                 .setTitle(title)
@@ -50,12 +49,12 @@ public class SelectFile extends FragmentActivity {
         try {
             isMounted = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
             if (!isMounted) {
-                displayMessage("Sorry, we couldn't find the external device.\nMake sure it is inserted and that your Android device is not in Mass Storage Mode.", "Storage not Found");
+                displayExitMessage("Sorry, we couldn't find the external device.\nMake sure it is inserted and that your Android device is not in Mass Storage Mode.", "Storage not Found");
             }
             File subDirectory = new File(dirPath);
 // have the object build the directory structure, if needed.
             if (subDirectory.mkdirs()) {
-                displayMessage("We've made a Subtitles folder on your external device.\nPlease place any subtitles you wish to play there.","Folder Created");
+                displayExitMessage("We've made a Subtitles folder on your external device.\nPlease place any subtitles you wish to play there.", "Folder Created");
                 isMounted = false;
             }
             super.onCreate(savedInstanceState);
