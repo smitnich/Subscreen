@@ -2,10 +2,10 @@ package com.subscreen.Subtitles;
 
 import android.widget.TextView;
 
+import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
-import com.subscreen.UnicodeReader;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -24,11 +24,11 @@ public class MPLFormat implements SubtitleFormat {
     }
     public ArrayList<TextBlock> readFile(String path) {
         ArrayList<TextBlock> blocks = new ArrayList<>();
-        UnicodeReader br = new UnicodeReader(path);
+        FileReaderHelper br = new FileReaderHelper(path);
         readLines(br, blocks);
         return blocks;
     }
-    void readLines(UnicodeReader in, ArrayList<TextBlock> blocks) {
+    void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks) {
         String[] replace = {"|"};
         String[] replaceWith = {"\n"};
         //Pattern p = Pattern.compile("\\[(\\d*)\\]\\[(\\d*)\\]");

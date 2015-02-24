@@ -2,11 +2,12 @@ package com.subscreen.Subtitles;
 
 import android.widget.TextView;
 
+import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
-import com.subscreen.UnicodeReader;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -21,11 +22,11 @@ public class SubViewerTwoFormat implements SubtitleFormat {
     }
     public ArrayList<TextBlock> readFile(String path) {
         ArrayList<TextBlock> blocks = new ArrayList<>();
-        UnicodeReader br = new UnicodeReader(path);
+        FileReaderHelper br = new FileReaderHelper(path);
         readLines(br, blocks);
         return blocks;
     }
-    public void readLines(UnicodeReader in,  ArrayList<TextBlock> blocks)
+    public void readLines(FileReaderHelper in,  ArrayList<TextBlock> blocks)
     {
         String[] replace = {"[br]"};
         String[] replaceWith = {"\n"};
@@ -52,9 +53,10 @@ public class SubViewerTwoFormat implements SubtitleFormat {
                     text = text.replace(replace[i],replaceWith[i]);
                 blocks.add(new TimeBlock(text,startTime,endTime,playerInstance));
             }
-        } catch (Exception e)
+        }
+        catch (IOException e)
         {
-            e.printStackTrace();
+            return;
         }
     }
     long parseTimeStamp(String input)

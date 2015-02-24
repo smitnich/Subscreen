@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 
 import android.widget.TextView;
 
+import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
-import com.subscreen.UnicodeReader;
 
 public class TmpFormat implements SubtitleFormat {
 
@@ -23,9 +23,9 @@ public class TmpFormat implements SubtitleFormat {
 	public ArrayList<TextBlock> readFile(String path)
 	{
 		ArrayList<TextBlock> blocks = new ArrayList<>();
-		UnicodeReader input = null;
+		FileReaderHelper input = null;
 		try {
-			input = new UnicodeReader(path);
+			input = new FileReaderHelper(path);
 		}
 		catch (Exception e)
 		{
@@ -35,7 +35,7 @@ public class TmpFormat implements SubtitleFormat {
 		readLines(input, blocks);
 		return blocks;
 	}
-	void readLines(UnicodeReader in, ArrayList<TextBlock> blocks)
+	void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks)
 	{
         //(:|=|,)(\d).")
         Pattern p = Pattern.compile("(\\d*):(\\d*):(\\d*)(?::|=)(.*)");

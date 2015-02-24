@@ -3,11 +3,9 @@ package com.subscreen;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.FileReader;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
@@ -19,6 +17,7 @@ import com.subscreen.Subtitles.SrtFormat;
 import com.subscreen.Subtitles.SubViewerTwoFormat;
 import com.subscreen.Subtitles.SubtitleFormat;
 import com.subscreen.Subtitles.TmpFormat;
+import com.subscreen.Subtitles.VTTFormat;
 
 import android.app.Activity;
 
@@ -105,41 +104,52 @@ public class SubtitlePlayer {
 	}
 	private SubtitleFormat pickFormat(String path)
 	{
-        FileInputStream fis = null;
-        byte[] buffer = new byte[1024];
+        FileReader fis = null;
+        char[] buffer = new char[2];
+        int i = 0;
         int count = 0;
         try {
-            fis = new FileInputStream(path);
-            fis.read(buffer);
-            switch(buffer[0])
-            {
-                case '{':
-                    return new MicroDVDFormat(this);
-                case '[':
-                    if (buffer[1] >= '0' && buffer[1] <= '9')
-                        return new MPLFormat(this);
-                    else
-                    {
-                        while (buffer[count++] != '\n');
-                        if (buffer[count] == '[')
-                            return new SubViewerTwoFormat(this);
+            fis = new FileReader(path);
+            fis.read(buffer,0,2);
+            while (true) {
+                //Convert to proper values
+                switch (buffer[i]) {
+                    case 'W':
+                        return new VTTFormat(this);
+                    case '{':
+                        return new MicroDVDFormat(this);
+                    case '[':
+                        if (buffer[1] >= '0' && buffer[1] <= '9')
+                            return new MPLFormat(this);
+                        else {
+                            while (buffer[count++] != '\n') ;
+                            if (buffer[count] == '[')
+                                return new SubViewerTwoFormat(this);
+                            else
+                                return new ASSFormat(this);
+                        }
+                        //Theoretically this could actually be a different format with the first text
+                        //appearing 10 hours in, so double check just to be paranoid
+                    case '1':
+                        if (buffer[1] == '\r' || buffer[1] == '\n')
+                            return new SrtFormat(this);
                         else
-                            return new ASSFormat(this);
-                    }
-                //Theoretically this could actually be a different format with the first text
-                //appearing 10 hours in, so double check just to be paranoid
-                case '1':
-                    if (buffer[1] == '\r' || buffer[1] == '\n')
-                        return new SrtFormat(this);
-                    else
-                    //FixMe
+                            //FixMe
+                            return new TmpFormat(this);
+                    case '0':
                         return new TmpFormat(this);
-                case '0':
-                    return new TmpFormat(this);
-                case '<':
-                    return new SMIFormat(this);
+                    case '<':
+                        return new SMIFormat(this);
+                    //Byte order mark
+                    case 0xFFFE:
+                    case 0xFEFF:
+                        i++;
+                        break;
+                    default:
+                        fis.close();
+                        return null;
+                }
             }
-            fis.close();
         }
         catch (Exception e) {
             //e.printStackTrace();

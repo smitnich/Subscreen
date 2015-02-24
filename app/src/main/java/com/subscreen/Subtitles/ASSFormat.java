@@ -1,8 +1,8 @@
 package com.subscreen.Subtitles;
+import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
-import com.subscreen.UnicodeReader;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,11 +23,11 @@ public class ASSFormat implements SubtitleFormat {
 	public ArrayList<TextBlock> readFile(String path)
 	{
 		ArrayList<TextBlock> blocks = new ArrayList<>();
-		UnicodeReader br = new UnicodeReader(path);
+		FileReaderHelper br = new FileReaderHelper(path);
 		readLines(br, blocks);
 		return blocks;
 	}
-	public void readLines(UnicodeReader in, ArrayList<TextBlock> blocks)
+	public void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks)
 	{
         char[] startTag = "[Events]".toCharArray();
 		int begin, end, i;
