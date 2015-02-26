@@ -104,13 +104,13 @@ public class SubtitlePlayer {
 	}
 	private SubtitleFormat pickFormat(String path)
 	{
+        final int bufferLength = 128;
         FileReader fis = null;
-        char[] buffer = new char[2];
+        char[] buffer = new char[bufferLength];
         int i = 0;
-        int count = 0;
         try {
             fis = new FileReader(path);
-            fis.read(buffer,0,2);
+            fis.read(buffer,0,bufferLength);
             while (true) {
                 //Convert to proper values
                 switch (buffer[i]) {
@@ -119,11 +119,11 @@ public class SubtitlePlayer {
                     case '{':
                         return new MicroDVDFormat(this);
                     case '[':
-                        if (buffer[1] >= '0' && buffer[1] <= '9')
+                        if (buffer[i+1] >= '0' && buffer[i+1] <= '9')
                             return new MPLFormat(this);
                         else {
-                            while (buffer[count++] != '\n') ;
-                            if (buffer[count] == '[')
+                            while (buffer[i++] != '\n');
+                            if (buffer[i] == '[')
                                 return new SubViewerTwoFormat(this);
                             else
                                 return new ASSFormat(this);
