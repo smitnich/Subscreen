@@ -9,10 +9,13 @@ The following formats are supported:
 	<ul>
 	<li>SubRip (SRT)</li>
 	<li>MPL</li>
-	<li>Synchronized Accessible Media Interchange (SAMI)</li>
-	<li>SubStation Alpha (SSA)</li>
+	<li>Synchronized Accessible Media Interchange (SAMI)*</li>
+	<li>SubStation Alpha (SSA)*</li>
 	<li>MicroDVD (SUB)</li>
 	<li>SubViewer 2.0 (TXT)</li>
 	<li>TMP</li>
+	<li>WebVTT (VTT)</li>
 	</ul>
+*Currently does not implement the full specification
+
 The value in parentheses is the extension listed on OpenSubtitles.org.
