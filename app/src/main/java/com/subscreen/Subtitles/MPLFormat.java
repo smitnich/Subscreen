@@ -29,8 +29,6 @@ public class MPLFormat implements SubtitleFormat {
         return blocks;
     }
     void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks) {
-        String[] replace = {"|"};
-        String[] replaceWith = {"\n"};
         //Pattern p = Pattern.compile("\\[(\\d*)\\]\\[(\\d*)\\]");
         Pattern p = Pattern.compile("\\[(\\d*)\\]\\[(\\d*)\\](.*)");
         String buffer;
@@ -47,9 +45,7 @@ public class MPLFormat implements SubtitleFormat {
                     //and dividing by 10
                     startTime = Integer.parseInt(m.group(1))*100;
                     endTime = Integer.parseInt(m.group(2))*100;
-                    text = m.group(3);
-                    for (int i = 0; i < replace.length; i++)
-                        text = text.replace(replace[i], replaceWith[i]);
+                    text = parseText( m.group(3));
                     blocks.add(new TimeBlock(text, startTime, endTime, playerInstance));
                 }
             }
@@ -58,5 +54,29 @@ public class MPLFormat implements SubtitleFormat {
         {
             e.printStackTrace();
         }
+    }
+    String parseText(String text)
+    {
+        StringBuilder start = new StringBuilder();
+        StringBuilder end = new StringBuilder();
+        int startOff = 0;
+        if (text.charAt(0) == '/')
+        {
+            start.append("<i>");
+            end.insert(0,"</i>");
+            startOff++;
+        }
+        int off = text.indexOf('|');
+        if (off != -1)
+        {
+            end.append("\n");
+            end.append(parseText(text.substring(off+1)));
+            start.append(text.substring(startOff,off-1));
+        }
+        else {
+            start.append(text.substring(startOff));
+        }
+        start.append(end.toString());
+        return start.toString();
     }
 }
