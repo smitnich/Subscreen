@@ -26,13 +26,15 @@ public class SrtFormat implements SubtitleFormat {
 	}
 	public void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks)
 	{
-		String buffer = new String();
+		String buffer;
 		int current = 1;
 		try {
 			while (in.available() > 0)
 			{	
 				//Read the block number and throw a warning if it is not the expected one
 				buffer =  new String(in.readLine()).trim();
+                if (buffer.length() == 0)
+                    break;
 				String tmp;
 				if (Integer.parseInt(buffer) != current++)
 				{
