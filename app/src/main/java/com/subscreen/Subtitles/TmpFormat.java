@@ -25,7 +25,7 @@ public class TmpFormat implements SubtitleFormat {
 		ArrayList<TextBlock> blocks = new ArrayList<>();
 		FileReaderHelper input = null;
 		try {
-			input = new FileReaderHelper(path);
+			input = new FileReaderHelper(path,"UTF-8");
 		}
 		catch (Exception e)
 		{

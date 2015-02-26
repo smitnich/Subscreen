@@ -20,7 +20,7 @@ public class SrtFormat implements SubtitleFormat {
 	public ArrayList<TextBlock> readFile(String path)
 	{
 		ArrayList<TextBlock> blocks = new ArrayList<>();
-		FileReaderHelper br = new FileReaderHelper(path);
+		FileReaderHelper br = new FileReaderHelper(path,"UTF-8");
 		readLines(br, blocks);
 		return blocks;
 	}

@@ -4,6 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 //A helper file to wrap around a FileReader in order to have access to the readLine() method
 public class FileReaderHelper {
@@ -13,9 +17,9 @@ public class FileReaderHelper {
     int limit = 0;
     int tmp = 0;
     boolean done = false;
-	public FileReaderHelper(String fileName) {
+	public FileReaderHelper(String fileName, String charSetName) {
 		try {
-			br = new BufferedReader(new FileReader(fileName));
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), Charset.forName(charSetName)));
             limit = br.read(buffer);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

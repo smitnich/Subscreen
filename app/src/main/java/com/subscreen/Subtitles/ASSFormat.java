@@ -23,7 +23,7 @@ public class ASSFormat implements SubtitleFormat {
 	public ArrayList<TextBlock> readFile(String path)
 	{
 		ArrayList<TextBlock> blocks = new ArrayList<>();
-		FileReaderHelper br = new FileReaderHelper(path);
+		FileReaderHelper br = new FileReaderHelper(path,"ISO-8859-1");
 		readLines(br, blocks);
 		return blocks;
 	}
