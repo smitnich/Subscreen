@@ -101,6 +101,14 @@ public class SubtitlePlayer {
             return;
         }
         outputTo.outputText("Playback complete");
+        try {
+            Thread.sleep(30*1000);
+        }
+        //If we're interrupted, just go back as normal
+        catch (InterruptedException e)
+        {
+        }
+        parentActivity.returnToSelectScreen();
 	}
 	private SubtitleFormat pickFormat(String path)
 	{
