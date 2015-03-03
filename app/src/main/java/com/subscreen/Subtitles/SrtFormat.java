@@ -50,7 +50,8 @@ public class SrtFormat implements SubtitleFormat {
 				while (tmp.length() > 0)
 				{
 					tmp = new String(in.readLine()).trim();
-					buffer += tmp + "\n";
+                    if (tmp.length() > 0)
+					    buffer += tmp + "<br>";
 				}
 				blocks.add(new TimeBlock(buffer, beginTime, endTime,playerInstance));
 			}

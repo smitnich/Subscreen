@@ -37,10 +37,9 @@ public class TmpFormat implements SubtitleFormat {
 	}
 	void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks)
 	{
-        //(:|=|,)(\d).")
         Pattern p = Pattern.compile("(\\d*):(\\d*):(\\d*)(?::|=)(.*)");
         String[] replace = {"|"};
-        String[] replaceWith = {"\n"};
+        String[] replaceWith = {"<br>"};
 		long time = 0;
 		TimeBlock oldBlock = null;
 		char[] charBuffer = new char[1024];

@@ -14,7 +14,7 @@ public class ASSFormat implements SubtitleFormat {
 	//The number of commas before reaching the actual text to output
 	static int lastCommaCount = 9;
 	static String[] replace = {"\\N","{\\i0}","{\\i1}","{\\pub}"};
-	static String[] replaceWith = {"\n","<i>","<i>",""};
+	static String[] replaceWith = {"<br>","<i>","<i>",""};
     SubtitlePlayer playerInstance = null;
     public ASSFormat(SubtitlePlayer tmpPlayer)
     {

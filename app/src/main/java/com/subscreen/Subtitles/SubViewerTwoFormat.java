@@ -29,7 +29,7 @@ public class SubViewerTwoFormat implements SubtitleFormat {
     public void readLines(FileReaderHelper in,  ArrayList<TextBlock> blocks)
     {
         String[] replace = {"[br]"};
-        String[] replaceWith = {"\n"};
+        String[] replaceWith = {"<br>"};
         try {
             char[] buffer;
             String str;
