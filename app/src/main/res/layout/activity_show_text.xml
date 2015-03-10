@@ -20,8 +20,8 @@
         android:gravity="center"
         android:text=""
         android:textColor="#FFF"
-        android:textScaleX="0.85"
-        android:textSize="36sp"
+        android:textScaleX="0.75"
+        android:textSize="33sp"
         android:typeface="sans"
         android:layout_toRightOf="@+id/controlrow"
         android:layout_toEndOf="@+id/controlrow" />
@@ -61,5 +61,25 @@
         android:layout_alignParentStart="true"
         android:textSize="20dp"
         android:layout_alignParentBottom="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/frameRates"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/backButton"
+        android:visibility="invisible"
+        android:layout_alignTop="@+id/pauseButton"
+        android:layout_toStartOf="@+id/pauseButton" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Encoding"
+        android:id="@+id/encodingButton"
+        android:layout_alignTop="@+id/pauseButton"
+        android:layout_alignRight="@+id/edit_message"
+        android:layout_alignEnd="@+id/edit_message" />
 
 </RelativeLayout>

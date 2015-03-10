@@ -21,7 +21,7 @@ public class VTTFormat implements SubtitleFormat {
         ArrayList<TextBlock> blocks = new ArrayList<>();
         //UnicodeReader br = new UnicodeReader(path);
         try {
-            FileReaderHelper br = new FileReaderHelper(path,"ISO-8859-1");
+            FileReaderHelper br = new FileReaderHelper(path,"UTF-8");
             readLines(br, blocks);
         }
         catch (Exception e)

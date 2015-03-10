@@ -1,12 +1,15 @@
 package com.subscreen;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.FileReader;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.subscreen.Subtitles.ASSFormat;
@@ -33,14 +36,16 @@ public class SubtitlePlayer {
     TextBlock text;
     ShowText parentActivity;
     Context context;
-    String rootPath = System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
-	public void main(TextView toEdit, Context _context, String fileName, Activity activity) {
+    String destCharset;
+    String rootPath = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
+	public void main(TextView toEdit, Context _context, String fileName, Activity activity,
+                     PopupMenu encodingMenu) {
         context = _context;
         parentActivity = (ShowText) activity;
         SubtitleFormat subFile = pickFormat(rootPath+fileName);
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
-		outputTo = new AndroidOutput(activity);
+		outputTo = new AndroidOutput(activity,destCharset,encodingMenu);
 		outputTo.setTextView(toEdit);
         try {
             blocks = subFile.readFile(rootPath + fileName);
@@ -110,6 +115,31 @@ public class SubtitlePlayer {
         }
         parentActivity.returnToSelectScreen();
 	}
+    //Open the file, read the values, and convert them to positive binary values.
+    //When opening a file, Java replaces the byte order mark that exists with the one that it
+    //thinks should be there; this is not ideal so this stupid workaround is required in order
+    //to detect it
+    private String determineEncoding(String path) throws Exception {
+        FileInputStream fis = new FileInputStream(path);
+        byte[] tmpBuffer = new byte[5];
+        int[] buffer = new int[5];
+        fis.read(tmpBuffer);
+        fis.close();
+        for (int i = 0; i < 5; i++)
+            buffer[i] = tmpBuffer[i] & 0xff;
+        if (buffer[0] == 0xef && buffer[1] == 0xbb && buffer[2] == 0xbf)
+            return "UTF-8";
+        else if (buffer[0] == 0xfe && buffer[1] == 0xff)
+            return "UTF-16BE";
+        else if (buffer[0] == 0xff && buffer[1] == 0xfe)
+            return "UTF-16LE";
+        /*else if (buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0xfe && buffer[3] == 0xff)
+            return "UTF_32";*/
+        else if (buffer[0] == 0x2b && buffer[1] == 0x2f && buffer[2] == 0x76)
+             return "US-ASCII";
+        else
+            return "ISO-8859-1";
+    }
 	private SubtitleFormat pickFormat(String path)
 	{
         final int bufferLength = 128;
@@ -117,6 +147,7 @@ public class SubtitlePlayer {
         char[] buffer = new char[bufferLength];
         int i = 0;
         try {
+            destCharset = determineEncoding(path);
             fis = new FileReader(path);
             fis.read(buffer,0,bufferLength);
             while (true) {
@@ -150,6 +181,8 @@ public class SubtitlePlayer {
                         return new SMIFormat(this);
                     //Byte order mark
                     case 0xFFFE:
+                        i++;
+                        break;
                     case 0xFEFF:
                         i++;
                         break;

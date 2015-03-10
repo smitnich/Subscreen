@@ -19,7 +19,7 @@ public class FileReaderHelper {
     boolean done = false;
 	public FileReaderHelper(String fileName, String charSetName) {
 		try {
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), Charset.forName(charSetName)));
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
             limit = br.read(buffer);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
