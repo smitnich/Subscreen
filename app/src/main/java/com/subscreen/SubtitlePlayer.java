@@ -215,7 +215,7 @@ public class SubtitlePlayer {
     {
         long timeOffset = 0;
         if (!paused) {
-            ShowText.setButton(">");
+            ShowText.setButton("▶");
             pauseTime = new Date().getTime();
             execThread.interrupt();
         }
