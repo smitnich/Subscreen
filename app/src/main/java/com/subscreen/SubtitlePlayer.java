@@ -149,6 +149,11 @@ public class SubtitlePlayer {
             destCharset = determineEncoding(path);
             fis = new FileReader(path);
             fis.read(buffer,0,bufferLength);
+            //Skip to the first actual text
+            while (buffer[i] == '\r' || buffer[i] == '\n')
+            {
+                i++;
+            }
             while (true) {
                 //Convert to proper values
                 switch (buffer[i]) {
