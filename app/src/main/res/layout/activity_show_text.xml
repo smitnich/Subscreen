@@ -41,7 +41,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:text="| |"
+        android:text="▋▋"
         android:id="@+id/pauseButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
