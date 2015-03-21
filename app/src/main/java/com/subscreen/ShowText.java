@@ -1,11 +1,17 @@
 package com.subscreen;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Button;
@@ -14,16 +20,15 @@ import android.view.MenuItem;
 public class ShowText extends FragmentActivity {
     static Button pauseButton;
     static Button backButton;
-    PopupMenu encodingMenu;
     SubtitlePlayer playerInstance = null;
-	@Override
+    String[] charsets = {"UTF-8","UTF-16BE","UTF-16LE","US-ASCII","ISO-8859-1"};
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_text);
 		TextView t = (TextView)findViewById(R.id.edit_message);
         pauseButton = (Button) findViewById(R.id.pauseButton);
         initMenu();
-        encodingMenu = new PopupMenu(ShowText.this, (Button) findViewById(R.id.encodingButton));
         Bundle b = getIntent().getExtras();
         String fileName = b.getString("fileName");
         playerInstance = new SubtitlePlayer();
@@ -35,7 +40,7 @@ public class ShowText extends FragmentActivity {
             }
         });
 
-        playerInstance.main(t, this.getApplicationContext(), fileName, this,encodingMenu);
+        playerInstance.main(t, this.getApplicationContext(), fileName, this);
 	}
     void displayBackMessage(String message, String title)
     {
@@ -58,31 +63,27 @@ public class ShowText extends FragmentActivity {
     }
     void initMenu()
     {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.menu_encoding_choice);
+        ListView lv = (ListView ) dialog.findViewById(R.id.choices);
+        lv.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, charsets));
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String encodingName = charsets[position];
+                playerInstance.setEncoding(encodingName);
+                dialog.hide();
+            }
+        });
+        dialog.setTitle("Choose Encoding");
+        dialog.setCancelable(true);
         final Button charset = (Button) findViewById(R.id.encodingButton);
         charset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Creating the instance of PopupMenu
-                //Inflating the Popup using xml file
-                encodingMenu.getMenuInflater()
-                        .inflate(R.menu.menu_encoding, encodingMenu.getMenu());
-
-                //registering popup with OnMenuItemClickListener
-                encodingMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        setEncoding(item.getTitle());
-                        return true;
-                    }
-                });
-
-                encodingMenu.show(); //showing popup menu
+                dialog.show();
             }
-        }); //closing the setOnClickListener method
-
-    }
-    public void setEncoding(CharSequence title)
-    {
-        playerInstance.outputTo.setDestCharset(title.toString());
+        });
     }
     public void pause(View v)
     {

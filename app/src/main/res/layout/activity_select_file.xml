@@ -8,4 +8,3 @@
         android:id="@+id/file_list"
         android:layout_height="wrap_content" />
 </RelativeLayout>
-

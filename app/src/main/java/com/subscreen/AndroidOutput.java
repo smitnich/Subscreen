@@ -1,6 +1,7 @@
 package com.subscreen;
 
 import android.text.Html;
+import android.view.MenuItem;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.app.Activity;
@@ -15,17 +16,13 @@ public class AndroidOutput implements Output {
     Charset destCharset;
     String destCharsetString;
     String lastText;
-    String[] charsets = {"UTF-8","UTF-16BE","UTF-16LE","US-ASCII","ISO-8859-1"};
-	AndroidOutput(Activity act, String charsetName, PopupMenu charsetMenu)
+	AndroidOutput(Activity act, String charsetName)
 	{
+        MenuItem tmpItem;
         destCharsetString = charsetName;
         loadedCharset = Charset.forName("UTF-8");
         destCharset = Charset.forName(charsetName);
         activity = act;
-        for (String charset : charsets)
-        {
-            charsetMenu.getMenu().add(charset);
-        }
 	}
 	@Override
 	public void outputText(final String text) {
