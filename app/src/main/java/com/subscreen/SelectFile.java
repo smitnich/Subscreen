@@ -19,6 +19,8 @@ public class SelectFile extends FragmentActivity {
     ListView lv;
     ArrayList<String> fileNames = null;
     String dirPath =  System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
+    String curPath;
+    String backString = "(Back)";
     ArrayAdapter adp;
     boolean isMounted = true;
     FilenameFilter textFilter = new FilenameFilter() {
@@ -46,6 +48,7 @@ public class SelectFile extends FragmentActivity {
 
     }
     protected void onCreate(Bundle savedInstanceState) {
+        curPath = dirPath;
         try {
             isMounted = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
             if (!isMounted) {
@@ -68,6 +71,31 @@ public class SelectFile extends FragmentActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String fileName = fileNames.get(position);
+                    if (fileName.charAt(0) == '/' || fileName.equals(backString))
+                    {
+                            //Take all but the first character of the fileName and add a directory
+                            //slash at the end in order to have the directory symbol at the end
+                            //of the string
+                        if (!fileName.equals(backString))
+                            curPath = curPath + fileName.substring(1) + "/";
+                        else {
+                            int i;
+                            //Skip the last character, which will always be a directory symbol
+                            //Then go back to the previous directory symbol; we want only the part
+                            //of the string before this
+                            for (i = curPath.length() -2; i >= 0; i--)
+                            {
+                                if (curPath.charAt(i) == '/')
+                                    break;
+                            }
+                            curPath = curPath.substring(0,i+1);
+                        }
+                        fileNames = loadFileNames(curPath);
+                        adp.clear();
+                        adp.addAll(fileNames);
+                        adp.notifyDataSetChanged();
+                        return;
+                    }
                     Intent intent = new Intent(SelectFile.this, ShowText.class);
                     Bundle b = new Bundle();
                     b.putString("fileName", fileName); //Your id
@@ -110,8 +138,15 @@ public class SelectFile extends FragmentActivity {
         ArrayList<String> out = new ArrayList<String>();
         if (!isMounted || !dir.isDirectory())
             return out;
-        for (File f : dir.listFiles(textFilter))
-            out.add(f.getName());
+        //If we're at the root directory, don't allow the user to go back
+        if (!path.equals(dirPath))
+            out.add(backString);
+        for (File f : dir.listFiles(textFilter)) {
+            if (f.isDirectory())
+                out.add("/" + f.getName());
+            else
+                out.add(f.getName());
+        }
         return out;
     }
 }
