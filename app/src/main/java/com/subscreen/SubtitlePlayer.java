@@ -53,9 +53,16 @@ public class SubtitlePlayer {
             //return;
             //e.printStackTrace();
         }
-        startThread();
+        initText();
+        pause();
 	}
-
+    //Initialize the text to the first line of dialog
+    private void initText()
+    {
+        TextBlock firstBlock = blocks.get(0);
+        firstBlock.addSyncMessage("Press play when this dialog begins:<br/>");
+        firstBlock.getText(outputTo);
+    }
     private void startThread()
     {
         execThread = new Thread(new Runnable() {
@@ -217,10 +224,11 @@ public class SubtitlePlayer {
         if (!paused) {
             ShowText.setButton("▶");
             pauseTime = new Date().getTime();
-            execThread.interrupt();
+            if (execThread != null)
+                execThread.interrupt();
         }
         else {
-            ShowText.setButton("| |");
+            ShowText.setButton("▋▋");
             timeOffset = new Date().getTime() - pauseTime;
             offset += timeOffset;
             startThread();
