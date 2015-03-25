@@ -16,6 +16,7 @@ public class FrameBlock implements TextBlock {
     public long startFrame;
     public long endFrame;
     SubtitlePlayer playerInstance = null;
+    boolean showFramerates = true;
     //Since the time that a user pauses for is not related to the framerate, this should not
     //be based on the framerate modifier
     public FrameBlock(String input, long s, long e, SubtitlePlayer tmp)
@@ -25,6 +26,10 @@ public class FrameBlock implements TextBlock {
         endFrame = e;
         text = input;
         setFrameRate(0);
+    }
+    public void addSyncMessage(String message)
+    {
+        text = message + text;
     }
     public void setFrameRate(int choice)
     {

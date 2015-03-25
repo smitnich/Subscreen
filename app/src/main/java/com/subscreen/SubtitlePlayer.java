@@ -6,7 +6,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.FileReader;
-
+import java.util.concurrent.*;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.widget.PopupMenu;
@@ -28,7 +28,9 @@ public class SubtitlePlayer {
     long rootTime = -1;
     long offset = 0;
     boolean paused = false;
-    int subCount = -1;
+    boolean changeTextRequested = false;
+    boolean playbackStarted = false;
+    volatile int subCount = 0;
     Thread execThread = null;
     long pauseTime = -1;
     AndroidOutput outputTo = null;
@@ -71,17 +73,38 @@ public class SubtitlePlayer {
             }});
         execThread.start();
     }
+    public void prevSubtitle()
+    {
+        if (!paused)
+            pause();
+        if (subCount <= 0)
+            return;
+        TextBlock prevBlock = blocks.get(--subCount);
+        prevBlock.getText(outputTo);
+        playbackStarted = false;
+    }
+    public void nextSubtitle()
+    {
+        if (!paused)
+            pause();
+        if (subCount+1 >= blocks.size())
+            return;
+        TextBlock nextBlock = blocks.get(++subCount);
+        nextBlock.getText(outputTo);
+        playbackStarted = false;
+    }
     private void startSubtitles()
     {
         if (blocks == null)
             return;
-        if (subCount == -1) {
-            subCount = 0;
+        if (playbackStarted == false) {
+            playbackStarted = true;
             Date rootDate = new Date();
             rootTime = rootDate.getTime();
             text = blocks.get(subCount);
             long firstTime = text.getStartTime();
-            rootTime -= firstTime;
+            //rootTime -= firstTime;
+            offset = -text.getStartTime();
             text.getText(outputTo);
             try {
                 text.secondDelay();
@@ -95,21 +118,29 @@ public class SubtitlePlayer {
         playSubtitles(blocks,outputTo);
     }
 	private void playSubtitles(ArrayList<TextBlock> blocks, Output outputTo) {
-        try {
-            if (blocks == null)
+        while (true) {
+            try {
+                if (blocks == null)
+                    return;
+                while (subCount < blocks.size()) {
+                    text = blocks.get(subCount);
+                    if (!changeTextRequested)
+                        text.firstDelay();
+                    else
+                        changeTextRequested = false;
+                    text.getText(outputTo);
+                    text.secondDelay();
+                    outputTo.clearText();
+                    subCount++;
+                }
+                break;
+            } catch (InterruptedException e) {
+                if (!changeTextRequested)
+                    pauseTime = new Date().getTime();
+                else
+                    continue;
                 return;
-            while (subCount < blocks.size()) {
-                text = blocks.get(subCount);
-                text.firstDelay();
-                text.getText(outputTo);
-                text.secondDelay();
-                outputTo.clearText();
-                subCount++;
             }
-        } catch (InterruptedException e)
-        {
-            pauseTime = new Date().getTime();
-            return;
         }
         outputTo.outputText("Playback complete");
         try {

@@ -20,6 +20,8 @@ import android.view.MenuItem;
 public class ShowText extends FragmentActivity {
     static Button pauseButton;
     static Button backButton;
+    static Button nextButton;
+    static Button prevButton;
     SubtitlePlayer playerInstance = null;
     String[] charsets = {"UTF-8","UTF-16BE","UTF-16LE","US-ASCII","ISO-8859-1"};
     @Override
@@ -37,6 +39,20 @@ public class ShowText extends FragmentActivity {
             @Override
             public void onClick(View view) {
                 returnToSelectScreen();
+            }
+        });
+        prevButton = (Button) findViewById(R.id.prevButton);
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playerInstance.prevSubtitle();
+            }
+        });
+        nextButton = (Button) findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playerInstance.nextSubtitle();
             }
         });
 

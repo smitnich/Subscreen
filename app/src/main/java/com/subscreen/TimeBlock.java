@@ -8,7 +8,8 @@ public class TimeBlock implements TextBlock {
 	public long endTime;
     public long offset = 0;
     SubtitlePlayer playerInstance = null;
-	public TimeBlock(String input, long s, long e, SubtitlePlayer tmpPlayer)
+    boolean showFramerates = false;
+    public TimeBlock(String input, long s, long e, SubtitlePlayer tmpPlayer)
 	{
         playerInstance = tmpPlayer;
 		startTime = s;
@@ -22,6 +23,10 @@ public class TimeBlock implements TextBlock {
 		endTime = s;
 		text = input;
 	}
+    public void addSyncMessage(String message)
+    {
+        text = message + text;
+    }
 	public void firstDelay() throws InterruptedException
 	{
 		Date currentTime = new Date();
@@ -46,12 +51,12 @@ public class TimeBlock implements TextBlock {
 			throw e;
 		}		
 	}
-	public void getText(Output _outputTo)
-	{
-		_outputTo.outputText(text);
-	}
     public long getStartTime()
     {
         return startTime;
     }
+	public void getText(Output _outputTo)
+	{
+		_outputTo.outputText(text);
+	}
 }
