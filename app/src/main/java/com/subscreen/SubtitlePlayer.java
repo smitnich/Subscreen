@@ -103,7 +103,6 @@ public class SubtitlePlayer {
             rootTime = rootDate.getTime();
             text = blocks.get(subCount);
             long firstTime = text.getStartTime();
-            //rootTime -= firstTime;
             offset = -text.getStartTime();
             text.getText(outputTo);
             try {
@@ -170,8 +169,8 @@ public class SubtitlePlayer {
             return "UTF-16BE";
         else if (buffer[0] == 0xff && buffer[1] == 0xfe)
             return "UTF-16LE";
-        /*else if (buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0xfe && buffer[3] == 0xff)
-            return "UTF_32";*/
+        else if (buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0xfe && buffer[3] == 0xff)
+            return "UTF_32";
         else if (buffer[0] == 0x2b && buffer[1] == 0x2f && buffer[2] == 0x76)
              return "US-ASCII";
         else
@@ -212,19 +211,17 @@ public class SubtitlePlayer {
                         //Theoretically this could actually be a different format with the first text
                         //appearing 10 hours in, so double check just to be paranoid
                     case '1':
-                        if (buffer[1] == '\r' || buffer[1] == '\n')
+                        if (buffer[i+1] == '\r' || buffer[i+1] == '\n')
                             return new SrtFormat(this);
                         else
-                            //FixMe
                             return new TmpFormat(this);
                     case '0':
                         return new TmpFormat(this);
                     case '<':
                         return new SMIFormat(this);
-                    //Byte order mark
+                    //Byte order mark, skip here
+                    case 0xFFFD:
                     case 0xFFFE:
-                        i++;
-                        break;
                     case 0xFEFF:
                         i++;
                         break;
