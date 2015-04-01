@@ -10,22 +10,33 @@ import java.util.Date;
  */
 public class FrameBlock implements TextBlock {
     //24, 30, and 48 fps seem to be all the movie framerates that currently exist
-    double frameRates[] = {23.976, 29.97, 23.976*2};
+    static double frameRates[] = {23.976, 29.97, 23.976*2};
+    static String[] frameRateStrings = {"24","30","48"};
     double frameRateModifier = 0;
     public String text;
     public long startFrame;
     public long endFrame;
+    //If we don't start at the beginning, calculate what frame the starting text block is;
+    //this will be needed in order to convert framerates later
+    public long frameOffset;
     SubtitlePlayer playerInstance = null;
-    boolean showFramerates = true;
+    public boolean showFramerates = true;
     //Since the time that a user pauses for is not related to the framerate, this should not
     //be based on the framerate modifier
+    public long pauseTime;
     public FrameBlock(String input, long s, long e, SubtitlePlayer tmp)
     {
+        pauseTime = 0;
+        frameOffset = 0;
         playerInstance = tmp;
         startFrame = s;
         endFrame = e;
         text = input;
         setFrameRate(0);
+    }
+    public boolean showFramerates()
+    {
+        return showFramerates;
     }
     public void addSyncMessage(String message)
     {
@@ -73,6 +84,6 @@ public class FrameBlock implements TextBlock {
     long convertFramerate(double newFPS)
     {
         Date currentTime = new Date();
-        return Math.round((currentTime.getTime()- playerInstance.rootTime)*newFPS/1000);
+        return Math.round(((currentTime.getTime()-pauseTime)- playerInstance.rootTime)*newFPS/1000);
     }
 }

@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.util.concurrent.*;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class SubtitlePlayer {
     boolean paused = false;
     boolean changeTextRequested = false;
     boolean playbackStarted = false;
+    boolean isFrameBased = false;
     volatile int subCount = 0;
     Thread execThread = null;
     long pauseTime = -1;
@@ -56,6 +58,17 @@ public class SubtitlePlayer {
             //e.printStackTrace();
         }
         initText();
+        if (blocks.get(0).showFramerates())
+        {
+            parentActivity.convertFramerateButton.setEnabled(true);
+            parentActivity.convertFramerateButton.setVisibility(View.VISIBLE);
+            isFrameBased = true;
+        }
+        else
+        {
+            parentActivity.convertFramerateButton.setEnabled(false);
+            parentActivity.convertFramerateButton.setVisibility(View.INVISIBLE);
+        }
         pause();
 	}
     //Initialize the text to the first line of dialog
@@ -72,6 +85,10 @@ public class SubtitlePlayer {
                 startSubtitles();
             }});
         execThread.start();
+    }
+    public void convertFramerate(double framerate)
+    {
+
     }
     public void prevSubtitle()
     {
@@ -232,7 +249,7 @@ public class SubtitlePlayer {
             }
         }
         catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         finally
         {

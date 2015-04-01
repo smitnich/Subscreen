@@ -22,6 +22,7 @@ public class ShowText extends FragmentActivity {
     static Button backButton;
     static Button nextButton;
     static Button prevButton;
+    static Button convertFramerateButton;
     SubtitlePlayer playerInstance = null;
     String[] charsets = {"UTF-8","UTF-16BE","UTF-16LE","US-ASCII","ISO-8859-1"};
     @Override
@@ -30,6 +31,7 @@ public class ShowText extends FragmentActivity {
 		setContentView(R.layout.activity_show_text);
 		TextView t = (TextView)findViewById(R.id.edit_message);
         pauseButton = (Button) findViewById(R.id.pauseButton);
+        convertFramerateButton = (Button) findViewById(R.id.setFrameButton);
         initMenu();
         Bundle b = getIntent().getExtras();
         String fileName = b.getString("fileName");
@@ -55,7 +57,6 @@ public class ShowText extends FragmentActivity {
                 playerInstance.nextSubtitle();
             }
         });
-
         playerInstance.main(t, this.getApplicationContext(), fileName, this);
 	}
     void displayBackMessage(String message, String title)
@@ -79,25 +80,44 @@ public class ShowText extends FragmentActivity {
     }
     void initMenu()
     {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.menu_encoding_choice);
-        ListView lv = (ListView ) dialog.findViewById(R.id.choices);
+        final Dialog encodingDialog = new Dialog(this);
+        encodingDialog.setContentView(R.layout.menu_encoding_choice);
+        ListView lv = (ListView ) encodingDialog.findViewById(R.id.choices);
         lv.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, charsets));
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String encodingName = charsets[position];
                 playerInstance.setEncoding(encodingName);
-                dialog.hide();
+                encodingDialog.hide();
             }
         });
-        dialog.setTitle("Choose Encoding");
-        dialog.setCancelable(true);
+        encodingDialog.setTitle("Choose Encoding");
+        encodingDialog.setCancelable(true);
+        final Dialog framerateDialog = new Dialog(this);
+        framerateDialog.setTitle("Choose Video Framerate");
+        framerateDialog.setContentView(R.layout.menu_encoding_choice);
+        lv = (ListView) framerateDialog.findViewById(R.id.choices);
+        lv.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, FrameBlock.frameRateStrings));
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                double frameRate = FrameBlock.frameRates[position];
+                playerInstance.convertFramerate(frameRate);
+                framerateDialog.hide();
+            }
+        });
         final Button charset = (Button) findViewById(R.id.encodingButton);
         charset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show();
+                encodingDialog.show();
+            }
+        });
+        convertFramerateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                framerateDialog.show();
             }
         });
     }

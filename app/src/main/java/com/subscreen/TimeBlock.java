@@ -8,7 +8,7 @@ public class TimeBlock implements TextBlock {
 	public long endTime;
     public long offset = 0;
     SubtitlePlayer playerInstance = null;
-    boolean showFramerates = false;
+    public boolean showFramerates = false;
     public TimeBlock(String input, long s, long e, SubtitlePlayer tmpPlayer)
 	{
         playerInstance = tmpPlayer;
@@ -23,6 +23,10 @@ public class TimeBlock implements TextBlock {
 		endTime = s;
 		text = input;
 	}
+    public boolean showFramerates()
+    {
+        return showFramerates;
+    }
     public void addSyncMessage(String message)
     {
         text = message + text;
