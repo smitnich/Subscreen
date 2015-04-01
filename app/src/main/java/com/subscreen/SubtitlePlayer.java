@@ -40,16 +40,16 @@ public class SubtitlePlayer {
     Context context;
     String destCharset;
     String rootPath = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
-	public void main(TextView toEdit, Context _context, String fileName, Activity activity) {
+	public void main(TextView toEdit, Context _context, String filePath, Activity activity) {
         context = _context;
         parentActivity = (ShowText) activity;
-        SubtitleFormat subFile = pickFormat(rootPath+fileName);
+        SubtitleFormat subFile = pickFormat(filePath);
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
 		outputTo = new AndroidOutput(activity,destCharset);
 		outputTo.setTextView(toEdit);
         try {
-            blocks = subFile.readFile(rootPath + fileName);
+            blocks = subFile.readFile(filePath);
         } catch (Exception e){
             parentActivity.displayBackMessage("Sorry, that doesn't seem to be a known subtitle format.","Sorry");
             //return;

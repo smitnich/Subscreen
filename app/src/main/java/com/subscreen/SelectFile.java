@@ -98,7 +98,7 @@ public class SelectFile extends FragmentActivity {
                     }
                     Intent intent = new Intent(SelectFile.this, ShowText.class);
                     Bundle b = new Bundle();
-                    b.putString("fileName", fileName); //Your id
+                    b.putString("fileName", curPath + fileName); //Your id
                     intent.putExtras(b); //Put your id to your next Intent
                     startActivity(intent);
                     finish();
