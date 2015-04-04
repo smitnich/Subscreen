@@ -13,8 +13,10 @@ public class ASSFormat implements SubtitleFormat {
 	//The string that begins any dialogue data
 	//The number of commas before reaching the actual text to output
 	static int lastCommaCount = 9;
-	static String[] replace = {"\\N","{\\i0}","{\\i1}","{\\pub}"};
-	static String[] replaceWith = {"<br>","<i>","<i>",""};
+	static String[] replaceTags = {"i0","i1","b0","b1","s0","s1"};
+    static String[] replaceTagsWith = {"</i>","<i>","</b>","<b>","</strike>","<strike>"};
+    static String[] replaceText = {"\\N",};
+	static String[] replaceTextWith = {"<br>","<i>","<i>",""};
     SubtitlePlayer playerInstance = null;
     public ASSFormat(SubtitlePlayer tmpPlayer)
     {
@@ -34,7 +36,7 @@ public class ASSFormat implements SubtitleFormat {
 		long beginTime, endTime;
 		int commasFound = 0;
 		boolean matchComma = true;
-		String buffer = new String();
+		String buffer;
 		try {
             //Skip until the Events tag for now
             while (in.available() > 0)
@@ -73,23 +75,37 @@ public class ASSFormat implements SubtitleFormat {
 				endTime = parseTimeStamp(endTimeString);
 				commasFound = 0;
 				matchComma = true;
-				for (i = 0; i < buffer.length(); i++)
+                int c;
+				for (c = 0; c < buffer.length(); c++)
 				{
-					char tmp = buffer.charAt(i);
-					if (buffer.charAt(i) == ',' && matchComma)
+					if (buffer.charAt(c) == ',' && matchComma)
 						commasFound++;
 					if (commasFound >= lastCommaCount)
 						break;
 				}
-				//Skip any format specifiers at the beginning of the line
-				if (buffer.charAt(i+1) == '{')
+                //Have to skip over all text within curly braces
+				char newBuffer[] = new char[buffer.length()];
+                int newBufferCount = 0;
+                for (i = c+1; i < buffer.length(); i++)
+                {
+                    if (buffer.charAt(i) == '{') {
+                        int j = i;
+                        char tmpChar = buffer.charAt(j+1);
+                        while (buffer.charAt(++j) != '}') ;
+                        String tag = buffer.substring(i+1, j);
+                        String tags[] = tag.split("\\\\");
+                        String htmlString = constructHTMLString(tags);
+                        for (char htmlChar : htmlString.toCharArray())
+                            newBuffer[newBufferCount++] = htmlChar;
+                        i = j;
+                    }
+                    else
+                        newBuffer[newBufferCount++] = buffer.charAt(i);
+                }
+                buffer = new String(newBuffer);
+				for (i = 0; i < replaceText.length; i++)
 				{
-					while (buffer.charAt(++i) != '}');
-				}
-				buffer = buffer.substring(i+1);
-				for (i = 0; i < replace.length; i++)
-				{
-					buffer = buffer.replace(replace[i], replaceWith[i]);
+					buffer = buffer.replace(replaceText[i], replaceTextWith[i]);
 				}
 				blocks.add(new TimeBlock(buffer, beginTime, endTime, playerInstance));
 			}
@@ -97,6 +113,43 @@ public class ASSFormat implements SubtitleFormat {
 			e.printStackTrace();
 		}
 	}
+    //SSA format stores colors in hex BBGGRR hex format; this is the opposite order of HTML, which
+    //uses RRGGBB; thus we should reverse the color order
+    public String parseColors(String tag)
+    {
+        //Make sure we don't try and go beyond the index of the string; a length of < 9 means the
+        //tag is not valid anyways
+        if (tag.length() <= 9)
+            return "";
+        int offset = 1;
+        StringBuilder out = new StringBuilder("<font color=#");
+        //If we don't have a number as the first character, we need to move the offset back one
+        //in order to get the proper values
+        if (tag.charAt(0) == 'c')
+            offset = 0;
+        //Append the text in the order Red, Green, Blue
+        //Red
+        out.append(tag.substring(7+offset,7+offset+2));
+        //Green
+        out.append(tag.substring(5+offset,5+offset+2));
+        //Blue
+        out.append(tag.substring(3+offset,3+offset+2));
+        out.append(">");
+        return out.toString();
+    }
+    public String constructHTMLString(String[] tags)
+    {
+        StringBuilder htmlString = new StringBuilder();
+        for (String tag : tags) {
+            if (tag.length() > 4 && ((tag.substring(0, 4).compareTo("1c&H") == 0)
+                    || (tag.substring(0, 3).compareTo("c&H")) == 0))
+                        htmlString.append(parseColors(tag));
+                for (int i = 0; i < replaceTags.length; i++)
+                    if (tag.compareTo(replaceTags[i]) == 0)
+                        htmlString.append(replaceTagsWith[i]);
+        }
+        return htmlString.toString();
+    }
 	public int parseTimeStamp(String input)
 	{
 		int count = input.indexOf(':');
