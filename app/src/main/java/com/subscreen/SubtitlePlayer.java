@@ -1,16 +1,13 @@
 package com.subscreen;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.FileReader;
-import java.util.concurrent.*;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.View;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.subscreen.Subtitles.ASSFormat;
@@ -35,6 +32,7 @@ public class SubtitlePlayer {
     volatile int subCount = 0;
     Thread execThread = null;
     long pauseTime = -1;
+    long firstSubtitleStartTime = 0;
     AndroidOutput outputTo = null;
     ArrayList<TextBlock> blocks = null;
     TextBlock text;
@@ -86,9 +84,41 @@ public class SubtitlePlayer {
             }});
         execThread.start();
     }
-    public void convertFramerate(double framerate)
+    //Find the subtitle that will be playing at this frame
+    public void findFrame(int frame)
     {
-
+        int start = 0;
+        int end = blocks.size()-1;
+        int mid = (start+end)/2;
+        FrameBlock block;
+        while (start != end) {
+            block = (FrameBlock) blocks.get(mid);
+            if (frame >= block.startFrame) {
+                if (frame <= block.endFrame)
+                    break;
+                start = mid;
+            } else {
+                end = mid;
+            }
+            mid = (int) Math.ceil((start+end)/2.0);
+        }
+        subCount = mid;
+        execThread.interrupt();
+        startThread();
+    }
+    public void convertFramerate(double framerate, int index)
+    {
+        try
+        {
+            FrameBlock block = (FrameBlock) blocks.get(subCount);
+            int result = (int) block.convertFramerate(framerate, index);
+            block.setFrameRate(index);
+            findFrame(result);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     public void prevSubtitle()
     {
@@ -119,7 +149,7 @@ public class SubtitlePlayer {
             Date rootDate = new Date();
             rootTime = rootDate.getTime();
             text = blocks.get(subCount);
-            long firstTime = text.getStartTime();
+            firstSubtitleStartTime = text.getStartTime();
             offset = -text.getStartTime();
             text.getText(outputTo);
             try {

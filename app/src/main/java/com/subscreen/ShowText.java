@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ShowText extends FragmentActivity {
     static Button pauseButton;
     static Button backButton;
@@ -24,6 +27,7 @@ public class ShowText extends FragmentActivity {
     static Button prevButton;
     static Button convertFramerateButton;
     SubtitlePlayer playerInstance = null;
+    ListView frameRateListView;
     String[] charsets = {"UTF-8","UTF-16BE","UTF-16LE","US-ASCII","ISO-8859-1"};
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,20 @@ public class ShowText extends FragmentActivity {
         startActivity(intent);
         finish();
     }
+    public void setAdapterItems(long currentFrame, long maxFrame, int frameIndex)
+    {
+        double currentFrameRate = FrameBlock.frameRates[frameIndex];
+        ArrayList<String> validFrameRates = new ArrayList<String>();
+        for (int i = 0; i < FrameBlock.frameRates.length; i++)
+        {
+            double frameRate = FrameBlock.frameRates[i];
+            double speedModifier = frameRate/currentFrameRate;
+            if (currentFrame * speedModifier <= maxFrame)
+                validFrameRates.add(0,FrameBlock.frameRateStrings[i]);
+        }
+        frameRateListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, validFrameRates));
+        frameRateListView.invalidateViews();
+    }
     void initMenu()
     {
         final Dialog encodingDialog = new Dialog(this);
@@ -97,13 +115,13 @@ public class ShowText extends FragmentActivity {
         final Dialog framerateDialog = new Dialog(this);
         framerateDialog.setTitle("Choose Video Framerate");
         framerateDialog.setContentView(R.layout.menu_encoding_choice);
-        lv = (ListView) framerateDialog.findViewById(R.id.choices);
-        lv.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, FrameBlock.frameRateStrings));
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        frameRateListView = (ListView) framerateDialog.findViewById(R.id.choices);
+        frameRateListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, FrameBlock.frameRateStrings));
+        frameRateListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 double frameRate = FrameBlock.frameRates[position];
-                playerInstance.convertFramerate(frameRate);
+                playerInstance.convertFramerate(frameRate, position);
                 framerateDialog.hide();
             }
         });
