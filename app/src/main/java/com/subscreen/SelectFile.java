@@ -52,7 +52,7 @@ public class SelectFile extends FragmentActivity {
         try {
             isMounted = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
             if (!isMounted) {
-                displayExitMessage("Sorry, we couldn't find the external device.\nMake sure it is"
+                displayExitMessage("Sorry, we couldn't find the external device.\nMake sure it is "
                 + "inserted and that your Android device is not in Mass Storage Mode.", "Storage not Found");
             }
             File subDirectory = new File(dirPath);
