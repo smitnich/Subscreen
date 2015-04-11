@@ -28,6 +28,7 @@ public class SrtFormat implements SubtitleFormat {
 	{
 		String buffer;
 		int current = 1;
+        String tmp;
 		try {
 			while (in.available() > 0)
 			{	
@@ -35,11 +36,6 @@ public class SrtFormat implements SubtitleFormat {
 				buffer =  new String(in.readLine()).trim();
                 if (buffer.length() == 0)
                     break;
-				String tmp;
-				if (Integer.parseInt(buffer) != current++)
-				{
-					System.out.println("Warning, block " + current + " was not found.");
-				}
 				buffer = new String(in.readLine()).trim();
 				String beginTimeString = buffer.substring(0,buffer.indexOf('-')).trim();
 				String endTimeString = buffer.substring(buffer.lastIndexOf('>')+2,buffer.length()).trim();
