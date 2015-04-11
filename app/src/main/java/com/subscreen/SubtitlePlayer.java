@@ -91,7 +91,7 @@ public class SubtitlePlayer {
         int end = blocks.size()-1;
         int mid = (start+end)/2;
         FrameBlock block;
-        while (start != end) {
+        while (Math.abs(start-end) > 1) {
             block = (FrameBlock) blocks.get(mid);
             if (frame >= block.startFrame) {
                 if (frame <= block.endFrame)
@@ -103,8 +103,12 @@ public class SubtitlePlayer {
             mid = (int) Math.ceil((start+end)/2.0);
         }
         subCount = mid;
-        execThread.interrupt();
-        startThread();
+        block = (FrameBlock) blocks.get(mid);
+        block.getText(outputTo);
+        if (!paused) {
+            execThread.interrupt();
+            startThread();
+        }
     }
     public void convertFramerate(double framerate, int index)
     {
