@@ -44,6 +44,11 @@ public class SubtitlePlayer {
         context = _context;
         parentActivity = (ShowText) activity;
         SubtitleFormat subFile = pickFormat(filePath);
+        if (subFile == null){
+            parentActivity.displayBackMessage(
+                    "Sorry, that doesn't seem to be a known subtitle format.","Sorry");
+            return;
+        }
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
 		outputTo = new AndroidOutput(activity,destCharset);
@@ -51,8 +56,9 @@ public class SubtitlePlayer {
         try {
             blocks = subFile.readFile(filePath);
         } catch (Exception e){
-            parentActivity.displayBackMessage("Sorry, that doesn't seem to be a known subtitle format.","Sorry");
-            //return;
+            parentActivity.displayBackMessage(
+                    "Sorry, that doesn't seem to be a known subtitle format.","Sorry");
+            return;
             //e.printStackTrace();
         }
         initText();
@@ -292,7 +298,7 @@ public class SubtitlePlayer {
             }
             catch (Exception e)
             {
-                //e.printStackTrace();
+                return null;
             }
         }
         return null;
