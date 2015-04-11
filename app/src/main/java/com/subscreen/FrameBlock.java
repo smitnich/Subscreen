@@ -53,8 +53,8 @@ public class FrameBlock implements TextBlock {
     public void firstDelay() throws InterruptedException
     {
         Date currentTime = new Date();
-        long toSleep = (long) Math.floor(startFrame*frameRateModifier - (currentTime.getTime()
-                - playerInstance.getOffset() - playerInstance.rootTime)*currentFramerateMultiplier);
+        long toSleep = (long) Math.floor(startFrame*frameRateModifier + playerInstance.getOffset()
+                - (currentTime.getTime() - playerInstance.rootTime)*currentFramerateMultiplier);
         if (toSleep <= 0)
             return;
         try {
@@ -70,8 +70,8 @@ public class FrameBlock implements TextBlock {
     public void secondDelay() throws InterruptedException
     {
         Date currentTime = new Date();
-        long toSleep = (long) Math.floor(endFrame*frameRateModifier - (currentTime.getTime() -
-                playerInstance.getOffset() - playerInstance.rootTime)*currentFramerateMultiplier);
+        long toSleep = (long) Math.floor(endFrame*frameRateModifier + playerInstance.getOffset()
+                -  (currentTime.getTime() - playerInstance.rootTime)*currentFramerateMultiplier);
         if (toSleep <= 0)
             return;
         try {
@@ -91,7 +91,7 @@ public class FrameBlock implements TextBlock {
         //Convert to number of frames that have passed with other framerate, make sure to
         //move forward this many frames starting from the initial subtitle block
         Date currentTime = new Date();
-        double numFrames = (currentTime.getTime() -pauseTime-playerInstance.rootTime)/frameRateModifier;
+        double numFrames = (currentTime.getTime()-playerInstance.rootTime)/frameRateModifier-pauseTime;
         double oldModifier = frameRateModifier;
         setFrameRate(index);
         double mod = newFPS/(1000/oldModifier);
