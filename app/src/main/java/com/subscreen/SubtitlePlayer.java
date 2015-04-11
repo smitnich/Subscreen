@@ -61,7 +61,6 @@ public class SubtitlePlayer {
             return;
             //e.printStackTrace();
         }
-        initText();
         if (blocks.get(0).showFramerates())
         {
             parentActivity.convertFramerateButton.setEnabled(true);
@@ -73,15 +72,8 @@ public class SubtitlePlayer {
             parentActivity.convertFramerateButton.setEnabled(false);
             parentActivity.convertFramerateButton.setVisibility(View.INVISIBLE);
         }
-        pause();
+        startThread();
 	}
-    //Initialize the text to the first line of dialog
-    private void initText()
-    {
-        TextBlock firstBlock = blocks.get(0);
-        firstBlock.addSyncMessage("Press play when this dialog begins:<br/>");
-        firstBlock.getText(outputTo);
-    }
     private void startThread()
     {
         execThread = new Thread(new Runnable() {
