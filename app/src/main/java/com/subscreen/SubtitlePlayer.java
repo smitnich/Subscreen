@@ -49,6 +49,7 @@ public class SubtitlePlayer {
                     "Sorry, that doesn't seem to be a known subtitle format.","Sorry");
             return;
         }
+        String playString = "Press play to begin";
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
 		outputTo = new AndroidOutput(activity,destCharset);
@@ -59,21 +60,29 @@ public class SubtitlePlayer {
             parentActivity.displayBackMessage(
                     "Sorry, that doesn't seem to be a known subtitle format.","Sorry");
             return;
-            //e.printStackTrace();
         }
         if (blocks.get(0).showFramerates())
         {
             parentActivity.convertFramerateButton.setEnabled(true);
             parentActivity.convertFramerateButton.setVisibility(View.VISIBLE);
             isFrameBased = true;
+            blocks.add(0, new FrameBlock(playString, 0,-1,this));
         }
         else
         {
             parentActivity.convertFramerateButton.setEnabled(false);
             parentActivity.convertFramerateButton.setVisibility(View.INVISIBLE);
+            blocks.add(0, new TimeBlock(playString, 0,-1,this));
         }
-        startThread();
+        initText();
+        pause();
+        //startThread();
 	}
+    //Initialize the text to the first line of dialog
+    private void initText() {
+        TextBlock firstBlock = blocks.get(0);
+        firstBlock.getText(outputTo);
+    }
     private void startThread()
     {
         execThread = new Thread(new Runnable() {
