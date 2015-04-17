@@ -2,11 +2,13 @@ package com.subscreen.Subtitles;
 
 import android.widget.TextView;
 
-import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.FrameBlock;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,13 +23,19 @@ public class MicroDVDFormat implements SubtitleFormat {
     {
         playerInstance = tmpPlayer;
     }
-    public ArrayList<TextBlock> readFile(String path) {
-        ArrayList<TextBlock> blocks = new ArrayList<>();
-        FileReaderHelper br = new FileReaderHelper(path,"UTF-8");
-        readLines(br, blocks);
-        return blocks;
+    public ArrayList<TextBlock> readFile(String path, String srcCharset) {
+        try {
+            ArrayList<TextBlock> blocks = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), srcCharset));
+            readLines(br, blocks);
+            return blocks;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
-    void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks) {
+    void readLines(BufferedReader in, ArrayList<TextBlock> blocks) {
         int newLine = -1;
         int lastNewLine = -1;
         //Pattern p = Pattern.compile("\\[(\\d*)\\]\\[(\\d*)\\]");
@@ -39,9 +47,12 @@ public class MicroDVDFormat implements SubtitleFormat {
         String options;
         long startFrame, endFrame;
         try {
-            while (in.available() > 0) {
+            while (true) {
                 allText = new StringBuilder();
-                buffer = new String(in.readLine()).trim();
+                buffer = in.readLine();
+                if (buffer == null)
+                    break;
+                buffer = buffer.trim();
                 m = p.matcher(buffer);
                 if (m.find())
                 {

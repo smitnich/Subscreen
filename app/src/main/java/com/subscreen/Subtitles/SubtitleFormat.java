@@ -5,5 +5,5 @@ import com.subscreen.TextBlock;
 
 
 public interface SubtitleFormat {
-	ArrayList<TextBlock> readFile(String path);
+	ArrayList<TextBlock> readFile(String path, String srcCharset);
 }

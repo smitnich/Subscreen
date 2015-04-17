@@ -1,9 +1,11 @@
 package com.subscreen.Subtitles;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import android.widget.TextView;
 
-import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
@@ -16,12 +18,12 @@ public class VTTFormat implements SubtitleFormat {
     {
         playerInstance = tmpPlayer;
     }
-    public ArrayList<TextBlock> readFile(String path)
+    public ArrayList<TextBlock> readFile(String path, String srcCharset)
     {
         ArrayList<TextBlock> blocks = new ArrayList<>();
         //UnicodeReader br = new UnicodeReader(path);
         try {
-            FileReaderHelper br = new FileReaderHelper(path,"UTF-8");
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path),srcCharset));
             readLines(br, blocks);
         }
         catch (Exception e)
@@ -30,7 +32,7 @@ public class VTTFormat implements SubtitleFormat {
         }
         return blocks;
     }
-    public void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks)
+    public void readLines(BufferedReader in, ArrayList<TextBlock> blocks)
     {
         String buffer;
         char[] cbuf = new char[1024];
@@ -39,20 +41,25 @@ public class VTTFormat implements SubtitleFormat {
             //Skip ahead to the first actual line of text
             in.readLine();
             in.readLine();
-            while (in.available() > 0)
+            while (in.ready())
             {
                 //Read the block number and throw a warning if it is not the expected one
-                String tmp;
-                buffer = new String(in.readLine()).trim();
+                String tmp = in.readLine();
+                if (tmp == null)
+                    break;
+                buffer = tmp.trim();
                 String beginTimeString = buffer.substring(0,buffer.indexOf('-')).trim();
                 String endTimeString = buffer.substring(buffer.lastIndexOf('>')+2,buffer.length()).trim();
                 long beginTime = parseTimeStamp(beginTimeString);
                 long endTime = parseTimeStamp(endTimeString);
                 tmp = buffer;
-                buffer = new String();
-                while (tmp.length() > 0)
+                buffer = new String("");
+                while (tmp != null && tmp.length() > 0)
                 {
-                    tmp = new String(in.readLine()).trim();
+                    tmp = in.readLine();
+                    if (tmp == null)
+                        return;
+                    tmp = tmp.trim();
                     if (tmp.length() > 0)
                         buffer += tmp + "<br>";
                 }

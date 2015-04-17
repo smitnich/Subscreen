@@ -1,9 +1,11 @@
 package com.subscreen.Subtitles;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import android.widget.TextView;
 
-import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
@@ -17,23 +19,29 @@ public class SrtFormat implements SubtitleFormat {
     {
         playerInstance = tmpPlayer;
     }
-	public ArrayList<TextBlock> readFile(String path)
+	public ArrayList<TextBlock> readFile(String path, String srcCharset)
 	{
-		ArrayList<TextBlock> blocks = new ArrayList<>();
-		FileReaderHelper br = new FileReaderHelper(path,"UTF-8");
-		readLines(br, blocks);
-		return blocks;
+        try {
+            ArrayList<TextBlock> blocks = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), srcCharset));
+            readLines(br, blocks);
+            return blocks;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
 	}
-	public void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks)
+	public void readLines(BufferedReader in, ArrayList<TextBlock> blocks)
 	{
 		String buffer;
 		int current = 1;
         String tmp;
 		try {
-			while (in.available() > 0)
+			while ((buffer = in.readLine()) != null)
 			{	
 				//Read the block number and throw a warning if it is not the expected one
-				buffer =  new String(in.readLine()).trim();
+				buffer =  buffer.trim();
                 if (buffer.length() == 0)
                     break;
 				buffer = new String(in.readLine()).trim();

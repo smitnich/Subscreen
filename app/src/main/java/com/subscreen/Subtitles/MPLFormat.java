@@ -2,11 +2,13 @@ package com.subscreen.Subtitles;
 
 import android.widget.TextView;
 
-import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -22,13 +24,19 @@ public class MPLFormat implements SubtitleFormat {
     {
         playerInstance = tmpPlayer;
     }
-    public ArrayList<TextBlock> readFile(String path) {
-        ArrayList<TextBlock> blocks = new ArrayList<>();
-        FileReaderHelper br = new FileReaderHelper(path,"UTF-8");
-        readLines(br, blocks);
-        return blocks;
+    public ArrayList<TextBlock> readFile(String path, String srcCharset) {
+        try {
+            ArrayList<TextBlock> blocks = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), srcCharset));
+            readLines(br, blocks);
+            return blocks;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
-    void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks) {
+    void readLines(BufferedReader in, ArrayList<TextBlock> blocks) {
         //Pattern p = Pattern.compile("\\[(\\d*)\\]\\[(\\d*)\\]");
         Pattern p = Pattern.compile("\\[(\\d*)\\]\\[(\\d*)\\](.*)");
         String buffer;
@@ -36,8 +44,7 @@ public class MPLFormat implements SubtitleFormat {
         String text;
         long startTime, endTime;
         try {
-            while (in.available() > 0) {
-                buffer = new String(in.readLine());
+            while ((buffer = in.readLine()) != null) {
                 m = p.matcher(buffer);
                 if (m.find()) {
                     //Multiple by 100 because it is in tenths of a second;

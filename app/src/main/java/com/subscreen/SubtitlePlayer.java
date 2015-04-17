@@ -1,6 +1,8 @@
 package com.subscreen;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.PushbackInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.FileReader;
@@ -38,7 +40,7 @@ public class SubtitlePlayer {
     TextBlock text;
     ShowText parentActivity;
     Context context;
-    String destCharset;
+    String srcCharset;
     String rootPath = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
 	public void main(TextView toEdit, Context _context, String filePath, Activity activity) {
         context = _context;
@@ -52,10 +54,10 @@ public class SubtitlePlayer {
         String playString = "Press play to begin";
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
-		outputTo = new AndroidOutput(activity,destCharset);
+		outputTo = new AndroidOutput(activity, srcCharset);
 		outputTo.setTextView(toEdit);
         try {
-            blocks = subFile.readFile(filePath);
+            blocks = subFile.readFile(filePath,srcCharset);
         } catch (Exception e){
             parentActivity.displayBackMessage(
                     "Sorry, that doesn't seem to be a known subtitle format.","Sorry");
@@ -214,10 +216,10 @@ public class SubtitlePlayer {
     //thinks should be there; this is not ideal so this stupid workaround is required in order
     //to detect it
     private String determineEncoding(String path) throws Exception {
-        FileInputStream fis = new FileInputStream(path);
+        PushbackInputStream fis = new PushbackInputStream(new FileInputStream(path), 4);
         byte[] tmpBuffer = new byte[5];
         int[] buffer = new int[5];
-        fis.read(tmpBuffer);
+        fis.read(tmpBuffer,0,4);
         fis.close();
         for (int i = 0; i < 5; i++)
             buffer[i] = tmpBuffer[i] & 0xff;
@@ -241,7 +243,7 @@ public class SubtitlePlayer {
         char[] buffer = new char[bufferLength];
         int i = 0;
         try {
-            destCharset = determineEncoding(path);
+            srcCharset = determineEncoding(path);
             fis = new FileReader(path);
             fis.read(buffer,0,bufferLength);
             //Skip to the first actual text

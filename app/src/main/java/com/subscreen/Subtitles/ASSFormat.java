@@ -1,10 +1,12 @@
 package com.subscreen.Subtitles;
-import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
@@ -22,14 +24,20 @@ public class ASSFormat implements SubtitleFormat {
     {
         playerInstance = tmpPlayer;
     }
-	public ArrayList<TextBlock> readFile(String path)
+	public ArrayList<TextBlock> readFile(String path, String srcCharset)
 	{
-		ArrayList<TextBlock> blocks = new ArrayList<>();
-		FileReaderHelper br = new FileReaderHelper(path,"UTF-8");
-		readLines(br, blocks);
-		return blocks;
+        try {
+            ArrayList<TextBlock> blocks = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), srcCharset));
+            readLines(br, blocks);
+            return blocks;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
 	}
-	public void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks)
+	public void readLines(BufferedReader in, ArrayList<TextBlock> blocks)
 	{
         char[] startTag = "[Events]".toCharArray();
 		int begin, end, i;
@@ -39,11 +47,15 @@ public class ASSFormat implements SubtitleFormat {
 		String buffer;
 		try {
             //Skip until the Events tag for now
-            while (in.available() > 0)
+            while (true)
             {
-                char[] tmp = in.readLine();
+                String tmp = in.readLine();
+                if (tmp == null)
+                    return;
+                if (tmp.length() < startTag.length)
+                    continue;
                 for (i = 0; i < startTag.length; i++) {
-                    if (tmp[i] != startTag[i])
+                    if (tmp.charAt(i) != startTag[i])
                         break;
                 }
                 if (i == startTag.length)
@@ -51,11 +63,14 @@ public class ASSFormat implements SubtitleFormat {
             }
             //We want to ignore the format text for now
             in.readLine();
-			while (in.available() > 0)
+			while (true)
 			{	
 				//The vast majority of data in ASS files is of no use to us; just
 				//parse the text after 'Dialogue:'
-				buffer =  new String(in.readLine()).trim();
+                buffer = in.readLine();
+                if (buffer == null)
+                    break;
+				buffer =  buffer.trim();
 				if (buffer.length() == 0)
 					continue;
 				//Find the first and last commas and take the substring between them

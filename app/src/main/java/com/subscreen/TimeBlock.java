@@ -59,6 +59,7 @@ public class TimeBlock implements TextBlock {
     {
         return startTime;
     }
+
 	public void getText(Output _outputTo)
 	{
 		_outputTo.outputText(text);

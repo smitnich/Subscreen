@@ -1,13 +1,15 @@
 package com.subscreen.Subtitles;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.widget.TextView;
 
-import com.subscreen.FileReaderHelper;
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
@@ -20,37 +22,36 @@ public class TmpFormat implements SubtitleFormat {
     {
         playerInstance = tmpPlayer;
     }
-	public ArrayList<TextBlock> readFile(String path)
+	public ArrayList<TextBlock> readFile(String path, String srcCharset)
 	{
-		ArrayList<TextBlock> blocks = new ArrayList<>();
-		FileReaderHelper input = null;
 		try {
-			input = new FileReaderHelper(path,"UTF-8");
+			ArrayList<TextBlock> blocks = new ArrayList<>();
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), srcCharset));
+			readLines(br, blocks);
+			return blocks;
 		}
 		catch (Exception e)
 		{
-			System.out.println(e.getMessage());
 			return null;
 		}
-		readLines(input, blocks);
-		return blocks;
 	}
-	void readLines(FileReaderHelper in, ArrayList<TextBlock> blocks)
+	void readLines(BufferedReader in, ArrayList<TextBlock> blocks)
 	{
         Pattern p = Pattern.compile("(\\d*):(\\d*):(\\d*)(?::|=)(.*)");
         String[] replace = {"|"};
         String[] replaceWith = {"<br>"};
 		long time = 0;
 		TimeBlock oldBlock = null;
-		char[] charBuffer = new char[1024];
+		String buffer;
 		long startTime = -1;
         Matcher m;
         try {
-			while (in.available() > 0)
+			while (true)
 			{	
-				charBuffer = in.readLine();
-				System.out.println(charBuffer);
-                String buffer = new String(charBuffer).trim();
+				buffer = in.readLine();
+				if (buffer == null)
+					break;
+                buffer = buffer.trim();
                 if (buffer.length() == 0)
                     break;
                 m = p.matcher(buffer);

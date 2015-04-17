@@ -26,7 +26,7 @@ public class AndroidOutput implements Output {
 	}
 	@Override
 	public void outputText(final String text) {
-        final String tmpText = new String(text.getBytes(loadedCharset),destCharset);
+        final String tmpText = text;
         lastText = text;
 		activity.runOnUiThread (new Runnable()
 		{
