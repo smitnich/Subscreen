@@ -103,6 +103,12 @@ public class ShowText extends FragmentActivity {
         framerateDialog.setContentView(R.layout.menu_encoding_choice);
         frameRateListView = (ListView) framerateDialog.findViewById(R.id.choices);
         frameRateListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, FrameBlock.frameRateStrings));
+        convertFramerateButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            framerateDialog.show();
+            }
+        });
         frameRateListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
