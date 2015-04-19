@@ -28,7 +28,7 @@ public class ShowText extends FragmentActivity {
     static Button convertFramerateButton;
     SubtitlePlayer playerInstance = null;
     ListView frameRateListView;
-    String[] charsets = {"UTF-8","UTF-16BE","UTF-16LE","US-ASCII","ISO-8859-1"};
+    String[] charsets = {"UTF-8","UTF-16BE","UTF-16LE","US-ASCII","ISO-8859-1","windows-1252"};
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,20 +98,6 @@ public class ShowText extends FragmentActivity {
     }
     void initMenu()
     {
-        final Dialog encodingDialog = new Dialog(this);
-        encodingDialog.setContentView(R.layout.menu_encoding_choice);
-        ListView lv = (ListView ) encodingDialog.findViewById(R.id.choices);
-        lv.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, charsets));
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String encodingName = charsets[position];
-                playerInstance.setEncoding(encodingName);
-                encodingDialog.hide();
-            }
-        });
-        encodingDialog.setTitle("Choose Encoding");
-        encodingDialog.setCancelable(true);
         final Dialog framerateDialog = new Dialog(this);
         framerateDialog.setTitle("Choose Video Framerate");
         framerateDialog.setContentView(R.layout.menu_encoding_choice);
@@ -123,19 +109,6 @@ public class ShowText extends FragmentActivity {
                 double frameRate = FrameBlock.frameRates[position];
                 playerInstance.convertFramerate(frameRate, position);
                 framerateDialog.hide();
-            }
-        });
-        final Button charset = (Button) findViewById(R.id.encodingButton);
-        charset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                encodingDialog.show();
-            }
-        });
-        convertFramerateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                framerateDialog.show();
             }
         });
     }

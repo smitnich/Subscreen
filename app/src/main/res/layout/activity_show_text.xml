@@ -20,7 +20,7 @@
         android:textScaleX="0.75"
         android:textSize="33sp"
         android:typeface="sans"
-        android:layout_below="@+id/encodingButton"
+        android:layout_below="@+id/setFrameButton"
         android:layout_toRightOf="@+id/controlrow"
         android:layout_toEndOf="@+id/controlrow"
         android:layout_above="@+id/pauseButton" />
@@ -74,16 +74,6 @@
         android:layout_alignTop="@+id/pauseButton"
         android:layout_toStartOf="@+id/pauseButton"
         android:layout_toLeftOf="@+id/pauseButton"/>
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:text="Change Encoding"
-        android:id="@+id/encodingButton"
-        android:textColor="#ffffffff"
-        android:background="#ff000000"
-        android:textSize="20sp"
-        android:layout_alignRight="@+id/edit_message"
-        android:layout_alignEnd="@+id/edit_message" />
     <Button
         android:textSize="20sp"
         android:textColor="#ffffffff"

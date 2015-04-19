@@ -323,10 +323,6 @@ public class SubtitlePlayer {
         }
         paused = !paused;
     }
-    public void setEncoding(String fileName)
-    {
-        outputTo.setDestCharset(fileName);
-    }
     public long getOffset() {
         return offset;
     }
