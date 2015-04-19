@@ -31,6 +31,7 @@ public class SubtitlePlayer {
     boolean changeTextRequested = false;
     boolean playbackStarted = false;
     boolean isFrameBased = false;
+    volatile boolean threadKillRequested = false;
     volatile int subCount = 0;
     Thread execThread = null;
     long pauseTime = -1;
@@ -194,6 +195,11 @@ public class SubtitlePlayer {
                 }
                 break;
             } catch (InterruptedException e) {
+                if (threadKillRequested)
+                {
+                    threadKillRequested = false;
+                    return;
+                }
                 if (!changeTextRequested)
                     pauseTime = new Date().getTime();
                 else
@@ -325,5 +331,18 @@ public class SubtitlePlayer {
     }
     public long getOffset() {
         return offset;
+    }
+    public void cleanup() {
+        try {
+            if (execThread != null) {
+                threadKillRequested = true;
+                execThread.interrupt();
+                execThread.join();
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

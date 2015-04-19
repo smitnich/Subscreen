@@ -79,6 +79,7 @@ public class ShowText extends FragmentActivity {
     }
     public void returnToSelectScreen(){
         Intent intent = new Intent(ShowText.this, SelectFile.class);
+        playerInstance.cleanup();
         startActivity(intent);
         finish();
     }
