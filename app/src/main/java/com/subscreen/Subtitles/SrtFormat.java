@@ -44,7 +44,10 @@ public class SrtFormat implements SubtitleFormat {
 				buffer =  buffer.trim();
                 if (buffer.length() == 0)
                     break;
-				buffer = new String(in.readLine()).trim();
+				tmp = in.readLine();
+				if (tmp == null)
+					break;
+				buffer = tmp.trim();
 				String beginTimeString = buffer.substring(0,buffer.indexOf('-')).trim();
 				String endTimeString = buffer.substring(buffer.lastIndexOf('>')+2,buffer.length()).trim();
 				long beginTime = parseTimeStamp(beginTimeString);
@@ -53,7 +56,10 @@ public class SrtFormat implements SubtitleFormat {
 				buffer = new String();
 				while (tmp.length() > 0)
 				{
-					tmp = new String(in.readLine()).trim();
+					tmp = in.readLine();
+					if (tmp == null)
+						break;
+					tmp = tmp.trim();
                     if (tmp.length() > 0)
 					    buffer += tmp + "<br>";
 				}

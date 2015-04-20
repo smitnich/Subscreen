@@ -44,6 +44,7 @@ public class ASSFormat implements SubtitleFormat {
 		long beginTime, endTime;
 		int commasFound = 0;
 		boolean matchComma = true;
+        double multiplier = 1;
 		String buffer;
 		try {
             //Skip until the Events tag for now
@@ -52,6 +53,12 @@ public class ASSFormat implements SubtitleFormat {
                 String tmp = in.readLine();
                 if (tmp == null)
                     return;
+                if (tmp.length() > 5 && tmp.substring(0,5).compareTo("Timer:") == 0)
+                {
+                    String percentage = tmp.substring(7);
+                    percentage = percentage.replace(",",".");
+                    multiplier = Integer.parseInt(percentage)/100.0;
+                }
                 if (tmp.length() < startTag.length)
                     continue;
                 for (i = 0; i < startTag.length; i++) {

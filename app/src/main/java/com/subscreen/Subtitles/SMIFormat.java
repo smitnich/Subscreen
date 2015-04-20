@@ -69,8 +69,8 @@ public class SMIFormat implements SubtitleFormat {
                             text = new String(newText);
                         }
                         while (true) {
-                            str = new String(in.readLine());
-                            if (str.length() == 0)
+                            str = in.readLine();
+                            if (str == null || str.length() == 0)
                                 break;
                             if (!str.startsWith("<SYNC"))
                                 text = text + str;
