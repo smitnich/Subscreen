@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ShowText extends FragmentActivity {
@@ -28,6 +29,8 @@ public class ShowText extends FragmentActivity {
     static Button convertFramerateButton;
     SubtitlePlayer playerInstance = null;
     ListView frameRateListView;
+    ArrayList<String> validFrameRates;
+    ArrayList<Integer> indices;
     String[] charsets = {"UTF-8","UTF-16BE","UTF-16LE","US-ASCII","ISO-8859-1","windows-1252"};
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,41 +86,52 @@ public class ShowText extends FragmentActivity {
         startActivity(intent);
         finish();
     }
-    public void setAdapterItems(long currentFrame, long maxFrame, int frameIndex)
-    {
-        double currentFrameRate = FrameBlock.frameRates[frameIndex];
-        ArrayList<String> validFrameRates = new ArrayList<String>();
-        for (int i = 0; i < FrameBlock.frameRates.length; i++)
-        {
-            double frameRate = FrameBlock.frameRates[i];
-            double speedModifier = frameRate/currentFrameRate;
-            if (currentFrame * speedModifier <= maxFrame)
-                validFrameRates.add(0,FrameBlock.frameRateStrings[i]);
-        }
-        frameRateListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, validFrameRates));
-        frameRateListView.invalidateViews();
-    }
     void initMenu()
     {
+        validFrameRates = new ArrayList<String>(Arrays.asList(FrameBlock.frameRateStrings));
         final Dialog framerateDialog = new Dialog(this);
         framerateDialog.setTitle("Choose Video Framerate");
         framerateDialog.setContentView(R.layout.menu_encoding_choice);
         frameRateListView = (ListView) framerateDialog.findViewById(R.id.choices);
-        frameRateListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, FrameBlock.frameRateStrings));
+        frameRateListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, validFrameRates));
         convertFramerateButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            framerateDialog.show();
+            @Override
+            public void onClick(View v) {
+                chooseFramerates(framerateDialog);
+                framerateDialog.show();
             }
         });
         frameRateListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                double frameRate = FrameBlock.frameRates[position];
-                playerInstance.convertFramerate(frameRate, position);
+                //Take the value from the indices since otherwise positions will be off due
+                double frameRate = FrameBlock.frameRates[indices.get(position)];
+                playerInstance.convertFramerate(frameRate, indices.get(position));
                 framerateDialog.hide();
             }
         });
+    }
+    public void chooseFramerates(Dialog framerateDialog) {
+        FrameBlock currentBlock = (FrameBlock) playerInstance.blocks.get(playerInstance.subCount);
+        double currentModifier = playerInstance.getCurrentFramerate();
+        indices = new ArrayList<Integer>();
+        long maxFrame = playerInstance.getLastFrame();
+        validFrameRates.clear();
+        for (int i = 0; i < FrameBlock.frameRateMultipliers.length; i++)
+        {
+            if (FrameBlock.frameRateMultipliers[i] == currentModifier)
+                continue;
+            long currentFrame = currentBlock.convertFramerate(FrameBlock.frameRateMultipliers[i],i);
+            if (currentFrame > maxFrame)
+                continue;
+            validFrameRates.add(FrameBlock.frameRateStrings[i]);
+            //Since not all framerates will be added to the list of available framerates, we need
+            //to make sure that we keep track of the true index by storing the corresponding index
+            //of each frame rate
+            indices.add(i);
+        }
+        frameRateListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, validFrameRates));
+        frameRateListView.invalidateViews();
     }
     public void pause(View v)
     {

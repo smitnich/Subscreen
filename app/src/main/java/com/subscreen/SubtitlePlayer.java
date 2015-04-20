@@ -81,6 +81,9 @@ public class SubtitlePlayer {
         pause();
         //startThread();
 	}
+    public double getCurrentFramerate() {
+        return FrameBlock.currentFramerateMultiplier;
+    }
     //Initialize the text to the first line of dialog
     private void initText() {
         TextBlock firstBlock = blocks.get(0);
@@ -101,6 +104,9 @@ public class SubtitlePlayer {
         int end = blocks.size()-1;
         int mid = (start+end)/2;
         FrameBlock block;
+        block = (FrameBlock) blocks.get(blocks.size()-1);
+        if (frame > block.endFrame)
+            return;
         while (Math.abs(start-end) > 1) {
             block = (FrameBlock) blocks.get(mid);
             if (frame >= block.startFrame) {
@@ -133,6 +139,10 @@ public class SubtitlePlayer {
         {
             e.printStackTrace();
         }
+    }
+    public long getLastFrame() {
+        FrameBlock tmp = (FrameBlock) blocks.get(blocks.size()-1);
+        return tmp.endFrame;
     }
     public void prevSubtitle()
     {
