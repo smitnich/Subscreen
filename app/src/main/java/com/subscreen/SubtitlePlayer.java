@@ -2,6 +2,7 @@ package com.subscreen;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PushbackInputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -253,12 +254,12 @@ public class SubtitlePlayer {
 	private SubtitleFormat pickFormat(String path)
 	{
         final int bufferLength = 128;
-        FileReader fis = null;
+        InputStreamReader fis = null;
         char[] buffer = new char[bufferLength];
         int i = 0;
         try {
             srcCharset = determineEncoding(path);
-            fis = new FileReader(path);
+            fis = new InputStreamReader(new FileInputStream(path), srcCharset);
             fis.read(buffer,0,bufferLength);
             //Skip to the first actual text
             while (buffer[i] == '\r' || buffer[i] == '\n')
