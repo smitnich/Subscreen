@@ -58,24 +58,22 @@ public class SubtitlePlayer {
 		outputTo = new AndroidOutput(activity, srcCharset);
 		outputTo.setTextView(toEdit);
         try {
-            blocks = subFile.readFile(filePath,srcCharset);
-        } catch (Exception e){
+            blocks = subFile.readFile(filePath, srcCharset);
+            if (blocks.get(0).showFramerates()) {
+                parentActivity.convertFramerateButton.setEnabled(true);
+                parentActivity.convertFramerateButton.setVisibility(View.VISIBLE);
+                isFrameBased = true;
+                blocks.add(0, new FrameBlock(playString, 0, -1, this));
+            } else {
+                parentActivity.convertFramerateButton.setEnabled(false);
+                parentActivity.convertFramerateButton.setVisibility(View.INVISIBLE);
+                blocks.add(0, new TimeBlock(playString, 0, -1, this));
+            }
+        }
+        catch (Exception e){
             parentActivity.displayBackMessage(
                     "Sorry, that doesn't seem to be a known subtitle format.","Sorry");
             return;
-        }
-        if (blocks.get(0).showFramerates())
-        {
-            parentActivity.convertFramerateButton.setEnabled(true);
-            parentActivity.convertFramerateButton.setVisibility(View.VISIBLE);
-            isFrameBased = true;
-            blocks.add(0, new FrameBlock(playString, 0,-1,this));
-        }
-        else
-        {
-            parentActivity.convertFramerateButton.setEnabled(false);
-            parentActivity.convertFramerateButton.setVisibility(View.INVISIBLE);
-            blocks.add(0, new TimeBlock(playString, 0,-1,this));
         }
         initText();
         pause();
