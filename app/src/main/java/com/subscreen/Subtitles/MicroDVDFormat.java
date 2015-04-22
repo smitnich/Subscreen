@@ -45,6 +45,7 @@ public class MicroDVDFormat implements SubtitleFormat {
         Matcher m;
         String text;
         String options;
+        FrameBlock lastBlock = null;
         long startFrame, endFrame;
         try {
             while (true) {
@@ -56,19 +57,30 @@ public class MicroDVDFormat implements SubtitleFormat {
                 m = p.matcher(buffer);
                 if (m.find())
                 {
-                    newLine = -1;
                     startFrame = Integer.parseInt(m.group(1));
-                    endFrame = Integer.parseInt(m.group(2));
+                    try {
+                        endFrame = Integer.parseInt(m.group(2));
+                    } catch (NumberFormatException e)
+                    {
+                        //If we get a number format exception for the end time, set it equal to -1
+                        //and later set it to the start of the next block
+                        endFrame = -1;
+                    }
+                    if (lastBlock != null)
+                        lastBlock.endFrame = startFrame;
                     text = m.group(3);
                     String[] textLines = text.split("\\|");
-                    for (int i = 0; i < textLines.length; i++)
-                    {
+                    for (int i = 0; i < textLines.length; i++) {
                         allText.append(buildOptions(textLines[i]));
                         //Make sure we don't append a break tag on the last line
-                        if (i < textLines.length-1)
+                        if (i < textLines.length - 1)
                             allText.append("<br>");
                     }
-                    blocks.add(new FrameBlock(allText.toString(),startFrame,endFrame,playerInstance));
+                    lastBlock = new FrameBlock(allText.toString(),startFrame,endFrame,playerInstance);
+                    blocks.add(lastBlock);
+                    //Only keep track of the last
+                    if (lastBlock.endFrame != -1)
+                        lastBlock = null;
                 }
             }
         }
@@ -76,6 +88,9 @@ public class MicroDVDFormat implements SubtitleFormat {
         {
             e.printStackTrace();
         }
+        //If the last end time tag wasn't closed, fill in a default end time for it
+        if (lastBlock != null)
+            lastBlock.endFrame = lastBlock.startFrame + 100;
     }
     //This format allows for a variety of options that need to be parsed in order to be converted
     //to proper HTML
