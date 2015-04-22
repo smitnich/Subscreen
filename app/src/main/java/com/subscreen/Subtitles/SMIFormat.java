@@ -72,7 +72,7 @@ public class SMIFormat implements SubtitleFormat {
                             str = in.readLine();
                             if (str == null || str.length() == 0)
                                 break;
-                            if (!str.startsWith("<SYNC"))
+                            if (!str.startsWith("<"))
                                 text = text + str;
                             else
                                 break;
