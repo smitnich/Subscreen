@@ -69,7 +69,7 @@ public class SubViewerTwoFormat implements SubtitleFormat {
             return;
         }
     }
-    long parseTimeStamp(String input)
+    public long parseTimeStamp(String input)
     {
         int count = input.indexOf(':');
         int nextCount = -1;
@@ -79,7 +79,9 @@ public class SubViewerTwoFormat implements SubtitleFormat {
         count = input.indexOf(':',nextCount);
         nextCount = input.indexOf('.',count);
         int seconds = Integer.parseInt(input.substring(count+1,nextCount));
-        int milliseconds = Integer.parseInt(input.substring(nextCount+1,input.length()));
+        //Multiply the milliseconds value by 10 because only 2 digits are used in this format,
+        //whereas a three digits are necessary to represent one millisecond
+        int milliseconds = Integer.parseInt(input.substring(nextCount+1,input.length()))*10;
         return (hours*60*60*1000) + (minutes*60*1000) + (seconds*1000) + milliseconds;
     }
 }
