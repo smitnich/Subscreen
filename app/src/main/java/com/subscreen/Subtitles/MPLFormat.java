@@ -76,9 +76,9 @@ public class MPLFormat implements SubtitleFormat {
         int off = text.indexOf('|');
         if (off != -1)
         {
-            end.append("\n");
+            end.append("<br>");
             end.append(parseText(text.substring(off+1)));
-            start.append(text.substring(startOff,off-1));
+            start.append(text.substring(startOff,off));
         }
         else {
             start.append(text.substring(startOff));
