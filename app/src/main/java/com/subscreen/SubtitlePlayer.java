@@ -50,10 +50,10 @@ public class SubtitlePlayer {
         SubtitleFormat subFile = pickFormat(filePath);
         if (subFile == null){
             parentActivity.displayBackMessage(
-                    "Sorry, that doesn't seem to be a known subtitle format.","Sorry");
+                    context.getString(R.string.bad_format_message),context.getString(R.string.bad_format_title));
             return;
         }
-        String playString = "Press play to begin";
+        String playString = context.getString(R.string.begin_play);
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
 		outputTo = new AndroidOutput(activity, srcCharset);
@@ -73,7 +73,7 @@ public class SubtitlePlayer {
         }
         catch (Exception e){
             parentActivity.displayBackMessage(
-                    "Sorry, that doesn't seem to be a known subtitle format.","Sorry");
+                    context.getText(R.string.bad_format_message).toString(),"Sorry");
             return;
         }
         initText();
@@ -204,8 +204,7 @@ public class SubtitlePlayer {
                 }
                 break;
             } catch (InterruptedException e) {
-                if (threadKillRequested)
-                {
+                if (threadKillRequested) {
                     threadKillRequested = false;
                     return;
                 }
@@ -216,20 +215,15 @@ public class SubtitlePlayer {
                 return;
             }
         }
-        outputTo.outputText("Playback complete");
+        outputTo.outputText(context.getString(R.string.finish_play));
         try {
-            Thread.sleep(30*1000);
+            Thread.sleep(30 * 1000);
         }
         //If we're interrupted, just go back as normal
-        catch (InterruptedException e)
-        {
+        catch (InterruptedException e) {
         }
         parentActivity.returnToSelectScreen();
-	}
-    //Open the file, read the values, and convert them to positive binary values.
-    //When opening a file, Java replaces the byte order mark that exists with the one that it
-    //thinks should be there; this is not ideal so this stupid workaround is required in order
-    //to detect it
+    }
     private String determineEncoding(String path) throws Exception {
         PushbackInputStream fis = new PushbackInputStream(new FileInputStream(path), 4);
         byte[] tmpBuffer = new byte[5];

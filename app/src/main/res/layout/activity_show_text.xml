@@ -52,7 +52,7 @@
     <Button
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="Back"
+        android:text="@string/back_button"
         android:id="@+id/backButton"
         android:textColor="#ffffffff"
         android:background="#ff000000"
@@ -80,7 +80,7 @@
         android:background="#ff000000"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="←Prev"
+        android:text="@string/prev_button"
         android:id="@+id/prevButton"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/pauseButton"/>
@@ -90,7 +90,7 @@
         android:background="#ff000000"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="Next→"
+        android:text="@string/next_button"
         android:id="@+id/nextButton"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/pauseButton"/>
@@ -100,7 +100,7 @@
         android:background="#ff000000"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Framerate"
+        android:text="@string/framerate_button"
         android:id="@+id/setFrameButton"
         android:layout_alignParentTop="true" />
 

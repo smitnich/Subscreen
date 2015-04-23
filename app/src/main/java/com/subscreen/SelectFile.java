@@ -20,7 +20,7 @@ public class SelectFile extends FragmentActivity {
     ArrayList<String> fileNames = null;
     String dirPath =  System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
     String curPath;
-    String backString = "(Back)";
+    String backString;
     ArrayAdapter adp;
     boolean isMounted = true;
     FilenameFilter textFilter = new FilenameFilter() {
@@ -38,7 +38,7 @@ public class SelectFile extends FragmentActivity {
         new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message)
-                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                .setNeutralButton(this.getString(R.string.exit_text), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     System.exit(0);
                 }
@@ -48,17 +48,19 @@ public class SelectFile extends FragmentActivity {
 
     }
     protected void onCreate(Bundle savedInstanceState) {
+        backString =  this.getString(R.string.back_folder);
         curPath = dirPath;
         try {
             isMounted = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
             if (!isMounted) {
-                displayExitMessage("Sorry, we couldn't find the external device.\nMake sure it is "
-                + "inserted and that your Android device is not in Mass Storage Mode.", "Storage not Found");
+                displayExitMessage(this.getString(R.string.storage_not_found),
+                        this.getString(R.string.storage_not_found_title));
             }
             File subDirectory = new File(dirPath);
 // have the object build the directory structure, if needed.
             if (subDirectory.mkdirs()) {
-                displayExitMessage("We've made a Subtitles folder on your external device.\nPlease place any subtitles you wish to play there.", "Folder Created");
+                displayExitMessage(this.getString(R.string.folder_created),
+                        this.getString(R.string.folder_created_title));
                 isMounted = false;
             }
             super.onCreate(savedInstanceState);

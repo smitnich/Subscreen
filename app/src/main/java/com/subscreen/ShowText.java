@@ -71,7 +71,7 @@ public class ShowText extends FragmentActivity {
         new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message)
-                .setNeutralButton("Back", new DialogInterface.OnClickListener() {
+                .setNeutralButton(this.getString(R.string.exit_text), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         returnToSelectScreen();
                     }
@@ -90,7 +90,7 @@ public class ShowText extends FragmentActivity {
     {
         validFrameRates = new ArrayList<String>(Arrays.asList(FrameBlock.frameRateStrings));
         final Dialog framerateDialog = new Dialog(this);
-        framerateDialog.setTitle("Choose Video Framerate");
+        framerateDialog.setTitle(this.getString(R.string.framerate_dialog_title));
         framerateDialog.setContentView(R.layout.menu_encoding_choice);
         frameRateListView = (ListView) framerateDialog.findViewById(R.id.choices);
         frameRateListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, validFrameRates));
