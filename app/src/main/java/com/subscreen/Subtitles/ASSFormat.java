@@ -129,7 +129,7 @@ public class ASSFormat implements SubtitleFormat {
 				{
 					buffer = buffer.replace(replaceText[i], replaceTextWith[i]);
 				}
-				blocks.add(new TimeBlock(buffer, beginTime, endTime, playerInstance));
+				blocks.add(new TimeBlock(buffer.trim(), beginTime, endTime, playerInstance));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
