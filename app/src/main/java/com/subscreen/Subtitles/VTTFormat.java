@@ -41,7 +41,7 @@ public class VTTFormat implements SubtitleFormat {
             //Skip ahead to the first actual line of text
             in.readLine();
             in.readLine();
-            while (in.ready())
+            while (true)
             {
                 //Read the block number and throw a warning if it is not the expected one
                 String tmp = in.readLine();
@@ -57,8 +57,10 @@ public class VTTFormat implements SubtitleFormat {
                 while (tmp != null && tmp.length() > 0)
                 {
                     tmp = in.readLine();
-                    if (tmp == null)
+                    if (tmp == null) {
+                        blocks.add(new TimeBlock(buffer,beginTime,endTime,playerInstance));
                         return;
+                    }
                     tmp = tmp.trim();
                     if (tmp.length() > 0)
                         buffer += tmp + "<br>";
