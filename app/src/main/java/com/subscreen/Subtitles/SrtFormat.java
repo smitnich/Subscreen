@@ -38,12 +38,10 @@ public class SrtFormat implements SubtitleFormat {
 		int current = 1;
         String tmp;
 		try {
-			while ((buffer = in.readLine()) != null)
+			buffer = in.readLine();
+			buffer = buffer.trim();
+			while (true)
 			{	
-				//Read the block number and throw a warning if it is not the expected one
-				buffer =  buffer.trim();
-                if (buffer.length() == 0)
-                    break;
 				tmp = in.readLine();
 				if (tmp == null)
 					break;
@@ -54,11 +52,15 @@ public class SrtFormat implements SubtitleFormat {
 				long endTime = parseTimeStamp(endTimeString);
 				tmp = buffer;
 				buffer = new String();
-				while (tmp.length() > 0)
+				while (true)
 				{
 					tmp = in.readLine();
 					if (tmp == null)
 						break;
+					if (isNumber(tmp))
+						break;
+					if (tmp.length() == 0)
+						continue;
 					tmp = tmp.trim();
                     if (tmp.length() > 0)
 					    buffer += tmp + "<br>";
@@ -73,6 +75,17 @@ public class SrtFormat implements SubtitleFormat {
         {
             throw e;
         }
+	}
+	public boolean isNumber(String input) {
+		//Don't count the empty string as a number
+		if (input.length() == 0)
+			return false;
+		for (int i = 0; i < input.length(); i++)
+		{
+			if (input.charAt(i) > '9' || input.charAt(i) < '0')
+				return false;
+		}
+		return true;
 	}
 	public int parseTimeStamp(String input)
 	{
