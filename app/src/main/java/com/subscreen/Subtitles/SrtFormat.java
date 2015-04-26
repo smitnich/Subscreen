@@ -38,8 +38,7 @@ public class SrtFormat implements SubtitleFormat {
 		int current = 1;
         String tmp;
 		try {
-			buffer = in.readLine();
-			buffer = buffer.trim();
+			in.readLine();
 			while (true)
 			{	
 				tmp = in.readLine();
@@ -47,7 +46,12 @@ public class SrtFormat implements SubtitleFormat {
 					break;
 				buffer = tmp.trim();
 				String beginTimeString = buffer.substring(0,buffer.indexOf('-')).trim();
-				String endTimeString = buffer.substring(buffer.lastIndexOf('>')+2,buffer.length()).trim();
+				//We need to check for a space after the second time string in order to avoid
+				//reading in possible coordinate data following the times
+				int spaceIndex = buffer.indexOf(' ',buffer.lastIndexOf('>')+2);
+				if (spaceIndex == -1)
+					spaceIndex = buffer.length();
+				String endTimeString = buffer.substring(buffer.lastIndexOf('>')+2,spaceIndex).trim();
 				long beginTime = parseTimeStamp(beginTimeString);
 				long endTime = parseTimeStamp(endTimeString);
 				tmp = buffer;
@@ -68,7 +72,6 @@ public class SrtFormat implements SubtitleFormat {
 				blocks.add(new TimeBlock(buffer, beginTime, endTime,playerInstance));
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         catch (Exception e)
