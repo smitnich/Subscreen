@@ -42,7 +42,7 @@ public class SubtitlePlayer {
     TextBlock text;
     ShowText parentActivity;
     Context context;
-    String srcCharset;
+    public String srcCharset;
     String rootPath = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
 	public void main(TextView toEdit, Context _context, String filePath, Activity activity) {
         context = _context;
@@ -78,7 +78,6 @@ public class SubtitlePlayer {
         }
         initText();
         pause();
-        //startThread();
 	}
     public double getCurrentFramerate() {
         return FrameBlock.currentFramerateMultiplier;
@@ -245,7 +244,7 @@ public class SubtitlePlayer {
         else
             return "ISO-8859-1";
     }
-	private SubtitleFormat pickFormat(String path)
+	public SubtitleFormat pickFormat(String path)
 	{
         final int bufferLength = 128;
         InputStreamReader fis = null;
@@ -277,15 +276,23 @@ public class SubtitlePlayer {
                             else
                                 return new ASSFormat(this);
                         }
-                        //Theoretically this could actually be a different format with the first text
-                        //appearing 10 hours in, so double check just to be paranoid
+                    //Unfortunately, SRT files sometimes begin with numbers other than 1; if it's
+                    // followed by a newline or line feed then it should be an SRT file, otherwise
+                    // it is a TMP file
+                    case '0':
                     case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
                         if (buffer[i+1] == '\r' || buffer[i+1] == '\n')
                             return new SrtFormat(this);
                         else
                             return new TmpFormat(this);
-                    case '0':
-                        return new TmpFormat(this);
                     case '<':
                         return new SMIFormat(this);
                     //Byte order mark, skip here
