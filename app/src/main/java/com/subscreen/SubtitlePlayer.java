@@ -289,10 +289,10 @@ public class SubtitlePlayer {
                     case '7':
                     case '8':
                     case '9':
-                        if (buffer[i+1] == '\r' || buffer[i+1] == '\n')
-                            return new SrtFormat(this);
-                        else
+                        if (buffer[i+1] <= '9' && buffer[i+1] >= '0')
                             return new TmpFormat(this);
+                        else
+                            return new SrtFormat(this);
                     case '<':
                         return new SMIFormat(this);
                     //Byte order mark, skip here
