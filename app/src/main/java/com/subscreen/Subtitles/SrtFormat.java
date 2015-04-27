@@ -40,10 +40,14 @@ public class SrtFormat implements SubtitleFormat {
 		boolean lastLineWasEmpty;
 		try {
 			in.readLine();
-			while (true)
-			{
+			while (true) {
+				tmp = null;
 				lastLineWasEmpty = false;
-				tmp = in.readLine();
+				do {
+					tmp = in.readLine();
+					if (tmp == null)
+						break;
+				} while(tmp.length() == 0);
 				if (tmp == null)
 					break;
 				buffer = tmp.trim();
@@ -63,6 +67,7 @@ public class SrtFormat implements SubtitleFormat {
 					tmp = in.readLine();
 					if (tmp == null)
 						break;
+					tmp = tmp.trim();
 					if (isNumber(tmp) && lastLineWasEmpty)
 						break;
 					if (lastLineWasEmpty && buffer.length() > 0)
@@ -71,7 +76,6 @@ public class SrtFormat implements SubtitleFormat {
 						lastLineWasEmpty = true;
 						continue;
 					}
-					tmp = tmp.trim();
                     if (tmp.length() > 0) {
 						if (!lastLineWasEmpty && buffer.length() > 0)
 							buffer += "<br>";
@@ -112,6 +116,10 @@ public class SrtFormat implements SubtitleFormat {
 		int minutes = Integer.parseInt(input.substring(count+1,nextCount));
 		count = input.indexOf(':',nextCount);
 		nextCount = input.indexOf(',',count);
+		//If the comma character is missing, default to the typical time format:
+		//00:00:00,000 by assuming that the nextCount index is the same as in this format
+		if (nextCount == -1)
+			nextCount = 8;
 		int seconds = Integer.parseInt(input.substring(count+1,nextCount));
 		int milliseconds = Integer.parseInt(input.substring(nextCount+1,input.length()));
 		return (hours*60*60*1000) + (minutes*60*1000) + (seconds*1000) + milliseconds;
