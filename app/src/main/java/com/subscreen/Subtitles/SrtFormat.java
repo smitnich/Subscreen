@@ -37,10 +37,12 @@ public class SrtFormat implements SubtitleFormat {
 		String buffer;
 		int current = 1;
         String tmp;
+		boolean lastLineWasEmpty;
 		try {
 			in.readLine();
 			while (true)
-			{	
+			{
+				lastLineWasEmpty = false;
 				tmp = in.readLine();
 				if (tmp == null)
 					break;
@@ -54,22 +56,29 @@ public class SrtFormat implements SubtitleFormat {
 				String endTimeString = buffer.substring(buffer.lastIndexOf('>')+2,spaceIndex).trim();
 				long beginTime = parseTimeStamp(beginTimeString);
 				long endTime = parseTimeStamp(endTimeString);
-				tmp = buffer;
 				buffer = new String();
 				while (true)
 				{
+
 					tmp = in.readLine();
 					if (tmp == null)
 						break;
-					if (isNumber(tmp))
+					if (isNumber(tmp) && lastLineWasEmpty)
 						break;
-					if (tmp.length() == 0)
+					if (lastLineWasEmpty && buffer.length() > 0)
+						buffer += "<br>";
+					if (tmp.length() == 0) {
+						lastLineWasEmpty = true;
 						continue;
+					}
 					tmp = tmp.trim();
-                    if (tmp.length() > 0)
-					    buffer += tmp + "<br>";
+                    if (tmp.length() > 0) {
+						if (!lastLineWasEmpty && buffer.length() > 0)
+							buffer += "<br>";
+						lastLineWasEmpty = false;
+						buffer += tmp;
+					}
 				}
-				blocks.add(new TimeBlock(buffer, beginTime, endTime,playerInstance));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -92,6 +101,8 @@ public class SrtFormat implements SubtitleFormat {
 	}
 	public int parseTimeStamp(String input)
 	{
+		if (input.length() == 1)
+			return 0;
 		int count = input.indexOf(':');
 		int nextCount = -1;
 		int hours = Integer.parseInt(input.substring(0,count));
