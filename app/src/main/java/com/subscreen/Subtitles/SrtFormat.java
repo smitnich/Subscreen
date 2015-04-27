@@ -79,6 +79,8 @@ public class SrtFormat implements SubtitleFormat {
 						buffer += tmp;
 					}
 				}
+				if (buffer.length() > 0)
+					blocks.add(new TimeBlock(buffer, beginTime, endTime,playerInstance));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
