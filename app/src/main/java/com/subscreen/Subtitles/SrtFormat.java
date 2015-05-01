@@ -39,7 +39,10 @@ public class SrtFormat implements SubtitleFormat {
         String tmp;
 		boolean lastLineWasEmpty;
 		try {
-			in.readLine();
+			//Skip past any empty lines at the beginning of the file
+			do {
+				buffer = in.readLine();
+			} while (buffer.length() == 0);
 			while (true) {
 				tmp = null;
 				lastLineWasEmpty = false;
