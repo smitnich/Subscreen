@@ -96,6 +96,7 @@ public class SelectFile extends FragmentActivity {
                         adp.clear();
                         adp.addAll(fileNames);
                         adp.notifyDataSetChanged();
+                        lv.setSelection(0);
                         return;
                     }
                     Intent intent = new Intent(SelectFile.this, ShowText.class);
