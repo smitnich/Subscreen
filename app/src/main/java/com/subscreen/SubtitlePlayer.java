@@ -289,7 +289,9 @@ public class SubtitlePlayer {
                     case '7':
                     case '8':
                     case '9':
-                        if (buffer[i+1] <= '9' && buffer[i+1] >= '0')
+                        //SRT files also occasionally begin with negative numbers...
+                    case '-':
+                        if (buffer.length > i+2 && buffer[i+2] == ':')
                             return new TmpFormat(this);
                         else
                             return new SrtFormat(this);
@@ -299,6 +301,8 @@ public class SubtitlePlayer {
                     case 0xFFFD:
                     case 0xFFFE:
                     case 0xFEFF:
+                    //Also skip empty spaces
+                    case ' ':
                         i++;
                         break;
                     default:
