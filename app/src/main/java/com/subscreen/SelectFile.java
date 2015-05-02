@@ -18,8 +18,8 @@ import android.content.DialogInterface;
 public class SelectFile extends FragmentActivity {
     ListView lv;
     ArrayList<String> fileNames = null;
-    String dirPath =  System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
-    String curPath;
+    static String dirPath =  System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
+    static String curPath = dirPath;
     String backString;
     ArrayAdapter adp;
     boolean isMounted = true;
@@ -49,7 +49,6 @@ public class SelectFile extends FragmentActivity {
     }
     protected void onCreate(Bundle savedInstanceState) {
         backString =  this.getString(R.string.back_folder);
-        curPath = dirPath;
         try {
             isMounted = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
             if (!isMounted) {
@@ -66,7 +65,7 @@ public class SelectFile extends FragmentActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_select_file);
             lv = (ListView) findViewById(R.id.file_list);
-            fileNames = loadFileNames(dirPath);
+            fileNames = loadFileNames(curPath);
             adp = new ArrayAdapter(this, android.R.layout.simple_list_item_1, fileNames);
             lv.setAdapter(adp);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
