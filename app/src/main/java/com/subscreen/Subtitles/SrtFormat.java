@@ -111,6 +111,8 @@ public class SrtFormat implements SubtitleFormat {
 	{
 		if (input.length() == 1)
 			return 0;
+		//A timestamp should not be longer than this
+		int maxLength = 12;
 		int count = input.indexOf(':');
 		int nextCount = -1;
 		int hours = Integer.parseInt(input.substring(0,count));
@@ -123,7 +125,19 @@ public class SrtFormat implements SubtitleFormat {
 		if (nextCount == -1)
 			nextCount = 8;
 		int seconds = Integer.parseInt(input.substring(count+1,nextCount));
-		int milliseconds = Integer.parseInt(input.substring(nextCount+1,input.length()));
+		//Don't use an input length greater than the max length, but do allow for one less than it
+		//by using min
+		int endIndex = Math.min(maxLength,input.length());
+		int milliseconds;
+		if (input.length() > 8) {
+			milliseconds = Integer.parseInt(input.substring(nextCount + 1, endIndex));
+			milliseconds *= Math.pow(10, ((nextCount + 1 + 3) - endIndex));
+		}
+		else {
+			milliseconds = 0;
+		}
+		//If there were less than three digits of milliseconds, then we need to multiply by 10
+		//to the power of the missing digits in order to convert to milliseconds
 		return (hours*60*60*1000) + (minutes*60*1000) + (seconds*1000) + milliseconds;
 	}
 
