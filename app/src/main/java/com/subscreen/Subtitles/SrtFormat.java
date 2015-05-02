@@ -56,10 +56,12 @@ public class SrtFormat implements SubtitleFormat {
 				String beginTimeString = buffer.substring(0,buffer.indexOf('-')).trim();
 				//We need to check for a space after the second time string in order to avoid
 				//reading in possible coordinate data following the times
-				int spaceIndex = buffer.indexOf(' ',buffer.lastIndexOf('>')+2);
+				int beginIndex = buffer.lastIndexOf('>');
+				while (buffer.charAt(++beginIndex) == ' ');
+				int spaceIndex = buffer.indexOf(' ',beginIndex+1);
 				if (spaceIndex == -1)
 					spaceIndex = buffer.length();
-				String endTimeString = buffer.substring(buffer.lastIndexOf('>')+2,spaceIndex).trim();
+				String endTimeString = buffer.substring(beginIndex,spaceIndex).trim();
 				long beginTime = parseTimeStamp(beginTimeString);
 				long endTime = parseTimeStamp(endTimeString);
 				buffer = new String();
