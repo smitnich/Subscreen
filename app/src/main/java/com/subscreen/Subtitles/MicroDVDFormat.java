@@ -70,16 +70,19 @@ public class MicroDVDFormat implements SubtitleFormat {
                         lastBlock.endFrame = startFrame;
                     text = m.group(3);
                     String[] textLines = text.split("\\|");
-                    for (int i = 0; i < textLines.length; i++) {
-                        allText.append(buildOptions(textLines[i]));
-                        //Make sure we don't append a break tag on the last line
-                        if (i < textLines.length - 1)
-                            allText.append("<br>");
+                    if (text.length() != 0) {
+                        for (int i = 0; i < textLines.length; i++) {
+                            allText.append(buildOptions(textLines[i]));
+                            //Make sure we don't append a break tag on the last line
+                            if (i < textLines.length - 1)
+                                allText.append("<br>");
+                        }
+                        lastBlock = new FrameBlock(allText.toString(), startFrame, endFrame, playerInstance);
+                        blocks.add(lastBlock);
                     }
-                    lastBlock = new FrameBlock(allText.toString(),startFrame,endFrame,playerInstance);
-                    blocks.add(lastBlock);
-                    //Only keep track of the last
-                    if (lastBlock.endFrame != -1)
+                    //If the previous block did not have an end time, give it this block's starting
+                    //time
+                    if (lastBlock != null && lastBlock.endFrame != -1)
                         lastBlock = null;
                 }
             }
