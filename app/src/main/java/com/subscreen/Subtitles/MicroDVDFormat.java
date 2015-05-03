@@ -147,6 +147,7 @@ public class MicroDVDFormat implements SubtitleFormat {
                             else
                                 i++;
                     }
+                    doOptionBlock = false;
                     break;
                 case 'P':
                     //Position would have no relation to how the text oriented on the device
