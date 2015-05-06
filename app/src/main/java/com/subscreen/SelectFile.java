@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
@@ -72,6 +74,8 @@ public class SelectFile extends FragmentActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String fileName = fileNames.get(position);
+                    //If a zip file is loaded, this is the one to be used within it
+                    String zipFileName = null;
                     if (fileName.charAt(0) == '/' || fileName.equals(backString))
                     {
                             //Take all but the first character of the fileName and add a directory
@@ -98,9 +102,25 @@ public class SelectFile extends FragmentActivity {
                         lv.setSelection(0);
                         return;
                     }
+                    if (fileName.endsWith(".zip")) {
+                        ArrayList<String> zipFileNames = FileHelper.readZipFile(curPath + fileName);
+                        if (zipFileNames.size() == 1) {
+                            zipFileName = zipFileNames.get(0);
+                        }
+                        else {
+                            adp.clear();
+                            adp.addAll(fileNames);
+                            adp.notifyDataSetChanged();
+                            lv.setSelection(0);
+                            fileNames = zipFileNames;
+                            return;
+                        }
+                    }
                     Intent intent = new Intent(SelectFile.this, ShowText.class);
                     Bundle b = new Bundle();
                     b.putString("fileName", curPath + fileName); //Your id
+                    if (zipFileName != null)
+                        b.putString("zipFileName",zipFileName);
                     intent.putExtras(b); //Put your id to your next Intent
                     startActivity(intent);
                     finish();

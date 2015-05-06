@@ -8,6 +8,7 @@ import com.subscreen.FrameBlock;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -23,10 +24,10 @@ public class MicroDVDFormat implements SubtitleFormat {
     {
         playerInstance = tmpPlayer;
     }
-    public ArrayList<TextBlock> readFile(String path, String srcCharset) {
+    public ArrayList<TextBlock> readFile(InputStream data, String srcCharset) {
         try {
             ArrayList<TextBlock> blocks = new ArrayList<>();
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), srcCharset));
+            BufferedReader br = new BufferedReader(new InputStreamReader(data, srcCharset));
             readLines(br, blocks);
             return blocks;
         }
@@ -135,6 +136,8 @@ public class MicroDVDFormat implements SubtitleFormat {
                                 if (doEndText)
                                     endText.insert(0, "</u>");
                                 break;
+                            //These currently are not supported by HTML.fromHTML, but insert them
+                            //anyways in case this ever changes
                             case 's':
                                 startText.append("<s>");
                                 if (doEndText)
@@ -159,10 +162,6 @@ public class MicroDVDFormat implements SubtitleFormat {
                     //Font size
                     //Let's ignore this since the font size on a monitor is much different from a small
                     //phone, and probably will not appear as intended
-                /*i = 2;
-                while (input.charAt(i++) != '}');
-                startText.append("<font size=\"" + input.substring(2,i) +  "\">");
-                endText.append("</font>");*/
                     break;
                 case 'C':
                     doEndText = false;

@@ -1,5 +1,6 @@
 package com.subscreen;
 
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -44,10 +45,10 @@ public class SubtitlePlayer {
     Context context;
     public String srcCharset;
     String rootPath = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
-	public void main(TextView toEdit, Context _context, String filePath, Activity activity) {
+	public void main(TextView toEdit, Context _context, BufferedInputStream fileData, Activity activity) {
         context = _context;
         parentActivity = (ShowText) activity;
-        SubtitleFormat subFile = pickFormat(filePath);
+        SubtitleFormat subFile = pickFormat(fileData);
         if (subFile == null){
             parentActivity.displayBackMessage(
                     context.getString(R.string.bad_format_message),context.getString(R.string.bad_format_title));
@@ -59,7 +60,7 @@ public class SubtitlePlayer {
 		outputTo = new AndroidOutput(activity, srcCharset);
 		outputTo.setTextView(toEdit);
         try {
-            blocks = subFile.readFile(filePath, srcCharset);
+            blocks = subFile.readFile(fileData, srcCharset);
             if (blocks.get(0).showFramerates()) {
                 parentActivity.convertFramerateButton.setEnabled(true);
                 parentActivity.convertFramerateButton.setVisibility(View.VISIBLE);
@@ -223,12 +224,11 @@ public class SubtitlePlayer {
         }
         parentActivity.returnToSelectScreen();
     }
-    private String determineEncoding(String path) throws Exception {
-        PushbackInputStream fis = new PushbackInputStream(new FileInputStream(path), 4);
+    private String determineEncoding(BufferedInputStream fis) throws Exception {
         byte[] tmpBuffer = new byte[5];
         int[] buffer = new int[5];
-        fis.read(tmpBuffer,0,4);
-        fis.close();
+        fis.read(tmpBuffer, 0, 4);
+        fis.reset();
         for (int i = 0; i < 5; i++)
             buffer[i] = tmpBuffer[i] & 0xff;
         if (buffer[0] == 0xef && buffer[1] == 0xbb && buffer[2] == 0xbf)
@@ -244,16 +244,18 @@ public class SubtitlePlayer {
         else
             return "ISO-8859-1";
     }
-	public SubtitleFormat pickFormat(String path)
+	public SubtitleFormat pickFormat(BufferedInputStream fileData)
 	{
         final int bufferLength = 128;
         InputStreamReader fis = null;
+        fileData.mark(bufferLength+1);
         char[] buffer = new char[bufferLength];
         int i = 0;
         try {
-            srcCharset = determineEncoding(path);
-            fis = new InputStreamReader(new FileInputStream(path), srcCharset);
+            srcCharset = determineEncoding(fileData);
+            fis = new InputStreamReader(fileData, srcCharset);
             fis.read(buffer,0,bufferLength);
+            fileData.reset();
             //Skip to the first actual text
             while (buffer[i] == '\r' || buffer[i] == '\n')
             {
@@ -313,16 +315,6 @@ public class SubtitlePlayer {
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
-        finally
-        {
-            try {
-                fis.close();
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
         }
         return null;
     }

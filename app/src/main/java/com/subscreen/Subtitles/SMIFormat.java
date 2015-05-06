@@ -6,6 +6,7 @@ import com.subscreen.TimeBlock;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -21,10 +22,10 @@ public class SMIFormat implements SubtitleFormat {
     {
         playerInstance = tmpPlayer;
     }
-    public ArrayList<TextBlock> readFile(String path, String srcCharset) {
+    public ArrayList<TextBlock> readFile(InputStream data, String srcCharset) {
         try {
             ArrayList<TextBlock> blocks = new ArrayList<>();
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), srcCharset));
+            BufferedReader br = new BufferedReader(new InputStreamReader(data, srcCharset));
             readLines(br, blocks);
             return blocks;
         }
@@ -47,7 +48,7 @@ public class SMIFormat implements SubtitleFormat {
             str = in.readLine();
             Matcher m;
                 do {
-                    String text = new String();
+                    String text = "";
                     endTime = -1;
                     m = p.matcher(str);
                     if (m.find()) {
@@ -66,13 +67,13 @@ public class SMIFormat implements SubtitleFormat {
                                 else
                                     newText[j++] = origText[i];
                             }
-                            text = new String(newText);
+                            text = new String(newText).trim();
                         }
                         while (true) {
                             str = in.readLine();
                             if (str == null || str.length() == 0)
                                 break;
-                            if (!str.startsWith("<"))
+                            if (!str.startsWith("<SYNC"))
                                 text = text + str;
                             else
                                 break;

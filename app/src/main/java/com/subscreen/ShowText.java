@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.view.MenuItem;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +33,6 @@ public class ShowText extends FragmentActivity {
     ListView frameRateListView;
     ArrayList<String> validFrameRates;
     ArrayList<Integer> indices;
-    String[] charsets = {"UTF-8","UTF-16BE","UTF-16LE","US-ASCII","ISO-8859-1","windows-1252"};
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +43,8 @@ public class ShowText extends FragmentActivity {
         initMenu();
         Bundle b = getIntent().getExtras();
         String fileName = b.getString("fileName");
+        String zipFileName = b.getString("zipFileName");
+        BufferedInputStream fileData = new BufferedInputStream(FileHelper.readFile(fileName,zipFileName));
         playerInstance = new SubtitlePlayer();
         backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +67,7 @@ public class ShowText extends FragmentActivity {
                 playerInstance.nextSubtitle();
             }
         });
-        playerInstance.main(t, this.getApplicationContext(), fileName, this);
+        playerInstance.main(t, this.getApplicationContext(), fileData, this);
 	}
     void displayBackMessage(String message, String title)
     {

@@ -2,6 +2,7 @@ package com.subscreen.Subtitles;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import android.widget.TextView;
@@ -19,11 +20,11 @@ public class SrtFormat implements SubtitleFormat {
     {
         playerInstance = tmpPlayer;
     }
-	public ArrayList<TextBlock> readFile(String path, String srcCharset)
+	public ArrayList<TextBlock> readFile(InputStream data, String srcCharset)
 	{
         try {
             ArrayList<TextBlock> blocks = new ArrayList<>();
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), srcCharset));
+            BufferedReader br = new BufferedReader(new InputStreamReader(data, srcCharset));
             readLines(br, blocks);
             return blocks;
         }
