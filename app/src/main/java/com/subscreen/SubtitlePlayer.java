@@ -10,6 +10,7 @@ import java.util.Date;
 import java.io.FileReader;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
@@ -77,6 +78,7 @@ public class SubtitlePlayer {
                     context.getText(R.string.bad_format_message).toString(),"Sorry");
             return;
         }
+        parentActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         initText();
         pause();
 	}
