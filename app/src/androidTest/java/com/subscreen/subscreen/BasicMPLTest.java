@@ -3,6 +3,7 @@ package com.subscreen.subscreen;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
+import com.subscreen.FileHelper;
 import com.subscreen.Subtitles.MPLFormat;
 import com.subscreen.Subtitles.VTTFormat;
 import com.subscreen.TextBlock;
@@ -22,7 +23,7 @@ public class BasicMPLTest extends ApplicationTestCase<Application> {
         ArrayList<TextBlock> blocks = null;
         String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
         MPLFormat mpl = new MPLFormat(null);
-        blocks = mpl.readFile(path+"mpl/testMpl.txt", "UTF-8");
+        blocks = mpl.readFile(FileHelper.readFile(path + "mpl/testMpl.txt", null), "UTF-8");
         TimeBlock firstBlock = (TimeBlock) blocks.get(0);
         assertEquals(firstBlock.getStartTime(), 376*100);
         assertEquals("Begin Text.", firstBlock.text);

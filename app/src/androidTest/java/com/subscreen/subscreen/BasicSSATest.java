@@ -3,6 +3,7 @@ package com.subscreen.subscreen;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
+import com.subscreen.FileHelper;
 import com.subscreen.Subtitles.ASSFormat;
 import com.subscreen.TextBlock;
 import com.subscreen.TimeBlock;
@@ -20,7 +21,7 @@ public BasicSSATest() {
             ArrayList<TextBlock> blocks = null;
             String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
             ASSFormat ssa = new ASSFormat(null);
-            blocks = ssa.readFile(path+"ssa/testSSA.ass", "UTF-8");
+            blocks = ssa.readFile(FileHelper.readFile(path + "ssa/testSSA.ass", null), "UTF-8");
             assertEquals(blocks.get(0).getStartTime(), 2*60*1000 + 36*1000 + 40);
             TimeBlock lastBlock = (TimeBlock) blocks.get(blocks.size()-1);
             assertEquals(lastBlock.text, "End Text.");

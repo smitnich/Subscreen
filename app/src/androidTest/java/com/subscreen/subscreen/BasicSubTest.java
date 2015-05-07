@@ -3,6 +3,7 @@ package com.subscreen.subscreen;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
+import com.subscreen.FileHelper;
 import com.subscreen.Subtitles.SubViewerTwoFormat;
 import com.subscreen.TextBlock;
 
@@ -19,7 +20,7 @@ public class BasicSubTest extends ApplicationTestCase<Application> {
         ArrayList<TextBlock> blocks = null;
         String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
         SubViewerTwoFormat sub = new SubViewerTwoFormat(null);
-        blocks = sub.readFile(path+"txt/test.srt", "UTF-8");
+        blocks = sub.readFile(FileHelper.readFile(path + "txt/test.srt", null), "UTF-8");
         assertEquals(blocks.get(0).getStartTime(),26040);
         TextBlock tmpBlock = blocks.get(blocks.size()-1);
         assertEquals(blocks.size(), 506);

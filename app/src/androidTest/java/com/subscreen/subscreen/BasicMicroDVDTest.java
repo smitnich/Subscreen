@@ -3,6 +3,7 @@ package com.subscreen.subscreen;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
+import com.subscreen.FileHelper;
 import com.subscreen.FrameBlock;
 import com.subscreen.Subtitles.MicroDVDFormat;
 import com.subscreen.Subtitles.SubViewerTwoFormat;
@@ -21,7 +22,7 @@ public class BasicMicroDVDTest extends ApplicationTestCase<Application> {
         ArrayList<TextBlock> blocks = null;
         String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
         MicroDVDFormat mdvd = new MicroDVDFormat(null);
-        blocks = mdvd.readFile(path+"sub/testSub.txt", "UTF-8");
+        blocks = mdvd.readFile(FileHelper.readFile(path + "sub/testSub.txt", null), "UTF-8");
         FrameBlock firstBlock = (FrameBlock) blocks.get(0);
         assertEquals(firstBlock.startFrame,512);
         assertEquals(firstBlock.endFrame,613);

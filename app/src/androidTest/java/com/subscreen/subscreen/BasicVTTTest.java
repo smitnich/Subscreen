@@ -3,6 +3,7 @@ package com.subscreen.subscreen;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
+import com.subscreen.FileHelper;
 import com.subscreen.Subtitles.SrtFormat;
 import com.subscreen.Subtitles.VTTFormat;
 import com.subscreen.TextBlock;
@@ -22,7 +23,7 @@ public class BasicVTTTest  extends ApplicationTestCase<Application> {
         ArrayList<TextBlock> blocks = null;
         String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
         VTTFormat vtt = new VTTFormat(null);
-        blocks = vtt.readFile(path+"vtt/testVtt.txt", "UTF-8");
+        blocks = vtt.readFile(FileHelper.readFile(path + "vtt/testVtt.txt", null), "UTF-8");
         TimeBlock firstBlock = (TimeBlock) blocks.get(0);
         assertEquals(firstBlock.getStartTime(), 4190);
         assertEquals("Begin Text.<br>", firstBlock.text);
