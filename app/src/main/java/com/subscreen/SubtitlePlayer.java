@@ -293,7 +293,7 @@ public class SubtitlePlayer {
                     case '9':
                         //SRT files also occasionally begin with negative numbers...
                     case '-':
-                        if (buffer.length > i+2 && buffer[i+2] == ':')
+                        if (buffer.length > i+2 && (buffer[i+1] == ':' || buffer[i+2] == ':'))
                             return new TmpFormat(this);
                         else
                             return new SrtFormat(this);
