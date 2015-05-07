@@ -169,8 +169,14 @@ public class SelectFile extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
     public ArrayList<String> loadFileNames(String path) {
-        File dir = new File(path);
         ArrayList<String> out = new ArrayList<String>();
+        if (path.endsWith(".zip")) {
+            zipOpened = true;
+            out.addAll(FileHelper.readZipFile(path));
+            out.add(0,backString);
+            return out;
+        }
+        File dir = new File(path);
         if (!isMounted || !dir.isDirectory())
             return out;
         //If we're at the root directory, don't allow the user to go back
