@@ -73,7 +73,8 @@ public class TmpFormat implements SubtitleFormat {
                 {
                     input = input.replace(replace[i],replaceWith[i]);
                 }
-				oldBlock = new TimeBlock(input,time,playerInstance);
+				if (input.length() > 0)
+					oldBlock = new TimeBlock(input,time,playerInstance);
 			}
 			if (oldBlock != null)
 			{
