@@ -24,6 +24,7 @@ public class SelectFile extends FragmentActivity {
     static String curPath = dirPath;
     String backString;
     ArrayAdapter adp;
+    boolean zipOpened = false;
     boolean isMounted = true;
     FilenameFilter textFilter = new FilenameFilter() {
         public boolean accept(File dir, String name) {
@@ -73,57 +74,7 @@ public class SelectFile extends FragmentActivity {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String fileName = fileNames.get(position);
-                    //If a zip file is loaded, this is the one to be used within it
-                    String zipFileName = null;
-                    if (fileName.charAt(0) == '/' || fileName.equals(backString))
-                    {
-                            //Take all but the first character of the fileName and add a directory
-                            //slash at the end in order to have the directory symbol at the end
-                            //of the string
-                        if (!fileName.equals(backString))
-                            curPath = curPath + fileName.substring(1) + "/";
-                        else {
-                            int i;
-                            //Skip the last character, which will always be a directory symbol
-                            //Then go back to the previous directory symbol; we want only the part
-                            //of the string before this
-                            for (i = curPath.length() -2; i >= 0; i--)
-                            {
-                                if (curPath.charAt(i) == '/')
-                                    break;
-                            }
-                            curPath = curPath.substring(0,i+1);
-                        }
-                        fileNames = loadFileNames(curPath);
-                        adp.clear();
-                        adp.addAll(fileNames);
-                        adp.notifyDataSetChanged();
-                        lv.setSelection(0);
-                        return;
-                    }
-                    if (fileName.endsWith(".zip")) {
-                        ArrayList<String> zipFileNames = FileHelper.readZipFile(curPath + fileName);
-                        if (zipFileNames.size() == 1) {
-                            zipFileName = zipFileNames.get(0);
-                        }
-                        else {
-                            adp.clear();
-                            adp.addAll(fileNames);
-                            adp.notifyDataSetChanged();
-                            lv.setSelection(0);
-                            fileNames = zipFileNames;
-                            return;
-                        }
-                    }
-                    Intent intent = new Intent(SelectFile.this, ShowText.class);
-                    Bundle b = new Bundle();
-                    b.putString("fileName", curPath + fileName); //Your id
-                    if (zipFileName != null)
-                        b.putString("zipFileName",zipFileName);
-                    intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
-                    finish();
+                    itemClicked(position);
                 }
             });
         }
@@ -133,7 +84,69 @@ public class SelectFile extends FragmentActivity {
         }
     }
 
-
+    private void itemClicked(int position) {
+        String fileName = fileNames.get(position);
+        //If a zip file is loaded, this is the one to be used within it
+        String zipFileName = null;
+        if (fileName.charAt(0) == '/' || fileName.equals(backString))
+        {
+            //Take all but the first character of the fileName and add a directory
+            //slash at the end in order to have the directory symbol at the end
+            //of the string
+            if (!fileName.equals(backString))
+                curPath = curPath + fileName.substring(1) + "/";
+            else {
+                int i;
+                //Skip the last character, which will always be a directory symbol
+                //Then go back to the previous directory symbol; we want only the part
+                //of the string before this
+                for (i = curPath.length() -2; i >= 0; i--)
+                {
+                    if (curPath.charAt(i) == '/')
+                        break;
+                }
+                curPath = curPath.substring(0,i+1);
+            }
+            zipOpened = false;
+            fileNames = loadFileNames(curPath);
+            adp.clear();
+            adp.addAll(fileNames);
+            adp.notifyDataSetChanged();
+            lv.setSelection(0);
+            return;
+        }
+        if (fileName.endsWith(".zip") || zipOpened) {
+            ArrayList<String> zipFileNames = FileHelper.readZipFile(curPath + fileName);
+            if (zipOpened) {
+                zipFileName = fileName;
+                //Akward hack, we're already storing the full path in the curPath variable, so
+                //we don't want anything appended to the filename
+                fileName = "";
+            }
+            else if (zipFileNames.size() == 1) {
+                zipFileName = zipFileNames.get(0);
+            }
+            else {
+                adp.clear();
+                zipFileNames.add(0,backString);
+                adp.addAll(zipFileNames);
+                adp.notifyDataSetChanged();
+                lv.setSelection(0);
+                fileNames = zipFileNames;
+                zipOpened = true;
+                curPath = curPath + fileName;
+                return;
+            }
+        }
+        Intent intent = new Intent(SelectFile.this, ShowText.class);
+        Bundle b = new Bundle();
+        b.putString("fileName", curPath + fileName); //Your id
+        if (zipFileName != null)
+            b.putString("zipFileName",zipFileName);
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
+        finish();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
