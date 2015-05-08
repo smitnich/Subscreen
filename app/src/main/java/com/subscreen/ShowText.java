@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.view.View;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ public class ShowText extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_text);
-		TextView t = (TextView)findViewById(R.id.edit_message);
+		TextView t = (TextView)findViewById(R.id.text);
         pauseButton = (Button) findViewById(R.id.pauseButton);
         convertFramerateButton = (Button) findViewById(R.id.setFrameButton);
         initMenu();
@@ -143,5 +144,4 @@ public class ShowText extends FragmentActivity {
     public static void setButton(String input){
         pauseButton.setText(input);
     }
-
 }
