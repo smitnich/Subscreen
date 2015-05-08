@@ -63,7 +63,7 @@ public class TmpFormat implements SubtitleFormat {
                 long seconds = Integer.parseInt(m.group(3));
                 time = (hours*60*60+minutes*60+seconds)*1000;
 				//Cut out everything after the timestamp and add it as the text string
-				String input = m.group(4);
+				String input = m.group(4).trim();
 				if (oldBlock != null)
 				{
 				    oldBlock.endTime = time;
@@ -73,6 +73,9 @@ public class TmpFormat implements SubtitleFormat {
                 {
                     input = input.replace(replace[i],replaceWith[i]);
                 }
+				//MicroDVD format and TMP format share many of the same modifiers:
+				//so use its string parsing function here
+				input = MicroDVDFormat.buildOptions(input);
 				if (input.length() > 0)
 					oldBlock = new TimeBlock(input,time,playerInstance);
 			}

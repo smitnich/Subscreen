@@ -98,7 +98,8 @@ public class MicroDVDFormat implements SubtitleFormat {
     }
     //This format allows for a variety of options that need to be parsed in order to be converted
     //to proper HTML
-    String buildOptions(String input)
+    //Also works for TMP format, so it is declared static for use in TmpFormat.java
+    static String buildOptions(String input)
     {
         if (input.charAt(0) != '{')
             return input;
