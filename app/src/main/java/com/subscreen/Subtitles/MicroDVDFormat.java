@@ -166,15 +166,13 @@ public class MicroDVDFormat implements SubtitleFormat {
                                 if (doEndText)
                                     endText.insert(0, "</s>");
                                 break;
+                            default:
+                                //Move back one space so that we will end up moving forward by one
+                                //once we add two to i
+                                i--;
+                                break;
                         }
-                        if (input.length() <= i + 1 || input.charAt(i + 1) != ',')
-                            if (input.charAt(i + 2) != '{')
-                                doOption = false;
-                            else
-                                i++;
                     }
-                    doOptionBlock = false;
-                    break;
                 case 'P':
                     //Position would have no relation to how the text oriented on the device
                 case 'f':
@@ -188,11 +186,12 @@ public class MicroDVDFormat implements SubtitleFormat {
                     break;
                 case 'C':
                     doEndText = false;
+                    //Fall through
                 case 'c':
                     //Text color
                     //MicroDVD format uses BBGGRR color format, so we need to switch around some of
                     //the values
-                    char[] colors = input.substring(i+3, i+9).toCharArray();
+                    char[] colors = option.substring(i+3, i+9).toCharArray();
                     char tmp = colors[0];
                     colors[0] = colors[4];
                     colors[4] = tmp;
@@ -204,15 +203,10 @@ public class MicroDVDFormat implements SubtitleFormat {
                     startText.append("\">");
                     if (doEndText)
                         endText.append("</font>");
-                    i+=10;
-                    if (input.charAt(i) != '{')
-                        doOptionBlock = false;
                     break;
-                default:
-                    doOptionBlock = false;
             }
         }
-        startText.append(text);
+        startText.append(options[options.length-1]);
         if (doEndText)
             startText.append(endText.toString());
         return startText.toString();
