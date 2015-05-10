@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class FrameBlock implements TextBlock {
     //24, 30, and 48 fps seem to be all the movie framerates that currently exist
-    static double frameRates[] = {23.976, 25.00, 29.97, 23.976*2};
+    public static double frameRates[] = {23.976, 25.00, 29.97, 23.976*2};
     static double[] frameRateMultipliers = {1, 25.0/23.976, 29.97/23.976, 2};
     static double currentFramerateMultiplier = 1;
     static String[] frameRateStrings = {"24","25","30","48"};
@@ -45,7 +45,7 @@ public class FrameBlock implements TextBlock {
     {
         text = message + text;
     }
-    public void setFrameRate(int choice)
+    public static void setFrameRate(int choice)
     {
         currentFramerateMultiplier = frameRateMultipliers[choice];
         frameRateModifier = 1000.0/frameRates[choice];
