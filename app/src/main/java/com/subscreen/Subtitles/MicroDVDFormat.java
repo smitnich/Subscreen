@@ -39,6 +39,7 @@ public class MicroDVDFormat implements SubtitleFormat {
     void readLines(BufferedReader in, ArrayList<TextBlock> blocks) {
         int newLine = -1;
         int lastNewLine = -1;
+        int forcedFramerate = -1;
         //Pattern p = Pattern.compile("\\[(\\d*)\\]\\[(\\d*)\\]");
         Pattern p = Pattern.compile("\\{(\\d*)\\}\\{(\\d*)\\}(.*)");
         StringBuilder allText = null;
@@ -49,6 +50,23 @@ public class MicroDVDFormat implements SubtitleFormat {
         FrameBlock lastBlock = null;
         long startFrame, endFrame;
         try {
+            //Check if the first line is a value specifying the framerate
+            in.mark(128);
+            buffer = in.readLine();
+            buffer = buffer.substring(buffer.lastIndexOf('}')+1);
+            try {
+                double textNum = Double.parseDouble(buffer);
+                for (int i = 0; i < FrameBlock.frameRates.length; i++) {
+                    double frameRate = FrameBlock.frameRates[i];
+                    if (Math.abs(frameRate - textNum) < 0.05) {
+                        forcedFramerate = i;
+                        break;
+                    }
+                }
+            } catch (NumberFormatException e) {
+                //Not a valid number, so just ignore it and continue as normal
+                in.reset();
+            }
             while (true) {
                 allText = new StringBuilder();
                 buffer = in.readLine();
@@ -92,6 +110,9 @@ public class MicroDVDFormat implements SubtitleFormat {
         {
             e.printStackTrace();
         }
+        if (forcedFramerate != -1 && blocks.size() > 0) {
+            FrameBlock.setFrameRate(forcedFramerate);
+        }
         //If the last end time tag wasn't closed, fill in a default end time for it
         if (lastBlock != null)
             lastBlock.endFrame = lastBlock.startFrame + 100;
@@ -101,27 +122,28 @@ public class MicroDVDFormat implements SubtitleFormat {
     //Also works for TMP format, so it is declared static for use in TmpFormat.java
     static String buildOptions(String input)
     {
-        if (input.charAt(0) != '{')
+        if (input.charAt(0) == '/')
+            return "<i>" + input.substring(1);
+        else if (input.charAt(0) != '{')
             return input;
-        int i = 1;
         boolean doEndText = true;
-        String text = input.substring(input.lastIndexOf('}')+1);
         StringBuilder startText = new StringBuilder("");
         StringBuilder endText = new StringBuilder("");
-        boolean formatAllLines = false;
-        boolean doOption = true;
-        boolean doOptionBlock = true;
-        while (doOptionBlock) {
+        String[] options = input.split("\\}");
+        for (String option : options) {
+            if (option.charAt(0) != '{')
+                continue;
+            int i = 1;
             doEndText = true;
-            switch (input.charAt(i)) {
+            switch (option.charAt(i)) {
                 //If we have a capital control code, then it means that we shouldn't end the font
                 //specification so that it carries onto the next line
                 case 'Y':
                     doEndText = false;
                 case 'y':
-                    while (doOption) {
+                    while (i + 2 < option.length()) {
                         i += 2;
-                        switch (input.charAt(i)) {
+                        switch (option.charAt(i)) {
                             case 'i':
                                 startText.append("<i>");
                                 if (doEndText)
