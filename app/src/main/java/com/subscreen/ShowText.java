@@ -95,7 +95,7 @@ public class ShowText extends FragmentActivity {
         validFrameRates = new ArrayList<String>(Arrays.asList(FrameBlock.frameRateStrings));
         final Dialog framerateDialog = new Dialog(this);
         framerateDialog.setTitle(this.getString(R.string.framerate_dialog_title));
-        framerateDialog.setContentView(R.layout.menu_encoding_choice);
+        framerateDialog.setContentView(R.layout.menu_choice);
         frameRateListView = (ListView) framerateDialog.findViewById(R.id.choices);
         frameRateListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, validFrameRates));
         convertFramerateButton.setOnClickListener(new View.OnClickListener() {
