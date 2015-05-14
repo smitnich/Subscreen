@@ -18,6 +18,8 @@ import java.util.ArrayList;
 public class SMIFormat implements SubtitleFormat {
 
     SubtitlePlayer playerInstance = null;
+    ArrayList<String> allLanguages = new ArrayList<String>();
+    ArrayList<ArrayList<TextBlock>> allBlocks = new ArrayList<ArrayList<TextBlock>>();
     public SMIFormat(SubtitlePlayer tmpPlayer)
     {
         playerInstance = tmpPlayer;
@@ -27,10 +29,11 @@ public class SMIFormat implements SubtitleFormat {
             ArrayList<TextBlock> blocks = new ArrayList<>();
             BufferedReader br = new BufferedReader(new InputStreamReader(data, srcCharset));
             readLines(br, blocks);
-            return blocks;
+            return allBlocks.get(0);
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             return null;
         }
     }
@@ -47,8 +50,9 @@ public class SMIFormat implements SubtitleFormat {
             TimeBlock newBlock = null;
             str = in.readLine();
             Matcher m;
-                do {
-                    String text = "";
+                while (true) {
+                    String tag = "Default";
+                    StringBuilder text = new StringBuilder();
                     endTime = -1;
                     m = p.matcher(str);
                     if (m.find()) {
@@ -58,46 +62,70 @@ public class SMIFormat implements SubtitleFormat {
                         char[] origText = m.group(3).toCharArray();
                         char[] newText = new char[origText.length];
                         int j = 0;
+                        int k = 0;
                         if (m.group(3).length() > 0) {
+                            char[] tagBuffer = new char[128];
                             for (int i = 0; i < origText.length; i++) {
                                 //If we find an opening tag, skip to the
                                 //closing tag
-                                if (origText[i] == '<')
-                                    while (origText[++i] != '>') ;
+                                if (origText[i] == '<') {
+                                    boolean equalsFound = false;
+                                    while (origText[i] != '>') {
+                                        if (equalsFound)
+                                            tagBuffer[k++] = origText[i];
+                                        if (origText[i] == '=')
+                                            equalsFound = true;
+                                        i++;
+                                    }
+                                    tag = new String(tagBuffer);
+                                }
                                 else
                                     newText[j++] = origText[i];
                             }
-                            text = new String(newText).trim();
+                            text.append(new String(newText).trim());
                         }
                         while (true) {
-                            str = in.readLine();
+                            str = in.readLine().trim();
                             if (str == null || str.length() == 0)
                                 break;
-                            if (!str.startsWith("<SYNC"))
-                                text = text + str;
+                            if (!str.toUpperCase().startsWith("<SYNC")) {
+                                /*int endTag = str.indexOf('>');
+                                if (endTag != -1)
+                                    text.append(str.substring(endTag+1));
+                                else*/
+                                    text.append(str);
+                            }
                             else
                                 break;
                         }
-                        for (int i = 0; i < replaceString.length; i++)
-                            text = text.replace(replaceString[0], replaceWith[i]);
+                        for (int i = 0; i < replaceString.length; i++) {
+                            int index = text.indexOf(replaceString[i]);
+                            while (index != -1) {
+                                text.replace(index,replaceString[i].length(),replaceWith[i]);
+                                index = text.indexOf(replaceString[i]);
+                            }
+                        }
                         if (prevBlock != null && prevBlock.endTime == -1)
                             prevBlock.endTime = startTime;
+                        String finalText = text.toString();
+                        finalText = finalText.trim();
                         //If we have an empty line of text, it will appear when using the prev/next
                         //buttons to move through the text blocks. Thus we should not add any empty
                         //lines, but instead use their starting time as the previous blocks ending time
-                        if (text.trim().length() > 0)
-                            newBlock = new TimeBlock(text, startTime, playerInstance);
+                        if (finalText.length() > 0)
+                            newBlock = new TimeBlock(finalText, startTime, playerInstance);
                         else
                             continue;
                         newBlock.endTime = endTime;
-                        blocks.add(newBlock);
+                        addBlock(newBlock,tag);
                         prevBlock = newBlock;
                     } else {
                         str = in.readLine();
                         if (str == null)
                             break;
                     }
-                } while (true);
+                }
+            //If we didn't get an end time on the last block, set it to display for 5 seconds by default
             if (prevBlock != null && prevBlock.endTime == -1){
                 prevBlock.endTime = prevBlock.startTime + 5*1000;
             }
@@ -106,6 +134,29 @@ public class SMIFormat implements SubtitleFormat {
         {
             e.printStackTrace();
         }
-        //If we didn't get an end time on the last block, set it to display for 5 seconds by default
+    }
+    public void addBlock(TimeBlock block, String name) {
+        for (int i = 0; i < allBlocks.size(); i++) {
+            if (name.compareTo(allLanguages.get(i)) == 0) {
+                ArrayList<TextBlock> tmpBlocks = allBlocks.get(i);
+                tmpBlocks.add(block);
+                return;
+            }
+        }
+        allLanguages.add(name);
+        ArrayList<TextBlock> newBlock = new ArrayList<TextBlock>();
+        newBlock.add(block);
+        allBlocks.add(newBlock);
+    }
+    public ArrayList<String> getAvailableLanguages() {
+        return allLanguages;
+    }
+    public ArrayList<TextBlock> getLanguage(String name) {
+        for (int i = 0; i < allBlocks.size(); i++) {
+            if (name.compareTo(allLanguages.get(i)) == 0) {
+                return allBlocks.get(i);
+            }
+        }
+        return null;
     }
 }

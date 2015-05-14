@@ -11,6 +11,7 @@ import java.io.FileReader;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
@@ -45,6 +46,10 @@ public class SubtitlePlayer {
     ShowText parentActivity;
     Context context;
     public String srcCharset;
+    //SMI allows for multiple languages in one file; check if the format is SMI and if so allow
+    //for selecting languages
+    public SMIFormat smiSub = null;
+    public ArrayList<String> languages = null;
     String rootPath = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
 	public void main(TextView toEdit, Context _context, BufferedInputStream fileData, Activity activity) {
         context = _context;
@@ -52,13 +57,13 @@ public class SubtitlePlayer {
         SubtitleFormat subFile = pickFormat(fileData);
         if (subFile == null){
             parentActivity.displayBackMessage(
-                    context.getString(R.string.bad_format_message),context.getString(R.string.bad_format_title));
+                    context.getString(R.string.bad_format_message), context.getString(R.string.bad_format_title));
             return;
         }
         String playString = context.getString(R.string.begin_play);
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
-		outputTo = new AndroidOutput(activity, srcCharset);
+		outputTo = new AndroidOutput(activity);
 		outputTo.setTextView(toEdit);
         try {
             blocks = subFile.readFile(fileData, srcCharset);
@@ -77,6 +82,12 @@ public class SubtitlePlayer {
             parentActivity.displayBackMessage(
                     context.getText(R.string.bad_format_message).toString(),"Sorry");
             return;
+        }
+        if (smiSub != null) {
+            languages = smiSub.getAvailableLanguages();
+        }
+        if (smiSub == null || languages.size() <= 1) {
+            parentActivity.languageButton.setVisibility(View.GONE);
         }
         parentActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         initText();
@@ -154,6 +165,7 @@ public class SubtitlePlayer {
         TextBlock prevBlock = blocks.get(--subCount);
         prevBlock.getText(outputTo);
         playbackStarted = false;
+        parentActivity.updateButtons(subCount,blocks.size());
     }
     public void nextSubtitle()
     {
@@ -164,12 +176,13 @@ public class SubtitlePlayer {
         TextBlock nextBlock = blocks.get(++subCount);
         nextBlock.getText(outputTo);
         playbackStarted = false;
+        parentActivity.updateButtons(subCount,blocks.size());
     }
     private void startSubtitles()
     {
         if (blocks == null)
             return;
-        if (playbackStarted == false) {
+        if (!playbackStarted) {
             playbackStarted = true;
             Date rootDate = new Date();
             rootTime = rootDate.getTime();
@@ -186,7 +199,7 @@ public class SubtitlePlayer {
                 return;
             }
         }
-        playSubtitles(blocks,outputTo);
+        playSubtitles(blocks, outputTo);
     }
 	private void playSubtitles(ArrayList<TextBlock> blocks, Output outputTo) {
         while (true) {
@@ -201,6 +214,7 @@ public class SubtitlePlayer {
                         changeTextRequested = false;
                     text.getText(outputTo);
                     text.secondDelay();
+                    parentActivity.updateButtons(subCount,blocks.size());
                     outputTo.clearText();
                     subCount++;
                 }
@@ -250,7 +264,7 @@ public class SubtitlePlayer {
 	{
         final int bufferLength = 128;
         InputStreamReader fis = null;
-        fileData.mark(bufferLength+1);
+        fileData.mark(bufferLength + 1);
         char[] buffer = new char[bufferLength];
         int i = 0;
         try {
@@ -300,7 +314,8 @@ public class SubtitlePlayer {
                         else
                             return new SrtFormat(this);
                     case '<':
-                        return new SMIFormat(this);
+                        smiSub = new SMIFormat(this);
+                        return smiSub;
                     //Byte order mark, skip here
                     case 0xFFFD:
                     case 0xFFFE:

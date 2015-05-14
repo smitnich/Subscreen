@@ -1,28 +1,21 @@
 package com.subscreen;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.view.View;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Button;
-import android.view.MenuItem;
 
 import java.io.BufferedInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ShowText extends FragmentActivity {
     static Button pauseButton;
@@ -30,8 +23,10 @@ public class ShowText extends FragmentActivity {
     static Button nextButton;
     static Button prevButton;
     static Button convertFramerateButton;
+    static Button languageButton;
     SubtitlePlayer playerInstance = null;
     ListView frameRateListView;
+    ListView languageListView;
     ArrayList<String> validFrameRates;
     ArrayList<Integer> indices;
     @Override
@@ -41,7 +36,12 @@ public class ShowText extends FragmentActivity {
 		TextView t = (TextView)findViewById(R.id.text);
         pauseButton = (Button) findViewById(R.id.pauseButton);
         convertFramerateButton = (Button) findViewById(R.id.setFrameButton);
-        initMenu();
+        languageButton = (Button) findViewById(R.id.languageButton);
+        try {
+            initMenu();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Bundle b = getIntent().getExtras();
         String fileName = b.getString("fileName");
         String zipFileName = b.getString("zipFileName");
@@ -61,6 +61,7 @@ public class ShowText extends FragmentActivity {
                 playerInstance.prevSubtitle();
             }
         });
+        prevButton.setVisibility(View.GONE);
         nextButton = (Button) findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +71,16 @@ public class ShowText extends FragmentActivity {
         });
         playerInstance.main(t, this.getApplicationContext(), fileData, this);
 	}
+    public void updateButtons(int count, int maxCount){
+        if (count == 0)
+            prevButton.setVisibility(View.GONE);
+        else if (count >= maxCount - 1)
+            nextButton.setVisibility(View.GONE);
+        else {
+            prevButton.setVisibility(View.VISIBLE);
+            nextButton.setVisibility(View.VISIBLE);
+        }
+    }
     void displayBackMessage(String message, String title)
     {
         new AlertDialog.Builder(this)
@@ -114,6 +125,31 @@ public class ShowText extends FragmentActivity {
                 framerateDialog.hide();
             }
         });
+        final Dialog languageDialog = new Dialog(this);
+        languageDialog.setTitle("Select Language");
+        languageDialog.setContentView(R.layout.menu_choice);
+        languageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseLanguage();
+                languageDialog.show();
+            }
+        });
+
+        languageListView = (ListView) languageDialog.findViewById(R.id.choices);
+        languageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                languageDialog.hide();
+            }
+        });
+    }
+    public void chooseLanguage() {
+        //Currently only SMI format supports multiple languages
+        if (playerInstance.smiSub == null)
+            return;
+        languageListView.setAdapter(new ArrayAdapter(this, R.layout.menu_encoding, playerInstance.languages));
+        languageListView.invalidateViews();
     }
     public void chooseFramerates(Dialog framerateDialog) {
         FrameBlock currentBlock = (FrameBlock) playerInstance.blocks.get(playerInstance.subCount);
