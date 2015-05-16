@@ -54,7 +54,7 @@ public class FrameBlock implements TextBlock {
     {
         Date currentTime = new Date();
         long toSleep = (long) Math.floor(startFrame*frameRateModifier + playerInstance.getOffset()
-                - (currentTime.getTime() - playerInstance.rootTime)*currentFramerateMultiplier);
+                - (currentTime.getTime() - playerInstance.rootTime));
         if (toSleep <= 0)
             return;
         try {
@@ -71,7 +71,7 @@ public class FrameBlock implements TextBlock {
     {
         Date currentTime = new Date();
         long toSleep = (long) Math.floor(endFrame*frameRateModifier + playerInstance.getOffset()
-                -  (currentTime.getTime() - playerInstance.rootTime)*currentFramerateMultiplier);
+                -  (currentTime.getTime() - playerInstance.rootTime));
         if (toSleep <= 0)
             return;
         try {
