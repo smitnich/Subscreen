@@ -162,7 +162,7 @@ public class ShowText extends FragmentActivity {
         {
             if (FrameBlock.frameRateMultipliers[i] == currentModifier)
                 continue;
-            long currentFrame = currentBlock.convertFramerate(FrameBlock.frameRateMultipliers[i],i);
+            long currentFrame = currentBlock.checkFramerate(FrameBlock.frameRateMultipliers[i],i);
             if (currentFrame > maxFrame)
                 continue;
             validFrameRates.add(FrameBlock.frameRateStrings[i]);
