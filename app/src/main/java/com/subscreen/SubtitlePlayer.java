@@ -110,19 +110,18 @@ public class SubtitlePlayer {
         execThread.start();
     }
     //Find the subtitle that will be playing at this frame
-    public void findFrame(int frame)
+    public void findTime(int time)
     {
         int start = 0;
         int end = blocks.size()-1;
         int mid = (start+end)/2;
-        FrameBlock block;
-        block = (FrameBlock) blocks.get(blocks.size()-1);
-        if (frame > block.endFrame)
+        TextBlock block =  blocks.get(blocks.size()-1);
+        if (time > block.getEndValue() && block.getEndValue() != -1)
             return;
         while (Math.abs(start-end) > 1) {
-            block = (FrameBlock) blocks.get(mid);
-            if (frame >= block.startFrame) {
-                if (frame <= block.endFrame)
+            block =  blocks.get(mid);
+            if (time >= block.getStartValue()) {
+                if (time <= block.getEndValue())
                     break;
                 start = mid;
             } else {
@@ -131,7 +130,8 @@ public class SubtitlePlayer {
             mid = (int) Math.ceil((start+end)/2.0);
         }
         subCount = mid;
-        block = (FrameBlock) blocks.get(mid);
+        block = blocks.get(mid);
+        long endTime = blocks.get(mid).getEndValue();
         block.getText(outputTo);
         if (!paused) {
             execThread.interrupt();
@@ -143,9 +143,9 @@ public class SubtitlePlayer {
         try
         {
             FrameBlock block = (FrameBlock) blocks.get(subCount);
-            int result = (int) block.convertFramerate(framerate, index);
-            block.setFrameRate(index);
-            findFrame(result);
+            int result = (int) block.checkFramerate(framerate, index);
+            FrameBlock.setFrameRate(index);
+            findTime(result);
         }
         catch (Exception e)
         {
@@ -182,6 +182,12 @@ public class SubtitlePlayer {
     {
         if (blocks == null)
             return;
+        final int size = blocks.size();
+        parentActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                parentActivity.updateButtons(subCount, size);
+            }
+        });
         if (!playbackStarted) {
             playbackStarted = true;
             Date rootDate = new Date();
@@ -201,6 +207,12 @@ public class SubtitlePlayer {
         }
         playSubtitles(blocks, outputTo);
     }
+    public void switchLanguage(long id) {
+        TimeBlock tmpBlock = (TimeBlock) blocks.get(subCount);
+        int time = (int) tmpBlock.getCurrentTime();
+        blocks = smiSub.getLanguage(id);
+        findTime(time);
+    }
 	private void playSubtitles(ArrayList<TextBlock> blocks, Output outputTo) {
         while (true) {
             try {
@@ -214,7 +226,6 @@ public class SubtitlePlayer {
                         changeTextRequested = false;
                     text.getText(outputTo);
                     text.secondDelay();
-                    parentActivity.updateButtons(subCount,blocks.size());
                     outputTo.clearText();
                     subCount++;
                 }
@@ -231,6 +242,12 @@ public class SubtitlePlayer {
                 return;
             }
         }
+        final int size = blocks.size();
+        parentActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                parentActivity.updateButtons(subCount, size);
+            }
+        });
         outputTo.outputText(context.getString(R.string.finish_play));
         try {
             Thread.sleep(30 * 1000);

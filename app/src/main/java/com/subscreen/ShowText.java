@@ -140,6 +140,7 @@ public class ShowText extends FragmentActivity {
         languageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                playerInstance.switchLanguage(id);
                 languageDialog.hide();
             }
         });

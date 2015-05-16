@@ -151,12 +151,7 @@ public class SMIFormat implements SubtitleFormat {
     public ArrayList<String> getAvailableLanguages() {
         return allLanguages;
     }
-    public ArrayList<TextBlock> getLanguage(String name) {
-        for (int i = 0; i < allBlocks.size(); i++) {
-            if (name.compareTo(allLanguages.get(i)) == 0) {
-                return allBlocks.get(i);
-            }
-        }
-        return null;
+    public ArrayList<TextBlock> getLanguage(long id) {
+        return allBlocks.get((int) id);
     }
 }

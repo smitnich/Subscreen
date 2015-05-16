@@ -11,4 +11,6 @@ public interface TextBlock {
     public void secondDelay() throws InterruptedException;
     public void getText(Output _outputTo);
     public long getStartTime();
+    public long getStartValue();
+    public long getEndValue();
 }

@@ -85,6 +85,12 @@ public class FrameBlock implements TextBlock {
         Date currentTime = new Date();
         return (long) Math.floor(startFrame*frameRateModifier)-(currentTime.getTime() - playerInstance.rootTime);
     }
+    public long getStartValue() {
+        return startFrame;
+    }
+    public long getEndValue() {
+        return endFrame;
+    }
     public long convertFramerate(double newFPS, int index)
     {
         //Time taken = now - pauseTime - start time
@@ -97,5 +103,11 @@ public class FrameBlock implements TextBlock {
         double mod = newFPS/(1000/oldModifier);
         //Set the current block to the value in numframes afterwards
         return  Math.round(numFrames*mod);
+    }
+    public long checkFramerate(double newFPS, int index) {
+        Date currentTime = new Date();
+        double numFrames = (currentTime.getTime()-playerInstance.rootTime)/frameRateModifier-pauseTime;
+        double mod = (frameRateMultipliers[index])/currentFramerateMultiplier;
+        return Math.round(numFrames*mod);
     }
 }
