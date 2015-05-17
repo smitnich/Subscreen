@@ -45,7 +45,8 @@ public class ShowText extends FragmentActivity {
         Bundle b = getIntent().getExtras();
         String fileName = b.getString("fileName");
         String zipFileName = b.getString("zipFileName");
-        BufferedInputStream fileData = new BufferedInputStream(FileHelper.readFile(fileName,zipFileName));
+        FileHelper.EncodingWrapper fileStream = FileHelper.readFile(fileName, zipFileName);
+        BufferedInputStream fileData = new BufferedInputStream(fileStream.data);
         playerInstance = new SubtitlePlayer();
         backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -69,17 +70,17 @@ public class ShowText extends FragmentActivity {
                 playerInstance.nextSubtitle();
             }
         });
-        playerInstance.main(t, this.getApplicationContext(), fileData, this);
+        playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding);
 	}
-    public void updateButtons(int count, int maxCount){
-        if (count == 0)
-            prevButton.setVisibility(View.GONE);
-        else if (count >= maxCount - 1)
-            nextButton.setVisibility(View.GONE);
-        else {
-            prevButton.setVisibility(View.VISIBLE);
-            nextButton.setVisibility(View.VISIBLE);
-        }
+    public void updateButtons(final int count, final int maxCount){
+                if (count == 0)
+                    prevButton.setVisibility(View.GONE);
+                else if (count >= maxCount - 1)
+                    nextButton.setVisibility(View.GONE);
+                else {
+                    prevButton.setVisibility(View.VISIBLE);
+                    nextButton.setVisibility(View.VISIBLE);
+                }
     }
     void displayBackMessage(String message, String title)
     {

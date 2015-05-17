@@ -16,12 +16,8 @@ public class AndroidOutput implements Output {
     Charset destCharset;
     String destCharsetString;
     String lastText;
-	AndroidOutput(Activity act, String charsetName)
+	AndroidOutput(Activity act)
 	{
-        MenuItem tmpItem;
-        destCharsetString = charsetName;
-        loadedCharset = Charset.forName("UTF-8");
-        destCharset = Charset.forName(charsetName);
         activity = act;
 	}
 	@Override

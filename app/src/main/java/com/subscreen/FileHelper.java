@@ -46,19 +46,34 @@ public class FileHelper {
         }
         return names;
     }
-    public static InputStream readFile(String path, String zipFileName) {
+    public static EncodingWrapper readFile(String path, String zipFileName) {
         InputStream data = null;
+        String encoding = null;
         try {
             if (zipFileName != null) {
                 ZipFile zf = new ZipFile(path);
                 data = zf.getInputStream(zf.getEntry(zipFileName));
+                encoding = CharsetDetectorWrapper.guessEncoding(data);
+                data.close();
+                data = zf.getInputStream(zf.getEntry(zipFileName));
             }
             else {
+                data = new FileInputStream(path);
+                encoding = CharsetDetectorWrapper.guessEncoding(data);
+                data.close();
                 data = new FileInputStream(path);
             }
         } catch (IOException e) {
             return null;
         }
-        return data;
+        return new EncodingWrapper(data,encoding);
+    }
+    public static class EncodingWrapper {
+        InputStream data;
+        String encoding;
+        EncodingWrapper(InputStream _data, String _encoding) {
+            data = _data;
+            encoding = _encoding;
+        }
     }
 }

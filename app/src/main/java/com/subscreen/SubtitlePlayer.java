@@ -51,10 +51,10 @@ public class SubtitlePlayer {
     public SMIFormat smiSub = null;
     public ArrayList<String> languages = null;
     String rootPath = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
-	public void main(TextView toEdit, Context _context, BufferedInputStream fileData, Activity activity) {
+	public void main(TextView toEdit, Context _context, BufferedInputStream fileData, Activity activity, String encoding) {
         context = _context;
         parentActivity = (ShowText) activity;
-        SubtitleFormat subFile = pickFormat(fileData);
+        SubtitleFormat subFile = pickFormat(fileData, encoding);
         if (subFile == null){
             parentActivity.displayBackMessage(
                     context.getString(R.string.bad_format_message), context.getString(R.string.bad_format_title));
@@ -277,16 +277,17 @@ public class SubtitlePlayer {
         else
             return "ISO-8859-1";
     }
-	public SubtitleFormat pickFormat(BufferedInputStream fileData)
+	public SubtitleFormat pickFormat(BufferedInputStream fileData, String encoding)
 	{
         final int bufferLength = 128;
         InputStreamReader fis = null;
         fileData.mark(bufferLength + 1);
+        srcCharset = encoding;
         char[] buffer = new char[bufferLength];
         int i = 0;
         try {
-            srcCharset = determineEncoding(fileData);
-            fis = new InputStreamReader(fileData, srcCharset);
+            //srcCharset = determineEncoding(fileData);
+            fis = new InputStreamReader(fileData, encoding);
             fis.read(buffer,0,bufferLength);
             fileData.reset();
             //Skip to the first actual text
