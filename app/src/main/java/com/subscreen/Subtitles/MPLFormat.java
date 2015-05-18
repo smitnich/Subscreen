@@ -52,7 +52,7 @@ public class MPLFormat implements SubtitleFormat {
                     //and dividing by 10
                     startTime = Integer.parseInt(m.group(1))*100;
                     endTime = Integer.parseInt(m.group(2))*100;
-                    text = parseText( m.group(3));
+                    text = MicroDVDFormat.buildOptions(parseText( m.group(3)));
                     blocks.add(new TimeBlock(text, startTime, endTime, playerInstance));
                 }
             }
