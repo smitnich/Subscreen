@@ -23,7 +23,8 @@ public class BasicVTTTest  extends ApplicationTestCase<Application> {
         ArrayList<TextBlock> blocks = null;
         String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
         VTTFormat vtt = new VTTFormat(null);
-        blocks = vtt.readFile(FileHelper.readFile(path + "vtt/testVtt.txt", null), "UTF-8");
+        FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "vtt/testVtt.txt", null);
+        blocks = vtt.readFile(wrapper.data, wrapper.encoding);
         TimeBlock firstBlock = (TimeBlock) blocks.get(0);
         assertEquals(firstBlock.getStartTime(), 4190);
         assertEquals("Begin Text.<br>", firstBlock.text);

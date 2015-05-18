@@ -38,10 +38,11 @@ public class MassSRTTest extends ApplicationTestCase<Application> {
             for (File f : bulkFolder.listFiles()) {
                 try {
                     tmpFile = f.getAbsolutePath();
-                    BufferedInputStream data = new BufferedInputStream(FileHelper.readFile(tmpFile, null));
+                    FileHelper.EncodingWrapper wrapper = FileHelper.readFile(tmpFile, null);
+                    BufferedInputStream data = new BufferedInputStream(wrapper.data);
                     if (f.isDirectory())
                         continue;
-                    sub = playerInstance.pickFormat(data);
+                    sub = playerInstance.pickFormat(data, wrapper.encoding);
                     blocks = sub.readFile(data, playerInstance.srcCharset);
                     if (blocks == null)
                     {

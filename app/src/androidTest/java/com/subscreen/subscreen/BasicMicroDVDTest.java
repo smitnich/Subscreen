@@ -22,7 +22,8 @@ public class BasicMicroDVDTest extends ApplicationTestCase<Application> {
         ArrayList<TextBlock> blocks = null;
         String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
         MicroDVDFormat mdvd = new MicroDVDFormat(null);
-        blocks = mdvd.readFile(FileHelper.readFile(path + "sub/testSub.txt", null), "UTF-8");
+        FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "sub/testSub.txt", null);
+        blocks = mdvd.readFile(wrapper.data, wrapper.encoding);
         FrameBlock firstBlock = (FrameBlock) blocks.get(0);
         assertEquals(firstBlock.startFrame,512);
         assertEquals(firstBlock.endFrame,613);

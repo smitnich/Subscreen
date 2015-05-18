@@ -20,7 +20,8 @@ public class BasicSMITest extends ApplicationTestCase<Application> {
         ArrayList<TextBlock> blocks = null;
         String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
         SMIFormat smi = new SMIFormat(null);
-        blocks = smi.readFile(FileHelper.readFile(path + "SMI/test.smi", null), "ISO-8859-1");
+        FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "SMI/test.smi", null);
+        blocks = smi.readFile(wrapper.data, wrapper.encoding);
         assertEquals(blocks.get(0).getStartTime(),3138);
         assertEquals(blocks.size(), 1335);
     }

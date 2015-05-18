@@ -23,7 +23,8 @@ public class BasicMPLTest extends ApplicationTestCase<Application> {
         ArrayList<TextBlock> blocks = null;
         String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
         MPLFormat mpl = new MPLFormat(null);
-        blocks = mpl.readFile(FileHelper.readFile(path + "mpl/testMpl.txt", null), "UTF-8");
+        FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "mpl/testMpl.txt", null);
+        blocks = mpl.readFile(wrapper.data, wrapper.encoding);
         TimeBlock firstBlock = (TimeBlock) blocks.get(0);
         assertEquals(firstBlock.getStartTime(), 376*100);
         assertEquals("Begin Text.", firstBlock.text);

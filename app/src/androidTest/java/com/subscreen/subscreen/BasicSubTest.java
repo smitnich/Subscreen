@@ -20,7 +20,8 @@ public class BasicSubTest extends ApplicationTestCase<Application> {
         ArrayList<TextBlock> blocks = null;
         String path = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
         SubViewerTwoFormat sub = new SubViewerTwoFormat(null);
-        blocks = sub.readFile(FileHelper.readFile(path + "txt/test.srt", null), "UTF-8");
+        FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "txt/test.srt", null);
+        blocks = sub.readFile(wrapper.data, wrapper.encoding);
         assertEquals(blocks.get(0).getStartTime(),26040);
         TextBlock tmpBlock = blocks.get(blocks.size()-1);
         assertEquals(blocks.size(), 506);
