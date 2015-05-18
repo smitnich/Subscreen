@@ -20,7 +20,7 @@ import android.content.DialogInterface;
 public class SelectFile extends FragmentActivity {
     ListView lv;
     ArrayList<String> fileNames = null;
-    static String dirPath =  System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
+    static final String dirPath =  System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
     static String curPath = dirPath;
     String backString;
     ArrayAdapter adp;
@@ -29,13 +29,25 @@ public class SelectFile extends FragmentActivity {
     FilenameFilter textFilter = new FilenameFilter() {
         public boolean accept(File dir, String name) {
             String lowercaseName = name.toLowerCase();
-            if (lowercaseName.endsWith(".md")) {
+            if (lowercaseName.endsWith(".nfo")) {
                 return false;
             } else {
                 return true;
             }
         }
     };
+    public void onBackPressed() {
+        goBackDirectory();
+        updateMenu();
+    }
+    private void updateMenu() {
+        zipOpened = false;
+        fileNames = loadFileNames(curPath);
+        adp.clear();
+        adp.addAll(fileNames);
+        adp.notifyDataSetChanged();
+        lv.setSelection(0);
+    }
     void displayExitMessage(String message, String title)
     {
         new AlertDialog.Builder(this)
@@ -83,7 +95,22 @@ public class SelectFile extends FragmentActivity {
             e.printStackTrace();
         }
     }
-
+    private void goBackDirectory() {
+        //Don't allow for going back past the subtitles directory
+        if (curPath.compareTo(dirPath) == 0) {
+            return;
+        }
+        int i;
+        //Skip the last character, which will always be a directory symbol
+        //Then go back to the previous directory symbol; we want only the part
+        //of the string before this
+        for (i = curPath.length() -2; i >= 0; i--)
+        {
+            if (curPath.charAt(i) == '/')
+                break;
+        }
+        curPath = curPath.substring(0,i+1);
+    }
     private void itemClicked(int position) {
         String fileName = fileNames.get(position);
         //If a zip file is loaded, this is the one to be used within it
@@ -95,24 +122,9 @@ public class SelectFile extends FragmentActivity {
             //of the string
             if (!fileName.equals(backString))
                 curPath = curPath + fileName.substring(1) + "/";
-            else {
-                int i;
-                //Skip the last character, which will always be a directory symbol
-                //Then go back to the previous directory symbol; we want only the part
-                //of the string before this
-                for (i = curPath.length() -2; i >= 0; i--)
-                {
-                    if (curPath.charAt(i) == '/')
-                        break;
-                }
-                curPath = curPath.substring(0,i+1);
-            }
-            zipOpened = false;
-            fileNames = loadFileNames(curPath);
-            adp.clear();
-            adp.addAll(fileNames);
-            adp.notifyDataSetChanged();
-            lv.setSelection(0);
+            else
+                goBackDirectory();
+            updateMenu();
             return;
         }
         if (fileName.endsWith(".zip") || zipOpened) {

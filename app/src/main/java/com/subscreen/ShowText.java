@@ -72,6 +72,9 @@ public class ShowText extends FragmentActivity {
         });
         playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding);
 	}
+    public void onBackPressed() {
+        returnToSelectScreen();
+    }
     public void updateButtons(final int count, final int maxCount){
                 if (count == 0)
                     prevButton.setVisibility(View.GONE);
