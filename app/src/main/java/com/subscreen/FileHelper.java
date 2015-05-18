@@ -69,8 +69,8 @@ public class FileHelper {
         return new EncodingWrapper(data,encoding);
     }
     public static class EncodingWrapper {
-        InputStream data;
-        String encoding;
+        public InputStream data;
+        public String encoding;
         EncodingWrapper(InputStream _data, String _encoding) {
             data = _data;
             encoding = _encoding;
