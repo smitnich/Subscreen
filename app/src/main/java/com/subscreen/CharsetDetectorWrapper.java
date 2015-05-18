@@ -19,7 +19,12 @@ public class CharsetDetectorWrapper {
                 detector.handleData(buffer, 0, nread);
             }
             detector.dataEnd();
-            return detector.getDetectedCharset();
+            String charset = detector.getDetectedCharset();
+            //If juniversalcharsetdetector was not able to guess the encoding, default to UTF-8
+            if (charset == null)
+                return "UTF-8";
+            else
+                return detector.getDetectedCharset();
         } catch (Exception e) {
             return null;
         } finally {
