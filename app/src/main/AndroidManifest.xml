@@ -13,13 +13,13 @@
 	android:theme="@android:style/Theme.NoTitleBar">
 	<activity
         android:screenOrientation="unspecified"
-		android:configChanges="orientation|keyboardHidden"
+		android:configChanges="orientation|keyboardHidden|screenSize"
 		android:name=".ShowText"
 		android:label="@string/app_name" >
 		</activity>
     <activity android:name=".SelectFile"
 		android:screenOrientation="unspecified"
-		android:configChanges="orientation|keyboardHidden"
+		android:configChanges="orientation|keyboardHidden|screenSize"
 		android:label="SubScreen">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
