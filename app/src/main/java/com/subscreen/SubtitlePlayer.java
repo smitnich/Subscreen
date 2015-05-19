@@ -211,7 +211,8 @@ public class SubtitlePlayer {
         TimeBlock tmpBlock = (TimeBlock) blocks.get(subCount);
         int time = (int) tmpBlock.getStartTime();
         blocks = smiSub.getLanguage(id);
-        findTime(time);
+        if (subCount > 0)
+            findTime(time);
     }
     //The loop used to play subtitles, incrementing subcount throughout until we reach
     //the last block
