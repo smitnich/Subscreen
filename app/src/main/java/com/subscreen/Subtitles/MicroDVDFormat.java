@@ -129,11 +129,21 @@ public class MicroDVDFormat implements SubtitleFormat {
         boolean doEndText = true;
         StringBuilder startText = new StringBuilder("");
         StringBuilder endText = new StringBuilder("");
-        String[] options = input.split("\\}");
-        for (String option : options) {
-            if (option.charAt(0) != '{')
+        String[] options = input.split("\\{");
+        for (String block : options) {
+            if (block.length() == 0)
                 continue;
-            int i = 1;
+            int endIndex = block.indexOf('}');
+            String option;
+            String text = null;
+            if (endIndex != -1) {
+                option = block.substring(0, endIndex);
+                text = block.substring(endIndex+1);
+            }
+            else {
+                option = block;
+            }
+            int i = 0;
             doEndText = true;
             switch (option.charAt(i)) {
                 //If we have a capital control code, then it means that we shouldn't end the font
@@ -205,8 +215,9 @@ public class MicroDVDFormat implements SubtitleFormat {
                         endText.append("</font>");
                     break;
             }
+            if (text != null)
+                startText.append(text);
         }
-        startText.append(options[options.length-1]);
         if (doEndText)
             startText.append(endText.toString());
         return startText.toString();
