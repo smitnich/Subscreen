@@ -39,8 +39,8 @@ public class TmpFormat implements SubtitleFormat {
 	void readLines(BufferedReader in, ArrayList<TextBlock> blocks)
 	{
         Pattern p = Pattern.compile("(\\d*):(\\d*):(\\d*)(?::|=)(.*)");
-        String[] replace = {"|"};
-        String[] replaceWith = {"<br>"};
+        String[] replace = {"|/","|"};
+        String[] replaceWith = {"<br><i>","<br>"};
 		long time = 0;
 		TimeBlock oldBlock = null;
 		String buffer;
