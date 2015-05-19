@@ -207,12 +207,16 @@ public class SubtitlePlayer {
         }
         playSubtitles(blocks, outputTo);
     }
+    //If using SMI files, multiple languages can be included in one file
+    //This swaps to the language stored in the array with index of id
     public void switchLanguage(long id) {
         TimeBlock tmpBlock = (TimeBlock) blocks.get(subCount);
-        int time = (int) tmpBlock.getCurrentTime();
+        int time = (int) tmpBlock.getStartTime();
         blocks = smiSub.getLanguage(id);
         findTime(time);
     }
+    //The loop used to play subtitles, incrementing subcount throughout until we reach
+    //the last block
 	private void playSubtitles(ArrayList<TextBlock> blocks, Output outputTo) {
         while (true) {
             try {
