@@ -46,13 +46,14 @@ public class SubtitlePlayer {
     ShowText parentActivity;
     Context context;
     public String srcCharset;
+    public static String playString;
     //SMI allows for multiple languages in one file; check if the format is SMI and if so allow
     //for selecting languages
     public SMIFormat smiSub = null;
     public ArrayList<String> languages = null;
-    String rootPath = System.getenv("EXTERNAL_STORAGE") + "/Subtitles/";
 	public void main(TextView toEdit, Context _context, BufferedInputStream fileData, Activity activity, String encoding) {
         context = _context;
+        playString = context.getString(R.string.begin_play);
         parentActivity = (ShowText) activity;
         SubtitleFormat subFile = pickFormat(fileData, encoding);
         if (subFile == null){
@@ -60,7 +61,6 @@ public class SubtitlePlayer {
                     context.getString(R.string.bad_format_message), context.getString(R.string.bad_format_title));
             return;
         }
-        String playString = context.getString(R.string.begin_play);
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
 		outputTo = new AndroidOutput(activity);
@@ -71,11 +71,9 @@ public class SubtitlePlayer {
                 parentActivity.convertFramerateButton.setEnabled(true);
                 parentActivity.convertFramerateButton.setVisibility(View.VISIBLE);
                 isFrameBased = true;
-                blocks.add(0, new FrameBlock(playString, 0, -1, this));
             } else {
                 parentActivity.convertFramerateButton.setEnabled(false);
                 parentActivity.convertFramerateButton.setVisibility(View.INVISIBLE);
-                blocks.add(0, new TimeBlock(playString, 0, -1, this));
             }
         }
         catch (Exception e){

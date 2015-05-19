@@ -27,6 +27,7 @@ public class TmpFormat implements SubtitleFormat {
 	{
 		try {
 			ArrayList<TextBlock> blocks = new ArrayList<>();
+			blocks.add(new TimeBlock(SubtitlePlayer.playString,0,-1,playerInstance));
 			BufferedReader br = new BufferedReader(new InputStreamReader(data, srcCharset));
 			readLines(br, blocks);
 			return blocks;

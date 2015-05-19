@@ -22,7 +22,7 @@ public class VTTFormat implements SubtitleFormat {
     public ArrayList<TextBlock> readFile(InputStream data, String srcCharset)
     {
         ArrayList<TextBlock> blocks = new ArrayList<>();
-        //UnicodeReader br = new UnicodeReader(path);
+        blocks.add(new TimeBlock(SubtitlePlayer.playString,0,-1,playerInstance));
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(data,srcCharset));
             readLines(br, blocks);
@@ -54,7 +54,7 @@ public class VTTFormat implements SubtitleFormat {
                 long beginTime = parseTimeStamp(beginTimeString);
                 long endTime = parseTimeStamp(endTimeString);
                 tmp = buffer;
-                buffer = new String("");
+                buffer = "";
                 while (tmp != null && tmp.length() > 0)
                 {
                     tmp = in.readLine();

@@ -20,12 +20,14 @@ public class SMIFormat implements SubtitleFormat {
     SubtitlePlayer playerInstance = null;
     ArrayList<String> allLanguages = new ArrayList<String>();
     ArrayList<ArrayList<TextBlock>> allBlocks = new ArrayList<ArrayList<TextBlock>>();
+    TimeBlock playBlock;
     public SMIFormat(SubtitlePlayer tmpPlayer)
     {
         playerInstance = tmpPlayer;
     }
     public ArrayList<TextBlock> readFile(InputStream data, String srcCharset) {
         try {
+            playBlock =  new TimeBlock(SubtitlePlayer.playString,-1, playerInstance);
             ArrayList<TextBlock> blocks = new ArrayList<>();
             BufferedReader br = new BufferedReader(new InputStreamReader(data, srcCharset));
             readLines(br, blocks);
@@ -145,6 +147,7 @@ public class SMIFormat implements SubtitleFormat {
         }
         allLanguages.add(name);
         ArrayList<TextBlock> newBlock = new ArrayList<TextBlock>();
+        newBlock.add(playBlock);
         newBlock.add(block);
         allBlocks.add(newBlock);
     }

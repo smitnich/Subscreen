@@ -26,6 +26,7 @@ public class SubViewerTwoFormat implements SubtitleFormat {
     public ArrayList<TextBlock> readFile(InputStream data, String srcCharset) {
         try {
             ArrayList<TextBlock> blocks = new ArrayList<>();
+            blocks.add(new TimeBlock(SubtitlePlayer.playString,0,-1,playerInstance));
             BufferedReader br = new BufferedReader(new InputStreamReader(data, srcCharset));
             readLines(br, blocks);
             return blocks;
