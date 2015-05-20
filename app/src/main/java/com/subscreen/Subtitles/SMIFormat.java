@@ -145,13 +145,14 @@ public class SMIFormat implements SubtitleFormat {
             e.printStackTrace();
         }
     }
-
     private void checkLanguageNames(String input) {
         int braceLocation = input.indexOf('{');
         if (braceLocation == -1)
             return;
         String id = input.substring(1,braceLocation).trim();
-        int start = input.indexOf("name");
+        int start = input.toLowerCase().indexOf("name");
+        if (start == -1)
+            return;
         while ((start < input.length()) && input.charAt(start++) != ':');
         int end = input.indexOf(';',start);
         String name = input.substring(start,end).trim();
