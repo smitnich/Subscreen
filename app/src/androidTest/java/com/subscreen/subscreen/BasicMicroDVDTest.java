@@ -24,7 +24,7 @@ public class BasicMicroDVDTest extends ApplicationTestCase<Application> {
         MicroDVDFormat mdvd = new MicroDVDFormat(null);
         FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "sub/testSub.txt", null);
         blocks = mdvd.readFile(wrapper.data, wrapper.encoding);
-        FrameBlock firstBlock = (FrameBlock) blocks.get(0);
+        FrameBlock firstBlock = (FrameBlock) blocks.get(1);
         assertEquals(firstBlock.startFrame,512);
         assertEquals(firstBlock.endFrame,613);
         assertEquals(firstBlock.text,"Begin Text");

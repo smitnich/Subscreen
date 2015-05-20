@@ -25,7 +25,6 @@ public class MassSRTTest extends ApplicationTestCase<Application> {
     }
     public void testAllFiles()
     {
-        //Conveniantly, all files downloaded from moveisubtitles.org end with this block:
         long startTime = 500;
         long endTime = 2000;
         String endString = "<font color=\"#ffff00\" size=14>www.moviesubtitles.org</font>";
@@ -35,15 +34,16 @@ public class MassSRTTest extends ApplicationTestCase<Application> {
         String tmpFile = "";
         SubtitlePlayer playerInstance = new SubtitlePlayer();
         SubtitleFormat sub;
-            for (File f : bulkFolder.listFiles()) {
+        FileHelper.EncodingWrapper wrapper;
+        for (File f : bulkFolder.listFiles()) {
                 try {
                     tmpFile = f.getAbsolutePath();
-                    FileHelper.EncodingWrapper wrapper = FileHelper.readFile(tmpFile, null);
+                    wrapper = FileHelper.readFile(tmpFile, null);
                     BufferedInputStream data = new BufferedInputStream(wrapper.data);
                     if (f.isDirectory())
                         continue;
                     sub = playerInstance.pickFormat(data, wrapper.encoding);
-                    blocks = sub.readFile(data, playerInstance.srcCharset);
+                    blocks = sub.readFile(data, wrapper.encoding);
                     if (blocks == null)
                     {
                         Log.e("EXCEPTION","File " + tmpFile + " did not read");

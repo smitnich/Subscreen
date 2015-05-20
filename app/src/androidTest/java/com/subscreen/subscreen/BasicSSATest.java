@@ -23,7 +23,7 @@ public BasicSSATest() {
             ASSFormat ssa = new ASSFormat(null);
             FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "ssa/testSSA.ass", null);
             blocks = ssa.readFile(wrapper.data, wrapper.encoding);
-            assertEquals(blocks.get(0).getStartTime(), 2*60*1000 + 36*1000 + 40);
+            assertEquals(blocks.get(1).getStartTime(), 2*60*1000 + 36*1000 + 40);
             TimeBlock lastBlock = (TimeBlock) blocks.get(blocks.size()-1);
             assertEquals(lastBlock.text, "End Text.");
         }
