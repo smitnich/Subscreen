@@ -22,7 +22,7 @@ public class BasicSMITest extends ApplicationTestCase<Application> {
         SMIFormat smi = new SMIFormat(null);
         FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "SMI/test.smi", null);
         blocks = smi.readFile(wrapper.data, wrapper.encoding);
-        assertEquals(blocks.get(1).getStartTime(),3138);
-        assertEquals(blocks.size(), 1336);
+        assertEquals(3138,blocks.get(1).getStartTime());
+        assertEquals(688,blocks.size());
     }
 }

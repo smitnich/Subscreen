@@ -40,8 +40,8 @@ import java.util.ArrayList;
             TmpFormat tmp = new TmpFormat(null);
             FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path+"/TMP/testTMPParse.txt",null);
             blocks = tmp.readFile(wrapper.data, wrapper.encoding);
-            TimeBlock block1 = (TimeBlock) blocks.get(0);
-            TimeBlock block2 = (TimeBlock) blocks.get(1);
+            TimeBlock block1 = (TimeBlock) blocks.get(1);
+            TimeBlock block2 = (TimeBlock) blocks.get(2);
             assertEquals(block1.text,"Line 1<br>Line 2");
             assertEquals(block2.text,"Line 1<br>Line 2<br>Line 3<br>Line 4");
         }
