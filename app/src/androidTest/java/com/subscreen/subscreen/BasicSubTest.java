@@ -22,9 +22,8 @@ public class BasicSubTest extends ApplicationTestCase<Application> {
         SubViewerTwoFormat sub = new SubViewerTwoFormat(null);
         FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "txt/test.srt", null);
         blocks = sub.readFile(wrapper.data, wrapper.encoding);
-        assertEquals(blocks.get(0).getStartTime(),26040);
-        TextBlock tmpBlock = blocks.get(blocks.size()-1);
-        assertEquals(blocks.size(), 506);
+        assertEquals(blocks.get(1).getStartTime(),26040);
+        assertEquals(blocks.size(), 507);
     }
     public void testSubParseTime()
     {

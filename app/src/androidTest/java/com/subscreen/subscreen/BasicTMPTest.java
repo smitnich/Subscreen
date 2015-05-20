@@ -23,9 +23,9 @@ import java.util.ArrayList;
             TmpFormat tmp = new TmpFormat(null);
             FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "/TMP/testTMP.txt", null);
             blocks = tmp.readFile(wrapper.data, wrapper.encoding);
-            assertEquals(blocks.get(0).getStartTime(),2000);
+            assertEquals(blocks.get(1).getStartTime(),2000);
             TextBlock tmpBlock = blocks.get(blocks.size()-1);
-            assertEquals(blocks.size(), 439);
+            assertEquals(blocks.size(), 440);
         }
         public void testTMPParseTime()
         {

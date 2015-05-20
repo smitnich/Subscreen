@@ -25,7 +25,7 @@ public class BasicMPLTest extends ApplicationTestCase<Application> {
         MPLFormat mpl = new MPLFormat(null);
         FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "mpl/testMpl.txt", null);
         blocks = mpl.readFile(wrapper.data, wrapper.encoding);
-        TimeBlock firstBlock = (TimeBlock) blocks.get(0);
+        TimeBlock firstBlock = (TimeBlock) blocks.get(1);
         assertEquals(firstBlock.getStartTime(), 376*100);
         assertEquals("Begin Text.", firstBlock.text);
         TimeBlock lastBlock = (TimeBlock) blocks.get(blocks.size()-1);

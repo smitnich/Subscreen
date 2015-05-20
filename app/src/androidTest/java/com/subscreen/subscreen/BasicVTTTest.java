@@ -25,7 +25,7 @@ public class BasicVTTTest  extends ApplicationTestCase<Application> {
         VTTFormat vtt = new VTTFormat(null);
         FileHelper.EncodingWrapper wrapper = FileHelper.readFile(path + "vtt/testVtt.txt", null);
         blocks = vtt.readFile(wrapper.data, wrapper.encoding);
-        TimeBlock firstBlock = (TimeBlock) blocks.get(0);
+        TimeBlock firstBlock = (TimeBlock) blocks.get(1);
         assertEquals(firstBlock.getStartTime(), 4190);
         assertEquals("Begin Text.<br>", firstBlock.text);
         TimeBlock lastBlock = (TimeBlock) blocks.get(blocks.size()-1);
