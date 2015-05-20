@@ -19,6 +19,8 @@ public class SMIFormat implements SubtitleFormat {
 
     SubtitlePlayer playerInstance = null;
     ArrayList<String> allLanguages = new ArrayList<String>();
+    ArrayList<String> allIds = new ArrayList<String>();
+    ArrayList<String> allNames = new ArrayList<String>();
     ArrayList<ArrayList<TextBlock>> allBlocks = new ArrayList<ArrayList<TextBlock>>();
     TimeBlock playBlock;
     public SMIFormat(SubtitlePlayer tmpPlayer)
@@ -31,6 +33,15 @@ public class SMIFormat implements SubtitleFormat {
             ArrayList<TextBlock> blocks = new ArrayList<>();
             BufferedReader br = new BufferedReader(new InputStreamReader(data, srcCharset));
             readLines(br, blocks);
+            for (String id : allIds) {
+                for (int i = 0; i < allLanguages.size(); i++) {
+                    String language = allLanguages.get(i);
+                    if (id.compareTo(language) == 0) {
+                        language = String.format("%s (%s)",allNames.get(i),language);
+                        allLanguages.set(i,language);
+                    }
+                }
+            }
             return allBlocks.get(0);
         }
         catch (Exception e)
@@ -79,7 +90,7 @@ public class SMIFormat implements SubtitleFormat {
                                             equalsFound = true;
                                         i++;
                                     }
-                                    tag = new String(tagBuffer);
+                                    tag = new String(tagBuffer).trim();
                                 }
                                 else
                                     newText[j++] = origText[i];
@@ -90,13 +101,8 @@ public class SMIFormat implements SubtitleFormat {
                             str = in.readLine().trim();
                             if (str == null || str.length() == 0)
                                 break;
-                            if (!str.toUpperCase().startsWith("<SYNC")) {
-                                /*int endTag = str.indexOf('>');
-                                if (endTag != -1)
-                                    text.append(str.substring(endTag+1));
-                                else*/
+                            if (!str.toUpperCase().startsWith("<SYNC"))
                                     text.append(str);
-                            }
                             else
                                 break;
                         }
@@ -122,7 +128,9 @@ public class SMIFormat implements SubtitleFormat {
                         addBlock(newBlock,tag);
                         prevBlock = newBlock;
                     } else {
-                        str = in.readLine();
+                        str = in.readLine().trim();
+                        if (str.length() > 0 && str.charAt(0) == '.')
+                            checkLanguageNames(str);
                         if (str == null)
                             break;
                     }
@@ -136,6 +144,19 @@ public class SMIFormat implements SubtitleFormat {
         {
             e.printStackTrace();
         }
+    }
+
+    private void checkLanguageNames(String input) {
+        int braceLocation = input.indexOf('{');
+        if (braceLocation == -1)
+            return;
+        String id = input.substring(1,braceLocation).trim();
+        int start = input.indexOf("name");
+        while ((start < input.length()) && input.charAt(start++) != ':');
+        int end = input.indexOf(';',start);
+        String name = input.substring(start,end).trim();
+        allIds.add(id);
+        allNames.add(name);
     }
     public void addBlock(TimeBlock block, String name) {
         for (int i = 0; i < allBlocks.size(); i++) {
