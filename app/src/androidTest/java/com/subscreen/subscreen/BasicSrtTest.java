@@ -22,7 +22,7 @@ public class BasicSrtTest extends ApplicationTestCase<Application> {
         blocks = srt.readFile(wrapper.data, wrapper.encoding);
         assertEquals(3160,blocks.get(1).getStartTime());
         assertEquals(682,blocks.size());
-    }
+}
     public void testSRTParseTime()
     {
         SrtFormat srt = new SrtFormat(null);
