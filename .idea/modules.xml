@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/NewSubScreen.iml" filepath="$PROJECT_DIR$/NewSubScreen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SubScreen/SubScreen.iml" filepath="$PROJECT_DIR$/SubScreen/SubScreen.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/subscreen.iml" filepath="$PROJECT_DIR$/subscreen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
-

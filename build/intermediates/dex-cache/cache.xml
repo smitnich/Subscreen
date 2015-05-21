@@ -2,32 +2,39 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Nick\AndroidStudioProjects\subscreen\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="C:\Users\Nick\AndroidStudioProjects\subscreen\app\build\intermediates\pre-dexed\debug\classes-656965e78550b366fb18645cb271733b6c154f7e.jar" />
-    </item>
-    <item
-        jar="C:\Users\Nick\AndroidStudioProjects\subscreen\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\Nick\AndroidStudioProjects\subscreen\app\build\intermediates\pre-dexed\debug\classes-b14bc39b26b4a3a0d17a193f3182a7c8f91060fc.jar" />
-    </item>
-    <item
-        jar="C:\Users\Nick\AndroidStudioProjects\subscreen\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\Nick\AndroidStudioProjects\subscreen\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-94016ead6759a63d897071832daf3f0fb9904873.jar" />
-    </item>
-    <item
-        jar="C:\Users\Nick\AppData\Local\Android\sdk1\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jar="C:\Users\Nick\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\Nick\AndroidStudioProjects\subscreen\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-6223fb61097b2b078aaf06deaa1bffbd59ad2dd7.jar" />
+        <dex dex="D:\Users\Nick\AndroidStudioProjects\NewSubScreen\SubScreen\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-f0c9fc5ec833eba35f86bcc5efcd9452e820aca5.jar" />
+    </item>
+    <item
+        jar="D:\Users\Nick\AndroidStudioProjects\NewSubScreen\SubScreen\libs\juniversalchardet-1.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="591d72211acc0b909b79c840e0b3ed9a0982d807">
+        <dex dex="D:\Users\Nick\AndroidStudioProjects\NewSubScreen\SubScreen\build\intermediates\pre-dexed\debug\juniversalchardet-1.0.3-e69c49e3f716935f1eafa3635d896a7d516cb6a4.jar" />
+    </item>
+    <item
+        jar="D:\Users\Nick\AndroidStudioProjects\NewSubScreen\SubScreen\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="D:\Users\Nick\AndroidStudioProjects\NewSubScreen\SubScreen\build\intermediates\pre-dexed\debug\classes-1915d857e52499ea1f34d6ac4216b63ee88b8af2.jar" />
+    </item>
+    <item
+        jar="D:\Users\Nick\AndroidStudioProjects\NewSubScreen\SubScreen\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="D:\Users\Nick\AndroidStudioProjects\NewSubScreen\SubScreen\build\intermediates\pre-dexed\debug\classes-416fa914a0b00add13f2cb8f0e2e62a41754529b.jar" />
+    </item>
+    <item
+        jar="D:\Users\Nick\AndroidStudioProjects\NewSubScreen\SubScreen\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\jars\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="D:\Users\Nick\AndroidStudioProjects\NewSubScreen\SubScreen\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-4b89016ddcd102bfaaa6c11aed0242504f9e511f.jar" />
     </item>
 
 </items>
