@@ -87,7 +87,7 @@ public class SubtitlePlayer {
         if (smiSub == null || languages.size() <= 1) {
             parentActivity.languageButton.setVisibility(View.GONE);
         }
-        parentActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        parentActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         initText();
         pause();
 	}
