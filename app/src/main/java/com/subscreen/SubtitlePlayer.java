@@ -2,6 +2,7 @@ package com.subscreen;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PushbackInputStream;
@@ -80,6 +81,13 @@ public class SubtitlePlayer {
             parentActivity.displayBackMessage(
                     context.getText(R.string.bad_format_message).toString(),"Sorry");
             return;
+        }
+        finally {
+            try {
+                fileData.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (smiSub != null) {
             languages = smiSub.getAvailableLanguages();
