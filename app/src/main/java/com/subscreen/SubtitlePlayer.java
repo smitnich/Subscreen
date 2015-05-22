@@ -151,7 +151,8 @@ public class SubtitlePlayer {
             FrameBlock block = (FrameBlock) blocks.get(subCount);
             int result = (int) block.checkFramerate(framerate, index);
             FrameBlock.setFrameRate(index);
-            findTime(result);
+            if (playbackStarted)
+                findTime(result);
         }
         catch (Exception e)
         {

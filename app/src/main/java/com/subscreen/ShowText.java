@@ -164,11 +164,13 @@ public class ShowText extends FragmentActivity {
         validFrameRates.clear();
         for (int i = 0; i < FrameBlock.frameRateMultipliers.length; i++)
         {
-            if (FrameBlock.frameRateMultipliers[i] == currentModifier)
-                continue;
-            long currentFrame = currentBlock.checkFramerate(FrameBlock.frameRateMultipliers[i],i);
-            if (currentFrame > maxFrame)
-                continue;
+            if (playerInstance.playbackStarted) {
+                if (FrameBlock.frameRateMultipliers[i] == currentModifier)
+                    continue;
+                long currentFrame = currentBlock.checkFramerate(FrameBlock.frameRateMultipliers[i], i);
+                if (currentFrame > maxFrame)
+                    continue;
+            }
             validFrameRates.add(FrameBlock.frameRateStrings[i]);
             //Since not all framerates will be added to the list of available framerates, we need
             //to make sure that we keep track of the true index by storing the corresponding index
