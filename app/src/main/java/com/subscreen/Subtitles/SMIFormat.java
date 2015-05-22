@@ -6,6 +6,7 @@ import com.subscreen.TimeBlock;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;
@@ -43,10 +44,7 @@ public class SMIFormat implements SubtitleFormat {
                 }
             }
             return allBlocks.get(0);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        } catch (IOException e) {
             return null;
         }
     }
@@ -98,9 +96,15 @@ public class SMIFormat implements SubtitleFormat {
                             text.append(new String(newText).trim());
                         }
                         while (true) {
-                            str = in.readLine().trim();
+                            str = in.readLine();
                             if (str == null || str.length() == 0)
                                 break;
+                            str = str.trim();
+                            //Check for unwanted paragraph blocks here
+                            if (str.startsWith("<P Class=")) {
+                                tag = str.substring(str.indexOf('=')+1,str.indexOf('>'));
+                                str = str.substring(str.indexOf('>') + 1);
+                            }
                             if (!str.toUpperCase().startsWith("<SYNC"))
                                     text.append(str);
                             else
@@ -109,14 +113,13 @@ public class SMIFormat implements SubtitleFormat {
                         for (int i = 0; i < replaceString.length; i++) {
                             int index = text.indexOf(replaceString[i]);
                             while (index != -1) {
-                                text.replace(index,replaceString[i].length(),replaceWith[i]);
+                                text.replace(index,index+replaceString[i].length(),replaceWith[i]);
                                 index = text.indexOf(replaceString[i]);
                             }
                         }
                         if (prevBlock != null && prevBlock.endTime == -1)
                             prevBlock.endTime = startTime;
-                        String finalText = text.toString();
-                        finalText = finalText.trim();
+                        String finalText = text.toString().trim();
                         //If we have an empty line of text, it will appear when using the prev/next
                         //buttons to move through the text blocks. Thus we should not add any empty
                         //lines, but instead use their starting time as the previous blocks ending time
@@ -139,10 +142,12 @@ public class SMIFormat implements SubtitleFormat {
             if (prevBlock != null && prevBlock.endTime == -1){
                 prevBlock.endTime = prevBlock.startTime + 5*1000;
             }
+        } catch (IOException e) {
+            return;
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        catch (Exception e) {
+            ArrayList<TextBlock> tmp = allBlocks.get(0);
+            int x = 5;
         }
     }
     private void checkLanguageNames(String input) {
