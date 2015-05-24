@@ -50,7 +50,7 @@ public class SubViewerTwoFormat implements SubtitleFormat {
                 buffer = in.readLine();
             } while (buffer.length() == 0 || !(buffer.charAt(0) >= '0' && buffer.charAt(0) <= '9'));
             while (true) {
-                if (blocks.size() > 0)
+                if (blocks.size() > 1)
                     buffer = in.readLine();
                 if (buffer == null)
                     break;
