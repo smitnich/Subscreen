@@ -13,7 +13,7 @@ public class FrameBlock implements TextBlock {
     public static double frameRates[] = {23.976, 25.00, 29.97, 23.976*2};
     static double[] frameRateMultipliers = {1, 25.0/23.976, 29.97/23.976, 2};
     static double currentFramerateMultiplier = 1;
-    static String[] frameRateStrings = {"24","25","30","48"};
+    static String[] frameRateStrings = {"24  ","25  ","30  ","48  "};
     static double frameRateModifier = 0;
     public String text;
     public long startFrame;
