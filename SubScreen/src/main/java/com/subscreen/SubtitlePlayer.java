@@ -24,6 +24,7 @@ import com.subscreen.Subtitles.SrtFormat;
 import com.subscreen.Subtitles.SubViewerTwoFormat;
 import com.subscreen.Subtitles.SubtitleFormat;
 import com.subscreen.Subtitles.TmpFormat;
+import com.subscreen.Subtitles.TutorialFormat;
 import com.subscreen.Subtitles.VTTFormat;
 
 import android.app.Activity;
@@ -261,28 +262,9 @@ public class SubtitlePlayer {
         }
         parentActivity.returnToSelectScreen();
     }
-    private String determineEncoding(BufferedInputStream fis) throws Exception {
-        byte[] tmpBuffer = new byte[5];
-        int[] buffer = new int[5];
-        fis.read(tmpBuffer, 0, 4);
-        fis.reset();
-        for (int i = 0; i < 5; i++)
-            buffer[i] = tmpBuffer[i] & 0xff;
-        if (buffer[0] == 0xef && buffer[1] == 0xbb && buffer[2] == 0xbf)
-            return "UTF-8";
-        else if (buffer[0] == 0xfe && buffer[1] == 0xff)
-            return "UTF-16BE";
-        else if (buffer[0] == 0xff && buffer[1] == 0xfe)
-            return "UTF-16LE";
-        else if (buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0xfe && buffer[3] == 0xff)
-            return "UTF_32";
-        else if (buffer[0] == 0x2b && buffer[1] == 0x2f && buffer[2] == 0x76)
-             return "US-ASCII";
-        else
-            return "ISO-8859-1";
-    }
 	public SubtitleFormat pickFormat(BufferedInputStream fileData, String encoding)
 	{
+        String tutorialId = "SUBSCREEN_TUTORIAL";
         final int bufferLength = 128;
         InputStreamReader fis = null;
         fileData.mark(bufferLength + 1);
@@ -302,6 +284,9 @@ public class SubtitlePlayer {
             while (true) {
                 //Convert to proper values
                 switch (buffer[i]) {
+                    case 'S':
+                        if (new String(buffer).substring(0,tutorialId.length()).compareTo(tutorialId) == 0)
+                            return new TutorialFormat(this);
                     case 'W':
                         return new VTTFormat(this);
                     case '{':

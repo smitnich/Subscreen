@@ -12,8 +12,7 @@
     <string name="storage_not_found">Sorry, we couldn\'t find the external device. Make sure it is
         inserted and that your Android device is not in Mass Storage Mode.</string>
     <string name="storage_not_found_title">Storage not found</string>
-    <string name="folder_created">We\'ve made a Subtitles folder on your external device.\n
-        Please place any subtitles you wish to play there</string>
+    <string name="folder_created">We\'ve made a Subtitles folder on your external device.\nPlease place any subtitles that you wish to play there</string>
     <string name="folder_created_title">Folder Created</string>
     <string name="exit_text">Exit</string>
     <string name="back_folder">(Back)</string>
@@ -23,4 +22,7 @@
     <string name="framerate_button">Framerate</string>
     <string name="language_button">Language</string>
     <string name="select_language_string">Select Language</string>
+    <string name="no_files_found">No files were found in $SUBTITLE_FOLDER$ folder.\nPlease place any subtitles that you wish to play there</string>
+    <string name="subtitle_replace_string">$SUBTITLE_FOLDER$</string>
+    <string name="no_files_found_title">No Files Found</string>
 </resources>

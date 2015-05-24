@@ -1,0 +1,50 @@
+SUBSCREEN_TUTORIAL
+
+
+
+
+1
+00:00:00,000 --> 00:00:00,001
+Hello, welcome to SubScreen. Start by pressing the play button below (>).
+
+2
+00:00:00,001 --> 00:00:04,000
+Good! Playback has been initiated and this line will change to the next one shortly.
+
+3
+00:00:04,000 --> 99:99:99,999
+Next, try hitting the next button to the bottom right. We'll wait.
+
+4
+00:00:04,000 --> 00:00:09,000
+Now hit the Play button below to resume playback.
+
+5
+00:00:09,000 --> 00:00:14,000
+These buttons can be used if you need
+to manually resync the player for
+some reason, such as commercials.
+
+6
+00:00:14,001 --> 00:00:19,000
+A few sites that have subtitles for this program are:
+
+8
+00:00:17,001 --> 00:00:22,000
+opensubtitles.org
+moviesubtitles.org
+subscene.com
+tv-subs.com
+
+9
+00:00:22,001 --> 00:00:25,000
+All formats on those sites should work.
+
+10
+00:00:25,001 --> 00:00:28,000
+Thank you for downloading this app!
+
+11
+00:00:28,001 --> 99:99:99,000
+Press the Back button to return
+to the file selection menu.

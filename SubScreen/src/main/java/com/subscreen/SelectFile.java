@@ -11,7 +11,12 @@ import android.widget.ArrayAdapter;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import android.content.Intent;
 import android.app.AlertDialog;
@@ -72,15 +77,20 @@ public class SelectFile extends FragmentActivity {
             }
             File subDirectory = new File(dirPath);
 // have the object build the directory structure, if needed.
-            if (subDirectory.mkdirs()) {
+            if (isMounted && subDirectory.mkdirs()) {
                 displayExitMessage(this.getString(R.string.folder_created),
                         this.getString(R.string.folder_created_title));
                 isMounted = false;
+                writeHelpFiles();
             }
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_select_file);
             lv = (ListView) findViewById(R.id.file_list);
             fileNames = loadFileNames(curPath);
+            if (isMounted && (fileNames == null || fileNames.size() == 0))
+                displayExitMessage(this.getString(R.string.no_files_found).replace(
+                                this.getString(R.string.subtitle_replace_string),dirPath),
+                        this.getString(R.string.no_files_found_title));
             adp = new ArrayAdapter(this, android.R.layout.simple_list_item_1, fileNames);
             lv.setAdapter(adp);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -93,6 +103,28 @@ public class SelectFile extends FragmentActivity {
         catch (Exception e)
         {
             e.printStackTrace();
+        }
+    }
+    private void writeHelpFiles() {
+        InputStream helpFileIn = null;
+        FileOutputStream helpFileOut = null;
+        try {
+            helpFileIn = getResources().getAssets().open("BasicUsageTutorial.srt");
+            helpFileOut = new FileOutputStream(curPath + "/Basic Usage");
+            byte[] buffer = new byte[1024];
+            while (helpFileIn.read(buffer) > 0)
+                helpFileOut.write(buffer);
+        } catch (IOException e) {
+            return;
+        } finally {
+            try {
+                if (helpFileIn != null)
+                    helpFileIn.close();
+                if (helpFileOut != null)
+                    helpFileOut.close();
+            } catch (IOException e) {
+                return;
+            }
         }
     }
     private void goBackDirectory() {
