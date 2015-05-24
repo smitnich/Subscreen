@@ -55,11 +55,11 @@ public class ASSFormat implements SubtitleFormat {
                 String tmp = in.readLine();
                 if (tmp == null)
                     return;
-                if (tmp.length() > 5 && tmp.substring(0,5).compareTo("Timer:") == 0)
+                if (tmp.length() > 7 && tmp.substring(0,6).compareTo("Timer:") == 0)
                 {
                     String percentage = tmp.substring(7);
                     percentage = percentage.replace(",",".");
-                    multiplier = Integer.parseInt(percentage)/100.0;
+                    multiplier = Float.parseFloat(percentage)/100.0;
                 }
                 if (tmp.length() < startTag.length)
                     continue;
@@ -95,8 +95,8 @@ public class ASSFormat implements SubtitleFormat {
 				if (begin == 0 || end == -1)
 					continue;
 				String endTimeString = buffer.substring(begin,end);
-				beginTime = parseTimeStamp(beginTimeString);
-				endTime = parseTimeStamp(endTimeString);
+				beginTime = (long) (parseTimeStamp(beginTimeString)*multiplier);
+				endTime = (long) (parseTimeStamp(endTimeString)*multiplier);
 				commasFound = 0;
 				matchComma = true;
                 int c;
@@ -114,7 +114,6 @@ public class ASSFormat implements SubtitleFormat {
                 {
                     if (buffer.charAt(i) == '{') {
                         int j = i;
-                        char tmpChar = buffer.charAt(j+1);
                         while (buffer.charAt(++j) != '}') ;
                         String tag = buffer.substring(i+1, j);
                         String tags[] = tag.split("\\\\");
@@ -128,9 +127,7 @@ public class ASSFormat implements SubtitleFormat {
                 }
                 buffer = new String(newBuffer).trim();
 				for (i = 0; i < replaceText.length; i++)
-				{
 					buffer = buffer.replace(replaceText[i], replaceTextWith[i]);
-				}
                 if (buffer.length() > 0)
 				    blocks.add(new TimeBlock(buffer.trim(), beginTime, endTime, playerInstance));
 			}
