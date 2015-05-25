@@ -112,8 +112,9 @@ public class SelectFile extends FragmentActivity {
             helpFileIn = getResources().getAssets().open("BasicUsageTutorial.srt");
             helpFileOut = new FileOutputStream(curPath + "/Basic Usage");
             byte[] buffer = new byte[1024];
-            while (helpFileIn.read(buffer) > 0)
-                helpFileOut.write(buffer);
+            int length = 0;
+            while ((length = helpFileIn.read(buffer)) > 0)
+                helpFileOut.write(buffer,0,length);
         } catch (IOException e) {
             return;
         } finally {
