@@ -78,8 +78,6 @@ public class SelectFile extends FragmentActivity {
             File subDirectory = new File(dirPath);
 // have the object build the directory structure, if needed.
             if (isMounted && subDirectory.mkdirs()) {
-                displayExitMessage(this.getString(R.string.folder_created),
-                        this.getString(R.string.folder_created_title));
                 isMounted = false;
                 writeHelpFiles();
             }
