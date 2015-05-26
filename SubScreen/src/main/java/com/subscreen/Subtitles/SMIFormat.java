@@ -46,7 +46,6 @@ public class SMIFormat implements SubtitleFormat {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
             return null;
         }
     }
@@ -142,7 +141,7 @@ public class SMIFormat implements SubtitleFormat {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            return;
         }
     }
     private void checkLanguageNames(String input) {

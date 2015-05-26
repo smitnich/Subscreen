@@ -69,8 +69,6 @@ public class VTTFormat implements SubtitleFormat {
                 blocks.add(new TimeBlock(buffer, beginTime, endTime,playerInstance));
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
         catch (Exception e)
         {

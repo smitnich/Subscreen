@@ -45,7 +45,6 @@ public class TmpFormat implements SubtitleFormat {
 		long time = 0;
 		TimeBlock oldBlock = null;
 		String buffer;
-		long startTime = -1;
         Matcher m;
         try {
 			while (true)
@@ -86,11 +85,11 @@ public class TmpFormat implements SubtitleFormat {
 				blocks.add(oldBlock);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 	}
 	public int parseTimeStamp(String input)

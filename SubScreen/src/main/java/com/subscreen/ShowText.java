@@ -40,7 +40,7 @@ public class ShowText extends FragmentActivity {
         try {
             initMenu();
         } catch (Exception e) {
-            e.printStackTrace();
+            return;
         }
         Bundle b = getIntent().getExtras();
         String fileName = b.getString("fileName");

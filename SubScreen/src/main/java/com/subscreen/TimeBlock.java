@@ -59,7 +59,6 @@ public class TimeBlock implements TextBlock {
     {
         return startTime;
     }
-	public long getCurrentTime() { return (new Date().getTime() - playerInstance.getOffset() - playerInstance.rootTime);}
 	public void getText(Output _outputTo)
 	{
 		_outputTo.outputText(text);

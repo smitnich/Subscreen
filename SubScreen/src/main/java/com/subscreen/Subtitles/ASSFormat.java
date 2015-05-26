@@ -132,7 +132,6 @@ public class ASSFormat implements SubtitleFormat {
 				    blocks.add(new TimeBlock(buffer.trim(), beginTime, endTime, playerInstance));
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
     //SSA format stores colors in hex BBGGRR hex format; this is the opposite order of HTML, which

@@ -108,7 +108,7 @@ public class MicroDVDFormat implements SubtitleFormat {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            return;
         }
         if (forcedFramerate != -1 && blocks.size() > 0) {
             FrameBlock.setFrameRate(forcedFramerate);

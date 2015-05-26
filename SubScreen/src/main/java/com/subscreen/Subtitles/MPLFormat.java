@@ -60,7 +60,7 @@ public class MPLFormat implements SubtitleFormat {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            return;
         }
     }
     String parseText(String text)

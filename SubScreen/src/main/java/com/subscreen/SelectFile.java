@@ -100,7 +100,7 @@ public class SelectFile extends FragmentActivity {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            return;
         }
     }
     private void writeHelpFiles() {
