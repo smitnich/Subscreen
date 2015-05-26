@@ -5,7 +5,7 @@ SUBSCREEN_TUTORIAL
 
 1
 00:00:00,000 --> 00:00:00,001
-Hello, welcome to SubScreen. Start by pressing the play button below (>).
+Hello, welcome to SubScreen. Start by pressing the Play button below (>).
 
 2
 00:00:00,001 --> 00:00:04,000
@@ -13,7 +13,7 @@ Good! Playback has been initiated and this line will change to the next one shor
 
 3
 00:00:04,000 --> 99:99:99,999
-Next, try hitting the next button to the bottom right. We'll wait.
+Next, try hitting the Next button to the bottom right. We'll wait.
 
 4
 00:00:04,000 --> 00:00:09,000
@@ -38,7 +38,8 @@ tv-subs.com
 
 9
 00:00:22,001 --> 00:00:25,000
-All formats on those sites should work.
+All formats on those sites should work,
+including zip files.
 
 10
 00:00:25,001 --> 00:00:28,000
