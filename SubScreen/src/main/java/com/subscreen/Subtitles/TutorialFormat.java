@@ -2,6 +2,7 @@ package com.subscreen.Subtitles;
 
 import com.subscreen.SubtitlePlayer;
 import com.subscreen.TextBlock;
+import com.subscreen.TimeBlock;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,12 +20,16 @@ public class TutorialFormat implements SubtitleFormat {
 
     public ArrayList<TextBlock> readFile(InputStream data, String srcCharset) {
         SrtFormat srtHelper = new SrtFormat(playerInstance);
+        String folderPath = System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
         ArrayList<TextBlock> blocks = null;
         try {
             data.skip("SUBSCREEN_TUTORIAL\r\n".length());
             blocks = srtHelper.readFile(data, srcCharset);
             //Remove the play block so that the first instruction will automatically appear
             blocks.remove(0);
+            //Replace the placeholder string with the actual path
+            TimeBlock block = (TimeBlock) blocks.get(8);
+            block.text = block.text.replace("$SUBTITLE_FOLDER_PATH$",folderPath);
         } catch (IOException e) {
             return null;
         }

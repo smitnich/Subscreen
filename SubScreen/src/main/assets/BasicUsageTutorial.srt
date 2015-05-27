@@ -42,10 +42,15 @@ All formats on those sites should work,
 including zip files.
 
 10
-00:00:25,001 --> 00:00:28,000
+00:00:25,001 --> 00:30:00:00
+Subtitle files should be placed in:
+$SUBTITLE_FOLDER_PATH$
+
+10
+00:00:30,001 --> 00:00:33,000
 Thank you for downloading this app!
 
 11
-00:00:28,001 --> 99:99:99,000
+00:00:33,001 --> 99:99:99,000
 Press the Back button to return
 to the file selection menu.
