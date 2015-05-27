@@ -168,7 +168,7 @@ public class ShowText extends FragmentActivity {
                 continue;
             //If playback has not been initialized already, we obviously haven't gone past the
             //time limit
-            if (playerInstance.playbackStarted == false) {
+            if (playerInstance.playbackStarted == true) {
                 long currentFrame = currentBlock.checkFramerate(FrameBlock.frameRateMultipliers[i], i);
                 if (currentFrame > maxFrame)
                     continue;
