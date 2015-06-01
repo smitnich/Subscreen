@@ -49,7 +49,8 @@ public class SelectFile extends FragmentActivity {
         zipOpened = false;
         fileNames = loadFileNames(curPath);
         adp.clear();
-        adp.addAll(fileNames);
+        for (String fileName : fileNames)
+            adp.add(fileName);
         adp.notifyDataSetChanged();
         lv.setSelection(0);
     }
