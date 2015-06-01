@@ -24,6 +24,8 @@ public class ShowText extends FragmentActivity {
     static Button prevButton;
     static Button convertFramerateButton;
     static Button languageButton;
+    static Button zoomOutButton;
+    static Button zoomInButton;
     SubtitlePlayer playerInstance = null;
     ListView frameRateListView;
     ListView languageListView;
@@ -32,6 +34,7 @@ public class ShowText extends FragmentActivity {
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        float textSize = getResources().getDimension(R.dimen.activity_text_size);
 		setContentView(R.layout.activity_show_text);
 		TextView t = (TextView)findViewById(R.id.text);
         pauseButton = (Button) findViewById(R.id.pauseButton);
@@ -70,8 +73,29 @@ public class ShowText extends FragmentActivity {
                 playerInstance.nextSubtitle();
             }
         });
+        zoomOutButton = (Button) findViewById(R.id.zoomOut);
+        zoomOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoomOut();
+            }
+        });
+        zoomInButton = (Button) findViewById(R.id.zoomIn);
+        zoomInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoomIn();
+            }
+        });
         playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding);
-	}
+        t.setTextSize(textSize);
+    }
+    private void zoomIn() {
+        int x =5;
+    }
+    private void zoomOut() {
+        int y = 5;
+    }
     public void onBackPressed() {
         returnToSelectScreen();
     }
