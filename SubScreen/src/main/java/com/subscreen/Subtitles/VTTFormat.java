@@ -66,7 +66,11 @@ public class VTTFormat implements SubtitleFormat {
                     if (tmp.length() > 0)
                         buffer += tmp + "<br>";
                 }
-                blocks.add(new TimeBlock(buffer, beginTime, endTime,playerInstance));
+                if (buffer.length() > 0) {
+                    if (buffer.endsWith("<br>"))
+                        buffer = buffer.substring(0,buffer.length() - 4);
+                    blocks.add(new TimeBlock(buffer, beginTime, endTime, playerInstance));
+                }
             }
         } catch (IOException e) {
         }
