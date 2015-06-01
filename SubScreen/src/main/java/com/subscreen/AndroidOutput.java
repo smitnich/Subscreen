@@ -16,8 +16,12 @@ public class AndroidOutput implements Output {
     Charset destCharset;
     String destCharsetString;
     String lastText;
-	AndroidOutput(Activity act)
+	public float textSize;
+	final static float minSize = 4.0f;
+	final static float maxSize = 49.0f;
+	AndroidOutput(Activity act, float size)
 	{
+		textSize = size;
         activity = act;
 	}
 	@Override
@@ -48,4 +52,16 @@ public class AndroidOutput implements Output {
     void resetText() {
         outputText(lastText);
     }
+	public void zoomIn() {
+		textSize += 3;
+		if (textSize > maxSize)
+			textSize = maxSize;
+		out.setTextSize(textSize);
+	}
+	public void zoomOut() {
+		textSize -= 3;
+		if (textSize < minSize)
+			textSize = minSize;
+		out.setTextSize(textSize);
+	}
 }

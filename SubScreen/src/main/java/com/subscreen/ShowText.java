@@ -91,10 +91,10 @@ public class ShowText extends FragmentActivity {
         t.setTextSize(textSize);
     }
     private void zoomIn() {
-        int x =5;
+        playerInstance.outputTo.zoomIn();
     }
     private void zoomOut() {
-        int y = 5;
+        playerInstance.outputTo.zoomOut();
     }
     public void onBackPressed() {
         returnToSelectScreen();

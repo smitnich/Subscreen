@@ -64,7 +64,7 @@ public class SubtitlePlayer {
         }
 		Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
 		toEdit.setTypeface(test_font);
-		outputTo = new AndroidOutput(activity);
+		outputTo = new AndroidOutput(activity,context.getResources().getDimension(R.dimen.activity_text_size));
 		outputTo.setTextView(toEdit);
         try {
             blocks = subFile.readFile(fileData, srcCharset);
