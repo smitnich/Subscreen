@@ -79,7 +79,7 @@ public class SelectFile extends FragmentActivity {
             File subDirectory = new File(dirPath);
 // have the object build the directory structure, if needed.
             if (isMounted && subDirectory.mkdirs()) {
-                isMounted = false;
+                //isMounted = false;
                 writeHelpFiles();
             }
             super.onCreate(savedInstanceState);
