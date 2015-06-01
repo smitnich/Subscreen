@@ -189,6 +189,7 @@ public class SubtitlePlayer {
             }
         });
         if (!playbackStarted) {
+            outputTo.out.setTextSize(outputTo.textSize);
             playbackStarted = true;
             Date rootDate = new Date();
             rootTime = rootDate.getTime();

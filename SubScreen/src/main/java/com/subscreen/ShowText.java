@@ -88,7 +88,6 @@ public class ShowText extends FragmentActivity {
             }
         });
         playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding);
-        t.setTextSize(textSize);
     }
     private void zoomIn() {
         playerInstance.outputTo.zoomIn();

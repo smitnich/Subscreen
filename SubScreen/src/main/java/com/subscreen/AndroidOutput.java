@@ -10,18 +10,20 @@ import java.nio.charset.Charset;
 
 public class AndroidOutput implements Output {
 
-	TextView out;
+	TextView out = null;
     Activity activity;
     Charset loadedCharset;
     Charset destCharset;
     String destCharsetString;
     String lastText;
-	public float textSize;
+	public static float textSize = 0.0f;
 	final static float minSize = 4.0f;
 	final static float maxSize = 49.0f;
 	AndroidOutput(Activity act, float size)
 	{
-		textSize = size;
+		//Only update text size if it hasn't been set this run
+		if (textSize == 0.0f)
+			textSize = size;
         activity = act;
 	}
 	@Override
@@ -43,15 +45,8 @@ public class AndroidOutput implements Output {
 	public void setTextView(TextView t)
 	{
 		out = t;
+		out.setTextSize(textSize);
 	}
-    public void setDestCharset(String in)
-    {
-        destCharset = Charset.forName(in);
-        resetText();
-    }
-    void resetText() {
-        outputText(lastText);
-    }
 	public void zoomIn() {
 		textSize += 3;
 		if (textSize > maxSize)
