@@ -17,13 +17,15 @@ public class AndroidOutput implements Output {
     String destCharsetString;
     String lastText;
 	public static float textSize = 0.0f;
-	final static float minSize = 4.0f;
-	final static float maxSize = 49.0f;
+	static float minSize = 4.0f;
+	static float maxSize = 49.0f;
 	AndroidOutput(Activity act, float size)
 	{
 		//Only update text size if it hasn't been set this run
-		if (textSize == 0.0f)
+		if (textSize == 0.0f) {
 			textSize = size;
+			maxSize = size*3;
+		}
         activity = act;
 	}
 	@Override
