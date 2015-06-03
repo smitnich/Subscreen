@@ -1,0 +1,1165 @@
+[INFORMATION]
+[AUTHOR]
+[SOURCE]
+[PRG]
+[FILEPATH]
+[DELAY]
+[CD TRACK]
+[COMMENT]
+[END INFORMATION]
+[SUBTITLE]
+[COLF]&HFFFFFF,[STYLE]no,[SIZE]18,[FONT]Arial
+00:00:37.00,00:00:39.31
+Az arénában.
+
+00:01:10.40,00:01:13.28
+Szóval az Arles-i amphiteátrumban.
+
+00:01:13.40,00:01:17.24
+Amelyet az elsõ század végén[br]építették.
+
+00:01:17.36,00:01:19.67
+Mészkõbõl épült.
+
+00:01:26.84,00:01:28.07
+Ismerem azokat.
+
+00:01:59.04,00:02:01.95
+Ott láthatják ezt az[br]erõs sárga színt.
+
+00:02:02.04,00:02:04.48
+Ezt a színt késõbb vitték[br]Fel a falra.
+
+00:02:04.56,00:02:07.20
+Nem vagyunk biztosak benn,[br]hogy a fal eredetileg is sárga volt.
+
+00:02:07.28,00:02:09.11
+Erre megyünk tovább, és
+
+00:02:09.24,00:02:11.76
+meglátogatjuk a római[br]fürdõt.
+
+00:02:24.84,00:02:26.64
+Yeah.
+
+00:02:29.04,00:02:32.80
+Köszönöm, uraim.[br]Így lesz jó.
+
+00:02:34.64,00:02:36.44
+Ez Szergej. Emlékszem rád.
+
+00:02:36.56,00:02:39.20
+Igen, Gregor, én vagyok.
+
+00:02:39.28,00:02:42.91
+- Hogy vagy?[br]- Hát. Ezek nehéz idõk.
+
+00:02:43.04,00:02:46.00
+- Bocsánat a szerencsétlen incidensért.[br]- Ó, igen.
+
+00:02:46.16,00:02:49.44
+Hiba volt.[br]Sõt, mondhatni õrültség.
+
+00:02:49.52,00:02:52.16
+Teljesen egyetértek.
+
+00:02:52.24,00:02:54.47
+Mikhi saját szakállára csinálta.
+
+00:02:56.00,00:02:58.64
+Igen, berágott és már[br]nem tudtál parancsolni neki?
+
+00:03:11.08,00:03:13.72
+Excusez-moi.[br]Je cherche la vieille maison de Van Gogh.
+
+00:03:13.84,00:03:16.80
+- Nem értem... Nem értem...[br]- Ó, angol.
+
+00:03:16.88,00:03:18.71
+Bocsánat. Bolond vagyok.
+
+00:03:18.84,00:03:20.64
+Van Gogh régi házát keresem.
+
+00:03:20.72,00:03:24.95
+Most tárgyalhatnánk[br]kollegiális légkörben,
+
+00:03:25.08,00:03:27.07
+de az asztalra csináltatok.
+
+00:03:27.16,00:03:30.95
+- Mit gondolsz?[br]- Azt, hogy megadjuk az árat.
+
+00:03:32.56,00:03:36.52
+Igen. Igen, hadd lássuk. Lássuk most.
+
+00:03:36.60,00:03:37.96
+Hol van, talán a pénztárcádban?
+
+00:03:38.12,00:03:40.64
+- Lássuk csak![br]- Elõször a táskát.
+
+00:03:42.84,00:03:45.88
+Lehetnek akármilyen jók a reflexeid,
+
+00:03:46.00,00:03:47.80
+De most nem tudsz mit csinálni.
+
+00:03:49.32,00:03:53.16
+- Gregor? Minden rendben?[br]- Gregor jól van.
+
+00:03:53.28,00:03:55.84
+De ti gondban vagytok.
+
+00:03:56.92,00:03:59.60
+- Hol van? Hol van?[br]- Nincs nálam.
+
+00:03:59.68,00:04:00.64
+Hol van?
+
+00:04:00.72,00:04:03.11
+Elküldtem a saját párizsi[br]postafiókomba.
+
+00:04:03.20,00:04:04.19
+Hilfe!
+
+00:04:04.28,00:04:05.92
+Segítség! Rabló!
+
+00:04:43.48,00:04:45.44
+Pardon. Pardon.
+
+00:04:45.56,00:04:47.28
+Pardon. Avancez!
+
+00:04:47.40,00:04:48.20
+Pardon.
+
+00:05:50.04,00:05:50.84
+Stop.
+
+00:05:54.44,00:05:57.04
+- Honnan ismerlek?[br]- Bécsbõl.
+
+00:05:57.12,00:06:00.59
+Persze. Sajnálom, hogy ezt kell tennem.
+
+00:06:00.68,00:06:01.67
+Hé!
+
+00:06:19.24,00:06:20.91
+- Jézusom.[br]- Hajts.
+
+00:06:42.16,00:06:47.08
+Stop! Descends! Vite! Descends!
+
+00:07:03.56,00:07:10.51
+- Errõl nekem kell gondoskodnom.[br]- Mit akarsz tenni?
+
+00:07:10.60,00:07:14.23
+Menjünk orvoshoz, vagy[br]állatorvosi rendelõbe.
+
+00:07:14.36,00:07:16.51
+Megszerzem, ami kell.
+
+00:07:20.12,00:07:23.64
+- Megtudod?[br]- Persze. Jobban tudom.
+
+00:07:26.24,00:07:28.36
+- Hogy vagy?[br]- Szivárgok.
+
+00:07:29.72,00:07:31.36
+Bocsánat.
+
+00:07:35.84,00:07:37.64
+A csaj kiadott minket.
+
+00:07:42.08,00:07:44.84
+Elárult minket.
+
+00:08:34.32,00:08:37.16
+- Kész, Jean-Pierre?[br]- Minden kész.
+
+00:08:55.68,00:08:57.59
+Tedd fel a lábam.
+
+00:08:57.68,00:08:59.51
+Vigyázz.
+
+00:09:08.68,00:09:10.80
+Biztosan tudod ezt csinálni?
+
+00:09:10.92,00:09:14.36
+Igen.
+
+00:09:14.48,00:09:17.60
+- Igyál.[br]- Nincs kedvem.
+
+00:09:23.08,00:09:27.87
+Könnyû, könnyû, könnyû.
+
+00:09:33.64,00:09:37.32
+Alig hatolt be.
+
+00:09:38.76,00:09:41.80
+Rendben, csináljuk.[br]Fertõtlenítsd alkohollal.
+
+00:09:45.12,00:09:47.51
+Fogd a vattát és töröld le[br]a vért, ahogy csak tudod.
+
+00:09:47.64,00:09:49.71
+Tartsd tisztán, hogy lássam.
+
+00:09:53.96,00:09:55.79
+Igen. Ez az.
+
+00:10:02.36,00:10:04.35
+Rendben.[br]Ez rutinmunka.
+
+00:10:04.52,00:10:06.96
+Már sokszor csináltam.
+
+00:10:07.08,00:10:09.15
+Nincsen létfontosságú szerv, ütõér[br]megsérülve.
+
+00:10:09.28,00:10:11.27
+Nem halok bele.[br]Fogd meg jól a golyót
+
+00:10:11.36,00:10:13.35
+- mielõtt kihúzod.[br]- Rendben.
+
+00:10:13.48,00:10:15.28
+Fogd a csipeszt.
+
+00:10:19.60,00:10:21.43
+A felsõ részt.
+
+00:10:22.96,00:10:24.87
+Erre. Csak vágd el ott.
+
+00:10:24.96,00:10:26.79
+Csak egy kis vágás.
+
+00:10:37.28,00:10:39.08
+Ok. Megvan.
+
+00:10:40.88,00:10:42.68
+Fogd a csipeszt.
+
+00:10:42.80,00:10:45.36
+Fogd a csipeszt és nyisd fel...[br]a lyukat.
+
+00:10:45.52,00:10:47.99
+Csak tedd oda.
+
+00:10:49.04,00:10:50.87
+Tedd oda.
+
+00:10:50.96,00:10:52.79
+Ez az. Tedd be. Csak...
+
+00:10:52.92,00:10:55.07
+most nyisd fel. Hajtsd szét. Hajtsd szét.
+
+00:10:55.16,00:10:57.44
+Ok. Ok.
+
+00:10:57.52,00:11:00.48
+Most fogd a másik...[br]A másik fogót és vedd ki a golyót.
+
+00:11:00.56,00:11:02.52
+Vigyázz, ne húzd ki, amíg[br]nem fogod biztosan.
+
+00:11:20.20,00:11:23.43
+Csináld újra. Próbáld újra.[br]Csak még egyszer.
+
+00:11:29.36,00:11:32.83
+Bocsánat.
+
+00:11:34.68,00:11:38.36
+Ha kinn van, rakd oda a vattát.[br]Sok vér jön majd ki.
+
+00:11:43.88,00:11:45.68
+Tedd a vattát oda.
+
+00:11:55.24,00:11:57.52
+A szemét teflonbevonatú golyót használ.
+
+00:11:58.76,00:12:02.47
+Rendesen ki akart engem fizetni.
+
+00:12:02.64,00:12:05.32
+- Ezért ment át a golyóálló mellényen?[br]- Igen.
+
+00:12:07.00,00:12:09.64
+Azt gondoltad, átverhetsz?
+
+00:12:10.96,00:12:14.43
+Ha nem bánod,[br]átadom.
+
+00:13:02.08,00:13:04.44
+Meg fogsz ölni?
+
+00:13:04.52,00:13:08.28
+Nem. Nem öllek meg.
+
+00:13:34.72,00:13:36.52
+Miért ölnélek meg?
+
+00:13:54.96,00:13:57.80
+- Adtam neked egy megbízást.[br]- Elvégeztem a munkámat.
+
+00:13:58.92,00:14:00.51
+Mit szúrtunk el?
+
+00:14:00.60,00:14:02.56
+Azt gondoltam a táskát akarod.
+
+00:14:03.72,00:14:05.44
+Ó, megszerezzük a táskát.
+
+00:14:05.52,00:14:08.48
+Meglesz a táska, Gregor?
+
+00:14:10.12,00:14:11.95
+A táska miatt ne izgulj.
+
+00:14:14.32,00:14:16.36
+Valamire magyarázatot várok.
+
+00:14:16.48,00:14:19.08
+Magyarázatot? Mire?
+
+00:14:19.24,00:14:21.12
+Te szúrtad el.
+
+00:14:21.28,00:14:24.12
+- Én szúrtam el?[br]- Te fogadtad fel.
+
+00:14:24.20,00:14:26.03
+A te rohadt kapcsolatodon keresztül!
+
+00:14:31.88,00:14:35.35
+- Nem végezted el a házi feladatodat.[br]- Miért kellett megölnöd Larry-t
+
+00:14:35.48,00:14:37.31
+Ó, Larry, a neve?
+
+00:14:38.40,00:14:40.20
+A te piszkodat takarítottam el.
+
+00:14:40.28,00:14:43.08
+Az én piszkomat?[br]Akkor hát vedd át te.
+
+00:14:43.20,00:14:45.00
+- Eh?[br]- De nem tudod, ugye?
+
+00:14:45.12,00:14:47.19
+Te vagy aki bujkál, nemde, Seamus?
+
+00:14:47.32,00:14:49.60
+Te nem mutathatod meg az arcodat.
+
+00:14:52.16,00:14:55.47
+Még ki gondolja ezt?[br]Még kinek beszéltél?
+
+00:14:55.60,00:14:57.72
+Talán nem ezért csinálom[br]ezt a melót?
+
+00:15:01.20,00:15:03.00
+Jó kislány vagy, Deirdre.
+
+00:15:04.32,00:15:06.15
+Csinálod a munkád, mi?
+
+00:15:19.32,00:15:21.36
+Kemény a te jenkid.
+
+00:15:22.68,00:15:24.24
+Ebben igazad van.
+
+00:15:26.40,00:15:27.60
+De kicsoda õ?
+
+00:15:29.24,00:15:30.99
+Ez nem fontos.
+
+00:15:31.96,00:15:34.60
+Korábban nem a CIA-nál dolgozott?
+
+00:15:35.68,00:15:37.35
+Régebben.
+
+00:15:38.08,00:15:39.52
+Már nem?
+
+00:15:41.04,00:15:42.63
+Menekülõben van.
+
+00:15:44.08,00:15:45.52
+Biztos vagy ebben?
+
+00:15:45.60,00:15:50.36
+Tudom, mire képes.[br]Láttam.
+
+00:15:50.44,00:15:52.83
+Ha még mindig a CIA-nál[br]volna, nem magát gyógyítaná.
+
+00:15:52.92,00:15:55.44
+Csak telefonálna egyet és orvosnál volna.
+
+00:16:05.56,00:16:07.47
+És te? Hogy vagy?
+
+00:16:15.88,00:16:21.16
+Kellene még információ.[br]Valakiket meg kell találnunk Párizsban.
+
+00:16:21.24,00:16:22.20
+Kiket?
+
+00:16:22.68,00:16:25.28
+Egy ír férfit és egy nõt,
+
+00:16:25.36,00:16:27.51
+egy németet, volt KGB-st.
+
+00:16:28.28,00:16:29.35
+Akik profik.
+
+00:16:29.44,00:16:30.88
+Akik bujkálnak.
+
+00:16:31.52,00:16:34.48
+Ez neked tényleg olyan fontos?
+
+00:16:36.60,00:16:39.04
+Megmentette az életem.
+
+00:16:41.80,00:16:42.63
+Bon.
+
+00:16:44.96,00:16:47.43
+Megtalálom neked.
+
+00:17:05.40,00:17:08.08
+Hol a bõrönd?
+
+00:17:11.44,00:17:13.24
+Holnap meglesz. Ebben biztos vagyok.
+
+00:17:13.40,00:17:16.79
+Én is biztos vagyok, menjünk.
+
+00:17:17.84,00:17:20.07
+Reménykedjünk is mindenesetre.
+
+00:17:50.44,00:17:52.51
+Jobban vagy már?
+
+00:17:52.64,00:17:54.76
+Igen, ahhoz, hogy felkeljek az ágyból.
+
+00:18:04.28,00:18:06.08
+A hobbim.
+
+00:18:07.16,00:18:08.96
+Az ember megöregszik.
+
+00:18:10.64,00:18:12.44
+Sok kollégámnak, barátaimnak,
+
+00:18:12.56,00:18:14.36
+egyetlen vágya egy étterem volt.
+
+00:18:14.44,00:18:16.80
+Ha nem halnak meg,[br]Sikerült volna nekik?
+
+00:18:19.84,00:18:22.88
+- Így megmenekültek egy csalódástól.[br]- Igen, ez igaz.
+
+00:18:24.84,00:18:26.91
+Kik ezek az emberek?[br]A barátaid?
+
+00:18:29.64,00:18:32.60
+- Egy barátot nem bántanék.[br]- Nem is ezt kérdeztem.
+
+00:18:34.04,00:18:35.32
+Ez igaz.
+
+00:18:40.60,00:18:43.83
+De ki vagy te?
+
+00:18:45.40,00:18:48.76
+Egy harcos mint te,[br]aki meg akarja érni a nyugdíjat.
+
+00:18:48.88,00:18:52.80
+A nap végén könnyen megfizethetünk[br]a jócselekedeteinkért.
+
+00:18:52.88,00:18:55.79
+Tõlem nem kell félned.[br]Nem bántalak.
+
+00:19:22.56,00:19:24.76
+Ismered a 47 ronin történetét?
+
+00:19:26.68,00:19:31.96
+47 szamuráj, akik urát elárulta[br]és megölte egy másik úr.
+
+00:19:32.04,00:19:35.43
+Ronin, gazda nélküli szamuráj,
+
+00:19:35.56,00:19:37.68
+aki más árulása miatt vesztette[br]el a becsületét.
+
+00:19:39.08,00:19:41.55
+Három évet vártak, kiadva[br]magukat tolvajnak,
+
+00:19:41.68,00:19:44.28
+zsoldosnak, sõt bolondnak.
+
+00:19:44.40,00:19:46.68
+Erre én nem értem rá.
+
+00:19:46.76,00:19:49.07
+És egy éjjel lecsaptak,[br]Beosontak az áruló
+
+00:19:49.20,00:19:51.08
+kastélyába, és megölték.
+
+00:19:52.48,00:19:54.84
+Szép. Tetszik. Ilyen az én munkám is.
+
+00:19:54.96,00:19:56.84
+Van még valami.
+
+00:19:58.36,00:20:02.32
+Mind a 47 szeppukut csinált,
+
+00:20:02.44,00:20:05.64
+rituális öngyilkosságot[br]a kastély udvarán.
+
+00:20:05.76,00:20:08.44
+Ez már annyira nem tetszik.
+
+00:20:08.56,00:20:11.55
+- De megérted?[br]- Hogy érted, hogy megértem-e?
+
+00:20:13.52,00:20:17.99
+A harcosbecsület, a csata láza.[br]Érted ezt, nem?
+
+00:20:19.20,00:20:22.00
+De van még valami.
+
+00:20:22.08,00:20:24.36
+Megérted, hogy van valami[br]Rajtad kívül,
+
+00:20:24.48,00:20:26.76
+amit szolgálnod kell.
+
+00:20:26.88,00:20:29.03
+Ha elmúlt a vágy,
+
+00:20:29.16,00:20:32.44
+ha meghalt a hit, ki maradsz?
+
+00:20:32.52,00:20:34.43
+Egy ember gazda nélkül.
+
+00:20:34.60,00:20:37.32
+Most inkább csekkfüzet[br]Nélküli ember vagyok.
+
+00:20:37.44,00:20:41.04
+A roninok más úrhoz is[br]Elszegõdhettek volna.
+
+00:20:41.12,00:20:43.19
+Saját magukért is harcolhattak volna.
+
+00:20:43.32,00:20:46.20
+De a dicsõséget választották.[br]És a hírnevet.
+
+00:20:47.32,00:20:49.07
+Rosszul választottak.
+
+00:20:56.56,00:20:59.00
+Szeppu... Szeppu... mi?
+
+00:20:59.12,00:21:01.24
+Igen, szeppuku.
+
+00:21:01.32,00:21:03.47
+Önhasfelmetszés.
+
+00:21:03.60,00:21:06.24
+A kard itt megy be.
+
+00:21:15.92,00:21:17.88
+Biztos jó ez a cím?
+
+00:21:18.00,00:21:19.83
+Jean-Pierre adta nekem.
+
+00:21:51.92,00:21:55.28
+A híd alatt a folyónál...
+
+00:21:55.36,00:21:57.92
+Honnam tudtad, hogy csapda?
+
+00:21:58.04,00:22:00.35
+Ha kétség van,[br]akkor nincs kétség.
+
+00:22:00.52,00:22:02.32
+Erre tanítottak meg elõször.
+
+00:22:05.92,00:22:08.52
+Ki tanított?
+
+00:22:08.64,00:22:11.68
+Nem emlékszem.[br]Ez a második, amire megtanítottak.
+
+00:22:16.64,00:22:18.84
+Aki vár, annak minden[br]sikerül.
+
+00:22:48.36,00:22:51.83
+- Miért van még mindig Gregor életben?[br]- Hogy elvigye õket a csomaghoz.
+
+00:23:15.40,00:23:16.55
+Hogy csinálod?
+
+00:23:24.08,00:23:26.72
+Mit akarsz...[br]Mit akarsz velem csinálni?
+
+00:23:26.84,00:23:31.87
+Maradj nyugton egy pillanatig.[br]Csak egy pillanatig.
+
+00:23:44.04,00:23:46.03
+Miért? Miért?
+
+00:23:46.12,00:23:48.11
+Tudod miért.
+
+00:23:48.20,00:23:50.27
+Nem. Úgyse teszed meg.
+
+00:23:53.92,00:23:54.88
+Nem tudod.
+
+00:23:59.60,00:24:00.24
+Vissza!
+
+00:24:01.76,00:24:03.67
+Be a rohadt kocsiba!
+
+00:24:13.20,00:24:14.72
+Miért nem lõtted le?
+
+00:25:04.76,00:25:06.43
+Az alagútba, most!
+
+00:25:06.52,00:25:08.43
+Ó, Jézusom!
+
+00:25:10.64,00:25:12.68
+Eh, merde!
+
+00:28:13.44,00:28:14.76
+Gyerünk! Gyerünk!
+
+00:28:38.84,00:28:40.72
+Rendben, rohadék!
+
+00:31:59.24,00:32:01.52
+Hol lehet?
+
+00:32:01.60,00:32:05.36
+- Hol lehet?[br]- Hmm.
+
+00:32:05.52,00:32:08.83
+Az írek és az oroszok is keresik.[br]Hová mehet?
+
+00:32:08.92,00:32:12.63
+Az oroszokhoz megy, hogy[br]eladja a táskát.
+
+00:32:12.72,00:32:16.08
+Gregor addig nem megy, amíg nem[br]tudja a cserét biztonságban lebonyolítani.
+
+00:32:16.20,00:32:18.27
+Tudja, szívesebben adnának neki[br]golyót a táskáért, mint pénzt.
+
+00:32:18.36,00:32:23.52
+És cselekednie kell, mielõtt[br]Az írek megtalálják.
+
+00:32:24.80,00:32:26.55
+Tehát hova megy?
+
+00:32:28.32,00:32:30.12
+Térj már a tárgyra.
+
+00:32:33.52,00:32:37.20
+Õ KGB-s.[br]Az egyik Biztonságos Házhoz megy.
+
+00:32:38.60,00:32:41.12
+Nem, azok már nincsenek meg.
+
+00:32:41.24,00:32:43.52
+Hová megy?
+
+00:32:49.04,00:32:52.32
+Tehát menekülsz.[br]Hová mennél?
+
+00:32:52.44,00:32:54.27
+Hmm?
+
+00:32:58.24,00:33:02.47
+Hol volt? Hol volt?[br]Hol volt? Hol volt?
+
+00:33:13.76,00:33:16.23
+Õ csinálta a hamis táskát.
+
+00:33:16.32,00:33:18.60
+Neki kellett csinálnia.
+
+00:33:18.72,00:33:22.03
+Gregor. Mással csináltatta.
+
+00:33:22.12,00:33:24.59
+Mással kellett csináltatnia.
+
+00:33:26.04,00:33:29.03
+Párizsban, mielõtt Nice-be ment.
+
+00:33:29.12,00:33:30.87
+Nem volt ideje megcsináltatni.
+
+00:33:30.96,00:33:33.08
+Vett valami hasonlót, aztán[br]spray-vel átfestette.
+
+00:33:33.16,00:33:35.63
+Honnan szedte a spray-t?[br]Nem hagyta el a szobát.
+
+00:33:35.72,00:33:37.63
+Honnan szedte a táskát?
+
+00:33:46.88,00:33:49.03
+Excusez-moi, monsieur.
+
+00:34:09.48,00:34:11.23
+Ez egy hûtõtáska.
+
+00:34:14.68,00:34:16.51
+Mért hûtõtáska?
+
+00:34:18.72,00:34:20.63
+Honnan tudta Gregor, hogy[br]hûtõtáska kell?
+
+00:34:22.56,00:34:24.95
+Nem volt rá ideje.
+
+00:34:25.08,00:34:29.68
+Nem volt rá ideje.[br]Az oroszok csinálták.
+
+00:34:31.56,00:34:34.03
+Az oroszok csinálták.
+
+00:34:37.04,00:34:38.84
+Rossz személyt követünk.
+
+00:34:38.96,00:34:41.76
+Nem kell Gregort megtalálni.
+
+00:34:41.88,00:34:44.48
+Megtaláljuk az oroszokat.[br]Õk majd elvisznek hozzá.
+
+00:34:44.60,00:34:48.31
+Sokáig éltél Párizsban[br]Ismered az embereket.
+
+00:34:48.40,00:34:51.31
+- Körbenézek.[br]- Találkozz az itteni oroszokkal.
+
+00:34:51.40,00:34:55.16
+Tudod hogy van ez.[br]Volt kémek. Ma maffiózók.
+
+00:34:56.00,00:34:58.04
+Diplomáciai védelem alatt.
+
+00:34:59.52,00:35:00.48
+KGB?
+
+00:35:00.72,00:35:01.68
+Ex-KGB.
+
+00:35:02.08,00:35:06.47
+Nehézfiúk, szerencsejáték,[br]sok pénz, drága kocsik.
+
+00:35:06.56,00:35:07.92
+Élnek mint a cárok.[br]Szórják a pénzt.
+
+00:35:08.00,00:35:09.80
+A szõrmekalapok drágák.
+
+00:35:09.88,00:35:15.08
+- És testõrök.[br]- Drága kabátok, Dr Zhivago.
+
+00:35:15.16,00:35:18.20
+Sok a munkám, kevés az idõm.
+
+00:35:19.64,00:35:21.20
+Értem.
+
+00:35:22.88,00:35:24.52
+Rendben. Menjünk.
+
+00:35:25.40,00:35:26.36
+Ok.
+
+00:35:33.24,00:35:34.76
+Minden rendben lesz.
+
+00:35:36.20,00:35:38.00
+A fickó kicsúszhat a markunkból.
+
+00:35:38.08,00:35:39.91
+Olyan ügyes?
+
+00:35:40.04,00:35:42.80
+Jean-Pierre szerint ha oroszokról[br]van szó Párizsban...
+
+00:35:53.44,00:35:56.72
+Ha ezen a héten oroszokkal[br]akarnék Párizsban találkozni,
+
+00:35:56.80,00:36:00.80
+A jégrevübe mennék.
+
+00:37:11.80,00:37:13.84
+- Bonsoir, Pierre.[br]- Bonsoir.
+
+00:37:13.92,00:37:15.75
+Je vais payer pour votre soeur.
+
+00:37:15.84,00:37:19.07
+Oh, merci beaucoup,[br]Mademoiselle Kirilova.
+
+00:37:25.32,00:37:29.87
+Teszek egy szívességet egy cigiért.
+
+00:37:30.40,00:37:32.23
+A szívesség az, figyeld ezeket a fickókat.
+
+00:37:32.32,00:37:33.76
+Ki? Az oroszok?
+
+00:37:40.00,00:37:42.12
+Rendesen szórják a pénzt.
+
+00:37:43.20,00:37:44.24
+Bonsoir.
+
+00:37:44.32,00:37:46.44
+- Ca va?[br]- Salut.
+
+00:37:49.60,00:37:51.35
+- Bonsoir.[br]- Ah, bonsoir.
+
+00:37:57.68,00:38:01.83
+Az orosz Natacha Kirilovát nézi[br]A jégrevü sztárját.
+
+00:38:01.92,00:38:05.36
+Minden este a nézõk közt van.
+
+00:38:06.56,00:38:08.00
+Honnan tudtad ezt meg?
+
+00:38:08.08,00:38:11.23
+Együtt jártunk iskolába.
+
+00:38:44.08,00:38:46.44
+Mikhi, minden rendben?
+
+00:38:47.20,00:38:48.56
+Minden rendben.
+
+00:38:49.72,00:38:50.71
+Drága kislány.
+
+00:38:53.40,00:38:54.36
+Menj. Indulj.
+
+00:39:12.56,00:39:14.23
+Hölgyeim és Uraim!
+
+00:39:14.32,00:39:17.47
+Büszkén jelenthetem be...
+
+00:39:17.56,00:39:24.16
+...a kétszeres olimpiai[br]és háromszoros világbajnok...
+
+00:39:24.24,00:39:27.71
+...Natasa Kirilovát!
+
+00:41:28.84,00:41:30.67
+Menjünk.
+
+00:41:43.48,00:41:45.52
+Várj kint.
+
+00:41:50.28,00:41:52.43
+Igen, õ az.
+
+00:41:52.52,00:41:54.51
+Hello, Mikhi.
+
+00:41:54.64,00:41:58.48
+- A találkozóval nem várunk.[br]- A találkozó most van.
+
+00:42:01.72,00:42:03.24
+Megvan a pénz?
+
+00:42:04.52,00:42:08.28
+Visszamegyünk érte.
+
+00:42:08.36,00:42:09.43
+Nem hiszem.
+
+00:42:10.84,00:42:12.67
+Megvan a pénz?
+
+00:42:16.92,00:42:19.80
+Lehet nálam van.[br]Hol a táska?
+
+00:42:19.88,00:42:24.08
+Nem, meg kell tenned.[br]Nem tudnék különben tükörbe nézni.
+
+00:42:36.52,00:42:38.32
+Megvan a pénz.
+
+00:42:38.44,00:42:40.83
+Bonyolítsuk ezt le és[br]Legyünk barátok.
+
+00:42:40.92,00:42:42.64
+Ok?
+
+00:42:45.40,00:42:46.44
+Hol van a táska?
+
+00:42:58.32,00:43:00.12
+Most kérném a pénzemet.
+
+00:43:05.48,00:43:07.55
+Nincs kétség.
+
+00:43:12.12,00:43:13.92
+Most mondd el a történet másik felét
+
+00:43:15.32,00:43:17.36
+A másik felét?
+
+00:43:17.52,00:43:19.32
+Elmegyek.
+
+00:43:19.44,00:43:22.20
+Fogom a pénzt és elmegyek.
+
+00:43:23.76,00:43:26.72
+Van egy emberem puskával a stadionban.
+
+00:43:26.92,00:43:29.64
+Sok éve dolgozom vele.[br]Sohase hibázik.
+
+00:43:29.76,00:43:32.60
+Telefonálok.
+
+00:43:32.72,00:43:34.95
+45 másodpercen belül telefonálnom kell,
+
+00:43:35.08,00:43:37.07
+hogy indulok,
+
+00:43:37.20,00:43:40.24
+és újabb 10 perc múlva,[br]hogy biztonságban vagyok.
+
+00:43:41.84,00:43:45.60
+Ha nem tudok telefonálni,[br]A kis barátnõd halott.
+
+00:43:55.04,00:43:56.84
+30 másodperc, Mikhi.
+
+00:43:58.20,00:44:00.59
+- Be kell jutnunk.[br]- Belépõ nélkül nem jutsz be.
+
+00:44:07.64,00:44:09.36
+20 másodperc.
+
+00:44:19.64,00:44:20.60
+10 másodperc
+
+00:44:48.64,00:44:51.36
+Ott volt kettõ közülük.
+
+00:44:51.48,00:44:53.12
+Azokat a fickókat keresték.
+
+00:44:53.20,00:44:55.27
+Egy pillanat, sir!
+
+00:45:11.16,00:45:14.92
+Chilei állampolgár vagyok,[br]mint az útlevelembõl látszik.
+
+00:45:15.00,00:45:16.59
+Merci.
+
+00:45:53.48,00:45:56.52
+- Mama![br]- Shh, shh, shh.
+
+00:46:02.12,00:46:03.68
+Katchev!
+
+00:46:03.76,00:46:04.88
+Qu'est-ce qui se passe?
+
+00:46:19.28,00:46:20.24
+Maradj rajta.
+
+00:46:51.76,00:46:54.20
+Ki innen.[br]Ki innen.
+
+00:46:54.32,00:46:57.04
+Kifelé a kocsiból.[br]Menjél el. Menjél el!
+
+00:46:57.12,00:46:59.84
+Menjél el! Menj. Menj.
+
+00:46:59.92,00:47:02.68
+- Csak ha te is akarod.[br]- Csak menj.
+
+00:47:02.76,00:47:05.12
+Gyere velem.[br]Felejtsd el a táskát
+
+00:47:09.36,00:47:11.75
+Nem a táska érdekel.[br]A fõnöködért jöttem.
+
+00:47:13.52,00:47:15.99
+Seamus-ért jöttem.
+
+00:47:17.32,00:47:22.03
+Csak menjünk el innen.[br]Sose mentem el. Nem látod?
+
+00:47:23.36,00:47:25.59
+El az utamból![br]El az utamból!
+
+00:47:33.60,00:47:34.88
+El az utamból!
+
+00:47:34.96,00:47:36.24
+Erre nem lehet menni.
+
+00:48:02.92,00:48:04.72
+Itt tarthatlak, de el is engedhetlek.
+
+00:48:06.16,00:48:07.36
+Ott. Az õ a táskával.
+
+00:48:07.44,00:48:09.48
+Sir! Erre, kérem.
+
+00:48:09.56,00:48:10.28
+Állj! Állj!
+
+00:48:17.60,00:48:20.51
+Arra vannak még többen!
+
+00:48:56.28,00:48:58.08
+Maradj ahol vagy![br]Maradj ahol vagy!
+
+00:48:58.16,00:49:01.87
+Ne mozdulj! Nyisd ki a pofád![br]Nyisd ki a pofád!
+
+00:49:15.32,00:49:17.07
+Te hülye barom.
+
+00:49:17.24,00:49:20.63
+Már halott vagy.
+
+00:49:42.24,00:49:44.52
+Itt a BBC világhíradó.
+
+00:49:44.64,00:49:47.20
+Ma jelentették be,[br]hogy majdnem 30 év véres
+
+00:49:47.32,00:49:50.55
+és látszólag vég nélküli északír[br]polgárháború után,
+
+00:49:50.64,00:49:52.47
+békét kötött
+
+00:49:52.60,00:49:55.67
+az angolpárti protestáns[br]kormány
+
+00:49:55.80,00:49:58.24
+és az ír ellenállás...
+
+00:50:02.84,00:50:06.28
+...a CNN szerint az ír[br]terrorista, Seamus O'Rourke
+
+00:50:06.40,00:50:11.03
+Franciaországban[br]történt meggyilkolása,
+
+00:50:11.12,00:50:13.35
+nagyban segítette a tárgyalások
+
+00:50:13.44,00:50:17.28
+sikeres befejezéséhez szükséges[br]légkör megteremtését.
+
+00:50:17.40,00:50:20.20
+O'Rourke-t korábban kizárta az IRA,
+
+00:50:20.32,00:50:24.24
+a Sinn Fein katonai szárnya,[br]mint szakadár szélsõségest.
+
+00:50:26.64,00:50:29.84
+Akkor hát, jó hogy találkoztunk.
+
+00:50:40.12,00:50:41.08
+Hmm?
+
+00:50:41.16,00:50:44.23
+- Tessék?[br]- Mondtál valamit.
+
+00:50:44.32,00:50:47.68
+Azt mondtam, nem[br]fog eljönni ide.
+
+00:50:49.76,00:50:54.04
+Igen. Nem fog eljönni, ugye?
+
+00:51:00.04,00:51:02.03
+Nem tudom ezzel a kézzel[br]Kifizetni a számlát.
+
+00:51:02.12,00:51:04.19
+Majd én fogom.
+
+00:51:06.60,00:51:08.35
+Én majd a következõt.
+
+00:51:14.44,00:51:16.11
+Mi volt a bõröndben?
+
+00:51:16.32,00:51:18.28
+Nem emlékszem.
+
+00:51:19.56,00:51:21.04
+Második lecke.
+
+00:51:23.12,00:51:24.92
+Érintkezésben maradunk.
+
+00:51:42.68,00:51:44.43
+Menjünk.
+
+00:51:57.12,00:51:59.80
+Nincs kérdés, nincs válasz.
+
+00:51:59.88,00:52:01.92
+Ez egy ilyen szakma.
+
+00:52:02.00,00:52:04.20
+Elfogadod és továbblépsz.
+
+00:52:05.56,00:52:08.24
+Talán ez a harmadik lecke.

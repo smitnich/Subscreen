@@ -1,0 +1,396 @@
+{1}{1}{Y:i}23.976
+{94}{116}Poka¿cie wasze dary.
+{118}{165}Wszyscy musz¹ zobaczyæ|z³oto, kadzid³o i mirrê,
+{167}{222}¿eby wiedzieli,|¿e jesteœmy Trzema Królami.
+{224}{279}Jest ponad 30 stopni.
+{281}{319}Nie mam ¿adnej mirry.
+{322}{401}Chyba, ¿e to biblijne okreœlenie|na "spocony ty³ek".
+{403}{438}Chcemy, ¿eby to wygl¹da³o porz¹dnie.
+{440}{492}¯eby ludzie powiedzieli:|"Spójrzcie na te kostiumy,
+{494}{540}spójrzcie na ten widok|oraz na dom Cher
+{542}{608}idealnie uchwycony| nad prawym ramieniem Alana".
+{626}{671}I tak wyjdzie lepiej|ni¿ rok temu.
+{673}{729}Ja, jako Józef,|Berta, jako Maryja Dziewica,
+{731}{795}spogl¹daj¹ca na ciebie w pieluszce.
+{797}{847}Ludziom siê podoba³o.
+{874}{907}Zaczynamy.
+{909}{967}A teraz, wszyscy mówi¹...
+{969}{1011}S³odkie dzieci¹tko Jezus!
+{1013}{1061}S³odkie dzieci¹tko Jezus!
+{1067}{1101}Przepraszamy za to.
+{1103}{1126}Ale to s³odkie.
+{1128}{1192}Jesteœcie ubrani jak goœcie|z "Dynastii kaczorów".
+{1217}{1276}Nie. Jesteœmy Trzema Królami|z Betlejem.
+{1278}{1307}No racja.
+{1309}{1342}Nie mam HBO.
+{1359}{1422}Dziewczyny, popatrzcie na niego.
+{1424}{1530}Czy¿ nie wygl¹da s³odko|w tej ma³ej sukience i z brod¹?
+{1532}{1579}Chcecie mojego z³ota?
+{1622}{1707}Pierwsza fajna dziewczyna, któr¹ spotyka,|a on daje jej pieni¹dze.
+{1743}{1795}Chyba mam lepszy pomys³|na œwi¹teczn¹ kartkê.
+{1797}{1928}{Y:i}Weso³ych Œwi¹t|od Dwóch i pó³ Królów.
+{1933}{1999}"Dwóch i pó³" 12x08|Clockwise in Back Hole Until Tight
+{2001}{2069}T³umaczenie: mazinho, ali5|Korekta: ali5
+{2151}{2246}www.NapiProjekt.pl - nowa jakoœæ napisów.|Napisy zosta³y specjalnie dopasowane do Twojej wersji filmu.
+{2247}{2309}Znalaz³am sztuczny œnieg!
+{2365}{2393}Wygl¹da jak prawdziwy.
+{2395}{2434}Tak.|Uwielbiam bia³e Œwiêta.
+{2436}{2467}Tak jak Charlie.
+{2469}{2543}Sypa³ œnieg na ka¿de|lusterko w tym domu.
+{2589}{2660}Mo¿e wejdziesz do domu|i napiszesz list do Miko³aja?
+{2662}{2692}Miko³aj nie istnieje.
+{2694}{2723}Co?
+{2725}{2768}Oczywiœcie, ¿e istnieje.
+{2770}{2847}Nigdy nie przyniós³ mi niczego,|o co prosi³em.
+{2849}{2933}Jestem pewny, ¿e w tym roku|Miko³aj przyjdzie do ciebie.
+{2935}{2983}Doroœli zawsze tak mówi¹.
+{3037}{3075}ChodŸ ze mn¹.
+{3077}{3169}Zrobi³am pierniki z Gapciami.
+{3171}{3214}Mia³am im te¿ zrobiæ|domki z piernika,
+{3216}{3271}ale ka¿dy wie, ¿e Gapcie|nie maj¹ domków.
+{3353}{3428}Szeœciolatek, który|nie wierzy w Miko³aja.
+{3430}{3472}To smutne.
+{3474}{3559}Prawie tak samo,|jak mój dwudziestolatek, który wierzy.
+{3561}{3573}To jest do bani.
+{3575}{3682}To, ¿e dorasta³ w domu dziecka, nie znaczy,|¿e nie mo¿e poczuæ magii Œwi¹t.
+{3684}{3740}Wiem.|To zawsze by³y ulubione œwiêta Jake'a.
+{3742}{3776}Szczególnie, gdy skoñczy³ 13 lat
+{3778}{3824}i mia³ swój pierwszy|œwi¹teczny wzwód.
+{3857}{3928}To by³a jedyna zabawka,|któr¹ bawi³ siê tamtego dnia.
+{3930}{4032}Za³o¿ê siê, ¿e Louis uwierzy,|jeœli dostanie to, czego chce.
+{4034}{4067}Nie wiem, czego on chce.
+{4069}{4094}{Y:i}Chce rower.
+{4096}{4197}Bo¿e! Rose.|Co ty tu robisz?
+{4199}{4232}Czekaj.|Sk¹d wiesz o Louisie?
+{4248}{4290}Walden, jesteœ uroczy.
+{4311}{4381}Chcia³am tylko przynieœæ|w³asnorêcznie zrobione cukierki.
+{4383}{4414}Lubisz orzechy?
+{4461}{4496}W czekoladzie - tak.
+{4509}{4553}W swetrze i spódnicy - nie.
+{4604}{4678}Tego dnia, serce Waldena|skurczy³o siê trzykrotnie.
+{4711}{4750}Wiem, ¿e mo¿ecie byæ teraz zajêci,
+{4752}{4801}wiêc jeœli bêdziecie potrzebowaæ pomocy,|to macie mnie.
+{4804}{4892}Mogê pakowaæ prezenty, zaj¹æ siê dzieckiem|albo poczytaæ œwi¹teczne opowieœci.
+{4894}{4924}Jestem dobra w udawaniu g³osów.
+{4926}{4972}Albo s³yszeniu ich.
+{4982}{5016}Czego chcesz, Rose?
+{5018}{5087}Mojego DNA, moich odcisków palców,|kosmyku moich w³osów?
+{5089}{5118}Nie, g³uptasku.
+{5120}{5159}To wszystko ju¿ mam.
+{5166}{5206}Chcê znów byæ twoj¹ przyjació³k¹.
+{5208}{5298}Nie bêdê siê czu³ komfortowo,|jeœli bêdziesz w pobli¿u Louisa.
+{5300}{5338}Albo mnie.
+{5340}{5395}Jeœli chcesz pobyæ|trochê z Alanem, to ok.
+{5430}{5468}Spasujê.
+{5554}{5635}Proszê, ma³y poczêstunek dla ka¿dego.
+{5687}{5748}- Co to jest?|- Ajerkoniak.
+{5750}{5784}Bez rumu!
+{5822}{5879}Ajerkoniak bez wódy|jest tak nudny i md³y,
+{5881}{5932}jak koœció³ bez wódy.
+{5993}{6060}B¹dŸ tak dobry|i przynieœ babci rum.
+{6079}{6153}Evelyn, on ma 6 lat.
+{6184}{6222}No racja.
+{6224}{6299}Rum jest w butelce|z piratem na obrazku.
+{6336}{6400}Mo¿e poczekamy,|a¿ Louis pójdzie spaæ.
+{6402}{6428}Oczywiœcie.
+{6443}{6484}Biegnij do ³ó¿ka, kochany.
+{6486}{6512}Mamo.
+{6514}{6566}Jeœli nie pójdziesz spaæ,|to Miko³aj nie przyjdzie.
+{6568}{6591}Miko³aj nie istnieje.
+{6593}{6640}Co?! Oczywiœcie, ¿e istnieje.
+{6642}{6705}Miko³aj jest tak prawdziwy|jak mój nos.
+{6792}{6846}Jest tak prawdziwy jak moje...
+{6882}{6917}Zaufaj mi, istnieje.
+{6949}{7040}Ona ma racjê i dzisiaj w nocy|udowodnimy ci to,
+{7042}{7219}bo mamy tutaj kamerê, wiêc mo¿emy|nagraæ wielkiego faceta w czerwonym.
+{7221}{7248}Œwiêtego Miko³aja!
+{7250}{7287}Starego Œwiêtego Mikusia!
+{7289}{7334}Dziadek Mróz.
+{7336}{7393}Babbo Natale.
+{7395}{7424}Weihnachtsmann.
+{7468}{7532}Co znaczy, oczywiœcie,|"Cz³owiek Œwi¹t" po niemiecku.
+{7555}{7579}Chwila na naukê.
+{7600}{7741}Kiedy zobaczysz go rano na nagraniu,|wtedy uwierzysz, ¿e istnieje?
+{7743}{7763}Chyba tak.
+{7765}{7816}Chyba?! Co?
+{7819}{7858}To œwi¹teczny cud!
+{7860}{7905}S³ysza³eœ to, Alan?|S³ysza³aœ to, Evelyn?
+{7907}{7931}A ty, Clarence?
+{7933}{8005}Weso³ych Œwi¹t,|wspania³y budynku pod zastaw!
+{8019}{8088}Dobra, czas iœæ spaæ.
+{8090}{8154}Za nied³ugo bêdziesz œniæ|o kandyzowanych œliwkach,
+{8156}{8195}tañcz¹cych w twojej g³owie.
+{8197}{8252}Mogê dostaæ trochê pirackiego rumu?
+{8254}{8360}Nie, nie chcemy ¿ebyœ œni³|o ró¿owych s³oniach tañcz¹cych w twojej g³owie.
+{8370}{8448}Umyj zêby, a ja zaraz przyjdê.
+{8462}{8542}Kiedy Alan by³ ma³y i nie móg³ zasn¹æ,|to dawa³am mu whisky.
+{8556}{8610}Karmienie piersi¹ siê nie liczy.
+{8649}{8672}Plan jest taki:
+{8674}{8724}Miko³aj tak naprawdê nie przyjdzie.
+{8726}{8754}No nie mów.
+{8756}{8885}Ale mamy numer do goœcia, który zastêpuje Miko³aja|na paradach z okazji Œwiêta Dziêkczynienia.
+{8887}{9015}Jeœli gigantyczny balon z ³osiem zerwie siê|i zabije tego pierwszego Miko³aja, on go zast¹pi.
+{9032}{9127}Goœæ zagra³ te¿ Miko³aja|w jednym odcinku "Stra¿nika Teksasu".
+{9169}{9275}Razem z Chuckiem Norrisem|pokonali bandziorów œwi¹tecznym-fu.
+{9304}{9383}Kiedy tu przyjdzie,|weŸmie prezenty, które kupiliœmy
+{9385}{9450}i po³o¿y je pod choink¹,|a my wszystko nagramy
+{9452}{9550}i Louis bêdzie mieæ w koñcu|wspania³e Œwiêta.
+{9826}{9859}Potrzebujê rumu.
+{9950}{9981}Miko³aj przyjecha³!
+{9998}{10065}Przestawiam wam Œwiêtego Miko³aja.
+{10124}{10187}- Palisz trawkê?|- Oczywiœcie, ¿e nie.
+{10235}{10253}Nie bój siê.
+{10255}{10298}Miko³aj ma na to receptê.
+{10337}{10413}Najwidoczniej w Kolorado|prezenty ju¿ s¹ dostarczone.
+{10453}{10485}WejdŸ, proszê.
+{10542}{10614}Jestem Walden.|To s¹ Alan i Evelyn.
+{10616}{10675}Jak mamy siê do ciebie zwracaæ?|Panie Miko³aju?
+{10709}{10746}Babbo Natale?
+{10784}{10822}Weihnachtsmann?
+{10826}{10864}Mo¿e byæ Frank.
+{10887}{10930}Niezbyt œwi¹tecznie.
+{10932}{11023}Jeœli ci siê nie podoba,|mogê zawiesiæ jemio³ê na swoim ty³kiem.
+{11074}{11126}Mówisz do mojego syna.
+{11142}{11175}To by³o dobre.
+{11206}{11251}Przepraszam, jesteœmy podekscytowani.
+{11253}{11305}To nasze pierwsze Œwiêta|z adoptowanym synem.
+{11307}{11418}Chcemy nagraæ to, jak bêdziesz|k³ad³ prezenty pod choink¹.
+{11420}{11499}Napisa³em coœ, co powiesz|do kamery Louisowi.
+{11501}{11531}Niech no zgadnê.
+{11533}{11604}“Weso³ych Œwi¹t, Louis!”
+{11637}{11672}To bêdzie lepsze.|Powiesz to.
+{11704}{11783}Nastêpnie ugryziesz ciastko,
+{11785}{11865}schrupiesz marchewkê,|³ykniesz mleka,
+{11867}{11930}mrugniesz do kamery,|zadzwonisz dzwonkiem i wyjdziesz.
+{11958}{11995}Czyli mamy zabawki,|gryzienie, chrupanie,
+{11997}{12055}³ykniêcie, mrugniêcie,|dzwonienie i wyjœcie.
+{12075}{12151}Zabawki, gryzienie, chrupanie,|³ykniêcie, mrugniêcie, dzwonienie, wyjœcie.
+{12153}{12173}Rozumiesz?
+{12175}{12214}Czyli chcecie, ¿ebym by³ Miko³ajem.
+{12236}{12321}Zabawki, gryzienie, chrupanie,|³ykniêcie, mrugniêcie, dzwonienie, wyjœcie.
+{12323}{12416}Brzmi trochê jak orgia,|w której bra³am udzia³ w Palm Springs.
+{12486}{12528}Dobra, zapakujmy to wszystko,
+{12530}{12599}¿ebyœmy mogli cieszyæ siê Œwiêtami,|które sobie wyobra¿a³em.
+{12601}{12684}S³uchanie œwi¹tecznej p³yty|Michaela Bublé...
+{12708}{12763}z moim mê¿em.
+{12785}{12855}Wygl¹da na to, ¿e Alan|dostanie swój pierwszy prezent wczeœniej.
+{12885}{12944}- Gdzie jest rower?|- Tutaj.
+{13001}{13058}To nie jest rower, tylko pude³ko.
+{13085}{13116}Rower jest w pude³ku.
+{13118}{13175}Powiedz tylko, ¿e rower|w pude³ku jest z³o¿ony.
+{13186}{13251}Nie, chcieli $75|za z³o¿enie go.
+{13277}{13319}Tyle kosztuje 10 par spodni.
+{13327}{13381}Ja za to p³aci³em!
+{13411}{13476}Daj spokój.|Jak trudne to mo¿e byæ?
+{13601}{13670}Przepraszam, wygl¹da na to, ¿e zajmie to|trochê d³u¿ej ni¿ oczekiwaliœmy.
+{13678}{13727}Jest szansa na to,|¿e wiecie jak z³o¿yæ rower?
+{13743}{13833}Teraz jestem tak nawalony,|¿e nie utrzymam w rêku ¿adnego przyrz¹du.
+{13866}{13959}Ja jestem tak nawalona,|¿e mog³abym wzi¹æ jakiœ przyrz¹d do rêki.
+{14039}{14061}Dok³adnie.
+{14082}{14097}Wezmê to.
+{14100}{14180}Dolejê nam trochê ajerkoniaku.
+{14197}{14295}Miko³aju, czy przyjecha³eœ|do nas swoimi saniami?
+{14297}{14355}Nie.|Taksówk¹ Œwiêtego Miko³aja.
+{14437}{14492}Mam nadziejê, ¿e twój kierowca|nazywa³ siê Rudolph.
+{14521}{14554}Co jest grane?
+{14556}{14592}Czy Miko³aj wie, ¿e masz mê¿a?
+{14594}{14681}Czy Urz¹d Skarbowy wie,|¿e nie masz pi¹tki dzieci?
+{14728}{14782}¯yjemy z Martym w otwartym zwi¹zku.
+{14784}{14823}A odk¹d skoñczy³ 93 lata,
+{14825}{14912}korzystam z tego|trochê czêœciej ni¿ on.
+{14914}{14940}Tak jak twoje usta.
+{14983}{15044}W³aœnie o tym mówi³am.
+{15103}{15131}Proszê.
+{15143}{15227}Nie by³o ju¿ za du¿o ajerkoniaku,|wiêc przynios³em sam rum.
+{15258}{15289}Dziêkujê.
+{15296}{15400}To jest moment, w którym Miko³aj|nie potrzebuje pomocnika.
+{15430}{15483}Zmykaj, Prancer.
+{15508}{15531}Dobrze.
+{15533}{15566}Ale musisz wiedzieæ,
+{15568}{15637}¿e nie bêdê siê ba³|daæ Miko³ajowi negatywa na Opinieo.
+{15737}{15790}Nie mogê siê po³apaæ w tej instrukcji.
+{15792}{15830}Jest w trudnym jêzyku.
+{15839}{15967}"Trzpienie nale¿y wkrêcaæ zgodnie|z ruchem wskazówek zegara,
+{15969}{16053}adekwatnie do ryciny|zamieszczonej poni¿ej".
+{16081}{16142}Jest tam gdzieœ wzmianka|o sk¹pym wspó³lokatorze,
+{16144}{16231}który powinien dostaæ kopa w ty³ek?
+{16270}{16303}Wychodzi na to,|¿e w pierwszy dzieñ Œwi¹t,
+{16305}{16357}od mojej prawdziwej mi³oœci|dostanê jedynie groŸby.
+{16359}{16436}Przepraszam, ale to pierwsze|Œwiêta Louisa poza domem dziecka,
+{16438}{16473}i chcê, ¿eby by³y idealne.
+{16475}{16518}¯adne Œwiêta nie s¹ nigdy idealne.
+{16520}{16606}Zawsze znajdzie siê zepsuta zabawka|albo z³y rodzaj baterii.
+{16608}{16639}Nawet podczas pierwszych Œwi¹t,
+{16641}{16707}Maryja i Józef obudzili siê|i czuli smród oœlego ³ajna.
+{16736}{16778}Wiem, ale...
+{16780}{16818}chcê, ¿eby uwierzy³ w Miko³aja,
+{16820}{16927}dosta³ swój rower i przeniós³ siê|do zimowego œwiata marzeñ.
+{16940}{17003}Nie, ¿ebym od razu zamówi³|ciê¿arówkê œniegu.
+{17028}{17066}Nie za³atwi³em renifera!
+{17078}{17125}"S¹ zbyt niebezpieczne".
+{17160}{17206}Ci¹gle mo¿emy sprawiæ, ¿eby te œwiêta|by³y wyj¹tkowe dla Louisa.
+{17208}{17259}Skoñczymy tylko sk³adaæ rower.|Damy radê.
+{17261}{17329}Masz racjê.|Mamy tu in¿yniera z M.I.T. i...
+{17331}{17392}by³ego wykwalifikowanego krêgarza.
+{17403}{17429}Teraz dobrze mówisz.
+{17437}{17514}To nie mo¿e byæ trudniejsze|od nastawienia komuœ krêgos³upa.
+{17530}{17650}Mamy tutaj krêg L2,|³¹czymy go z L3.
+{17669}{17770}Teraz musimy tylko nacisn¹æ|we w³aœciwym miejscu i...
+{17862}{17984}To dlatego jestem by³ym|wykwalifikowanym krêgarzem.
+{18135}{18157}{Y:i}Miko³aju.
+{18248}{18270}{Y:i}Miko³aju!
+{18330}{18375}O nie.
+{18400}{18467}{Y:i}Œwiêty Miko³aj siê zbli¿a!
+{18480}{18565}{Y:i}Œwiêty Miko³aj siê zbli¿a!
+{18819}{18872}- O mój Bo¿e.|- Co siê sta³o?
+{18874}{18939}Widzia³em jak mamusia|bzyka siê ze Œwiêtym Miko³ajem.
+{18962}{19043}- Co?|- Rok 1972 powróci³ na nowo.
+{19096}{19120}Mamy problem.
+{19122}{19162}Tak, masz problem.
+{19164}{19242}Jesteœ œwi¹teczn¹ zdzir¹!
+{19244}{19341}Tak czy inaczej,|chyba zabi³am Œwiêtego Miko³aja.
+{19343}{19434}Bo¿e! Jest dok³adnie jak w 1972 r.!
+{19524}{19555}Nic mu nie bêdzie?
+{19557}{19592}Tak, to by³o tylko migotanie przedsionków.
+{19594}{19640}Potrzebuje tylko lekarstw|i kilku dni odpoczynku.
+{19642}{19725}S³ysza³aœ kochanie?|Dojdê do siebie przed Nowym Rokiem.
+{19727}{19801}Bêdê niecierpliwie czekaæ|do tego czasu.
+{19858}{19909}Dziêki Bogu, Louis niczego nie widzia³.
+{19911}{19950}Mia³by traumê.
+{19952}{20007}Louis? A co ze mn¹?
+{20009}{20077}Ten facet prawie umar³|podczas uprawiania seksu ze mn¹.
+{20106}{20148}Nie³atwo siê z tego otrz¹sn¹æ.
+{20150}{20228}Bez wzglêdu na to,|ile razy to siê zdarzy³o.
+{20270}{20325}No piêknie.
+{20327}{20350}Weso³ych Œwi¹t, Louis.
+{20352}{20445}Twoja babcia bzyknê³a Miko³aja,|przez co by³ o w³os od œmierci.
+{20447}{20506}A oto po³owa roweru!
+{20515}{20537}Mo¿emy to jeszcze uratowaæ.
+{20539}{20598}Jeszcze jest trochê czasu,|¿eby skoñczyæ sk³adanie roweru,
+{20600}{20662}zapakowaæ pozosta³e prezenty|i po³o¿yæ je pod choinkê.
+{20675}{20770}Masz racjê.|Louis bêdzie spaæ jeszcze 6 godzin.
+{20784}{20799}{Y:i}Walden?
+{20801}{20853}No nie!
+{20865}{20914}S³ysza³em jakiœ ha³as.|Czy Miko³aj doszed³ do naszego domu?
+{20916}{20968}Niestety nie.
+{21065}{21104}Dobra.
+{21117}{21152}Gdzie jest Evelyn?
+{21154}{21191}No wiêc...
+{21194}{21276}posz³a do swojego domu pobawiæ siê...
+{21278}{21320}swoimi zabawkami.
+{21322}{21362}Pora spaæ, kolego.
+{21364}{21394}Miko³aj jest ju¿ w drodze.
+{21407}{21430}Jeœli Miko³aj istnieje naprawdê,
+{21432}{21517}to jak udaje siê mu dostarczyæ|prezenty dla wszystkich dzieci w jedn¹ noc?
+{21519}{21581}To dziêki œwi¹tecznej magii.
+{21583}{21641}A sk¹d wie, gdzie wszyscy mieszkaj¹?
+{21674}{21747}To magia Google Maps.
+{21782}{21834}Dobranoc.|Pora spaæ.
+{21843}{21899}Mo¿ecie ze mn¹ zostaæ,|dopóki nie zasnê?
+{21958}{21987}Pewnie.
+{21989}{22073}Przecie¿ nie musimy|pomagaæ Miko³ajowi sk³adaæ zabawek.
+{22107}{22178}P³aci za to $75 swoim elfom.
+{22230}{22273}To miejsce Timothy'ego.
+{22346}{22384}Czyli...
+{22643}{22678}Dobry piesek.
+{22877}{22899}Alan?
+{22969}{23007}O mój Bo¿e!
+{23009}{23041}Nie pochlebiaj sobie.
+{23043}{23102}Codziennie tak mam.
+{23172}{23200}Jest 7:00.|Zaspaliœmy.
+{23202}{23249}O cholercia.|Rower.
+{23251}{23279}Prezenty.|Co teraz zrobimy?
+{23281}{23356}Nie za poŸno, ¿eby powiedzieæ mu,|¿e jesteœmy ¯ydami?
+{23414}{23442}Co, do...
+{23444}{23498}Miko³aj przyby³!|On istnieje!
+{23523}{23541}Czy ty...?
+{23543}{23571}Nie.
+{23573}{23608}Jest na nagraniu.
+{23656}{23770}Chyba nie widzia³eœ babci Evelyn|si³uj¹cej siê z Miko³ajem, prawda?
+{23772}{23832}Nie, tylko Miko³aja.
+{23873}{23899}To...
+{23901}{23933}Miko³aj.
+{23947}{23988}O mój Bo¿e.
+{23990}{24029}Jeœli pod choink¹ znajdê|zabawkowy piekarnik,
+{24031}{24104}który zawsze chcia³em,|to mam mózg zlasowany.
+{24108}{24161}Mogê iœæ na zewn¹trz|pojeŸdziæ na moim rowerze?
+{24174}{24201}Pewnie.
+{24219}{24243}Alan, mo¿esz...?
+{24245}{24273}Tak, oczywiœcie.
+{24292}{24327}ChodŸ, kolego.
+{24344}{24377}Wygl¹da na to,|¿e mamy udane œwiêta
+{24379}{24443}i zaoszczêdziliœmy $75.
+{24809}{24840}Rose?
+{24876}{24921}ChodŸ tu, Rose.|Wiem, ¿e tam jesteœ.
+{24937}{24970}W zasadzie,|to jestem za tob¹.
+{24972}{24999}Do jasnej...!
+{25010}{25055}Jak ty to robisz?
+{25057}{25104}Dlaczego to robisz?!
+{25106}{25150}Dziewczyny musz¹ mieæ jak¹œ rozrywkê.
+{25163}{25195}Weso³ych Œwi¹t.
+{25197}{25274}Nie mogê uwierzyæ,|¿e narobi³aœ sobie tyle k³opotu dla nas.
+{25276}{25361}Raczej niewierzenie w Miko³aja|narobi³o te k³opoty.
+{25363}{25395}W porz¹dku, w takim razie,
+{25397}{25476}to Miko³ajowi muszê podziêkowaæ.
+{25490}{25529}On nie robi tego dla podziêkowañ.
+{25531}{25643}Robi to, bo chce jedynie,|¿eby jego bliscy byli szczêœliwi.
+{25645}{25687}Jesteœ szczêœliwy, Walden?
+{25698}{25711}Jestem.
+{25713}{25785}Nie móg³bym sobie wyobraziæ|lepszego œwi¹tecznego poranka.
+{25787}{25880}Oczywiœcie oprócz pobudki z Alanem,|tr¹caj¹cym mnie od ty³u.
+{25885}{25935}Pos³uchaj, ja...
+{25942}{26026}Przepraszam, ¿e powiedzia³em,|¿e nie chcê ciê w pobli¿u.
+{26028}{26058}Proszê ciê.
+{26060}{26118}Przecie¿ nie jest tak, ¿e zawsze,|gdy ktoœ powie mi coœ niemi³ego,
+{26120}{26207}zapisujê to w wielkiej ksiêdze,|zwanej “Ci, którzy mnie skrzywdzili”.
+{26237}{26270}To zabawne.
+{26272}{26300}Tak mi siê wydaje.
+{26323}{26425}Ju¿ ci mówi³am, chcê jedynie,|¿ebyœmy byli przyjació³mi.
+{26427}{26465}Jesteœmy nimi.
+{26467}{26507}I...
+{26509}{26550}przepraszam, jeœli o tym zapomnia³em.
+{26659}{26736}Jak Miko³ajowi|uda³o siê z³o¿yæ ten rower?
+{26738}{26806}Instrukcja nie mog³a byæ prostsza.
+{26808}{26861}"Trzpienie nale¿y wkrêcaæ zgodnie|z ruchem wskazówek zegara,
+{26863}{26913}adekwatnie do ryciny|zamieszczonej poni¿ej".
+{26915}{26952}Helo³.
+{26967}{27039}Tak. Helo³.
+{27049}{27093}Macie jakieœ wielkie plany na póŸniej?
+{27108}{27139}Nie, robimy to, co zwykle.
+{27141}{27201}Otwieramy prezenty,|dzwonimy do naszych rodzin,
+{27203}{27243}liczymy, ¿e nie bêd¹ odbieraæ.
+{27245}{27299}No i gwóŸdŸ programu:|Alan bêdzie sma¿y³ indyka,
+{27301}{27368}wiêc jest du¿e prawdopodobieñstwo,|¿e siê podpali.
+{27407}{27476}Mam dla was ma³y drobiazg do domu.
+{27478}{27523}I liczê, ¿e za ka¿dym razem,|gdy na niego spojrzycie,
+{27525}{27558}pomyœlicie o mnie.
+{27629}{27669}Zegar z kuku³k¹.
+{27671}{27716}Kumam.|Bo masz...
+{27762}{27790}Co?
+{27828}{27863}Nie.
+{27872}{27921}Bo jest czerwony, jak ró¿a.
+{27953}{27991}Jak mo¿esz raniæ mnie w œwiêta?
+{27993}{28032}Przepraszam. Ja...
+{28034}{28081}- Myœla³em, ¿e to...|- Tylko ¿artujê.
+{28083}{28159}Oczywiœcie, ¿e dlatego,|¿e mam kuku na muniu.
+{28187}{28242}Weso³ych Œwi¹t, Walden.
+{28333}{28385}Weso³ych Œwi¹t, Rose.
+{28513}{28590}Czy¿ to nie urocze?|To ma³a Rose.
+{28616}{28672}Zaraz, to jej prawdziwe w³osy?
+{28674}{28715}{y:i}Nie, to twoje.
+{28896}{28988}{Y:i}Uœmiechnij siê ju¿,|ja otrê ci ³zy.
+{28990}{29021}{Y:i}I nie rób tych min...
+{29023}{29120}W³aœnie o to chodzi w œwiêtach.
+{29122}{29188}Rodzina, Michael Bublé,
+{29205}{29251}sma¿ony indyk.
+{29262}{29292}¯ycie jest piêkne, Alan.
+{29317}{29346}Jest.
+{29529}{29568}Mo¿esz mi pokroiæ?
+{29589}{29622}Sma¿one paluszki.
+{29833}{29869}{Y:i}- To mi³o ze strony Rose.|- Tak.
+{29871}{29926}{Y:i}Wiesz, zawsze by³em cyniczny|w stosunku do niej.
+{29928}{29989}{Y:i}Mo¿e rzeczywiœcie chce tylko,|¿ebyœmy byli przyjació³mi?
+{30025}{30220}{Y:i}On widzi ciê przez sufit,|czy œpisz, czy bawisz siê...
+{30234}{30334}T³umaczenie: mazinho, ali5|Korekta: ali5
+{30382}{30454}.:: Napisy24.pl - Wprost od t³umaczy ::.
+{30478}{30573}www.NapiProjekt.pl - nowa jakoœæ napisów.|Napisy zosta³y specjalnie dopasowane do Twojej wersji filmu.
