@@ -68,6 +68,19 @@ public class SelectFile extends FragmentActivity {
                 .show();
 
     }
+    void displayBackMessage(String message, String title) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setNeutralButton(this.getString(R.string.back_button), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        updateMenu();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+    }
     protected void onCreate(Bundle savedInstanceState) {
         backString =  this.getString(R.string.back_folder);
         try {
@@ -147,6 +160,7 @@ public class SelectFile extends FragmentActivity {
         String fileName = fileNames.get(position);
         //If a zip file is loaded, this is the one to be used within it
         String zipFileName = null;
+
         if (fileName.charAt(0) == '/' || fileName.equals(backString))
         {
             //Take all but the first character of the fileName and add a directory
@@ -161,7 +175,11 @@ public class SelectFile extends FragmentActivity {
         }
         if (fileName.endsWith(".zip") || zipOpened) {
             ArrayList<String> zipFileNames = FileHelper.readZipFile(curPath + fileName);
-            if (zipOpened) {
+            if (zipFileNames == null) {
+                displayBackMessage(getText(R.string.bad_format_message).toString(), "Sorry");
+                return;
+            }
+            else if (zipOpened) {
                 zipFileName = fileName;
                 //Akward hack, we're already storing the full path in the curPath variable, so
                 //we don't want anything appended to the filename
@@ -173,7 +191,8 @@ public class SelectFile extends FragmentActivity {
             else {
                 adp.clear();
                 zipFileNames.add(0,backString);
-                adp.addAll(zipFileNames);
+                for (String tmpName : zipFileNames)
+                    adp.add(tmpName);
                 adp.notifyDataSetChanged();
                 lv.setSelection(0);
                 fileNames = zipFileNames;
