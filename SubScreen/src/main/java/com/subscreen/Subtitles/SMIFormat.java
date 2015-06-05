@@ -81,7 +81,6 @@ public class SMIFormat implements SubtitleFormat {
                                 //If we find an opening tag, skip to the
                                 //closing tag
                                 //Skip past any leading whitespace
-                                while (origText[i++] == ' ');
                                 if (origText[i] == '<') {
                                     boolean equalsFound = false;
                                     while (origText[i] != '>') {
