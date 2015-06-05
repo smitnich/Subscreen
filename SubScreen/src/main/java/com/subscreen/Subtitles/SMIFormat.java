@@ -80,6 +80,8 @@ public class SMIFormat implements SubtitleFormat {
                             for (int i = 0; i < origText.length; i++) {
                                 //If we find an opening tag, skip to the
                                 //closing tag
+                                //Skip past any leading whitespace
+                                while (origText[i++] == ' ');
                                 if (origText[i] == '<') {
                                     boolean equalsFound = false;
                                     while (origText[i] != '>') {
@@ -97,18 +99,26 @@ public class SMIFormat implements SubtitleFormat {
                             text.append(new String(newText).trim());
                         }
                         while (true) {
-                            str = in.readLine().trim();
-                            if (str == null || str.length() == 0)
+                            str = in.readLine();
+                            if (str == null)
+                                break;
+                            str = str.trim();
+                            if (str.toLowerCase().startsWith("<p class")) {
+                                str = str.substring(str.indexOf(">")+1);
+                            }
+                            if ( str.length() == 0)
                                 break;
                             if (!str.toUpperCase().startsWith("<SYNC"))
                                     text.append(str);
                             else
                                 break;
                         }
+                        if (str == null)
+                            return;
                         for (int i = 0; i < replaceString.length; i++) {
                             int index = text.indexOf(replaceString[i]);
                             while (index != -1) {
-                                text.replace(index,replaceString[i].length(),replaceWith[i]);
+                                text.replace(index,index+replaceString[i].length(),replaceWith[i]);
                                 index = text.indexOf(replaceString[i]);
                             }
                         }
@@ -141,6 +151,8 @@ public class SMIFormat implements SubtitleFormat {
         }
         catch (Exception e)
         {
+            ArrayList<TextBlock> tmpBlocks = allBlocks.get(0);
+            e.printStackTrace();
             return;
         }
     }
