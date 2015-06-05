@@ -59,8 +59,7 @@ public class VTTFormat implements SubtitleFormat {
                 {
                     tmp = in.readLine();
                     if (tmp == null) {
-                        blocks.add(new TimeBlock(buffer,beginTime,endTime,playerInstance));
-                        return;
+                        break;
                     }
                     tmp = tmp.trim();
                     if (tmp.length() > 0)
