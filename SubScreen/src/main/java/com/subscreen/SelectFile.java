@@ -1,5 +1,6 @@
 package com.subscreen;
 
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import android.content.Intent;
 import android.app.AlertDialog;
@@ -83,7 +85,9 @@ public class SelectFile extends FragmentActivity {
     }
     protected void onCreate(Bundle savedInstanceState) {
         backString =  this.getString(R.string.back_folder);
-        try {
+        final Intent intent = getIntent();
+        final String action = intent.getAction();
+            try {
             isMounted = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
             if (!isMounted) {
                 displayExitMessage(this.getString(R.string.storage_not_found),
@@ -111,6 +115,12 @@ public class SelectFile extends FragmentActivity {
                     itemClicked(position);
                 }
             });
+            if(Intent.ACTION_VIEW.equals(action)) {
+                //uri = intent.getStringExtra("URI");
+                Uri uri = intent.getData();
+                //Remove the first slash so this file is not interpreted as a directory
+                handleFileSelected(URLDecoder.decode(uri.getEncodedPath(), "UTF-8").substring(1),true);
+            }
         }
         catch (Exception e)
         {
@@ -158,32 +168,37 @@ public class SelectFile extends FragmentActivity {
     }
     private void itemClicked(int position) {
         String fileName = fileNames.get(position);
+        handleFileSelected(fileName, false);
+    }
+    private void handleFileSelected(String fileName, boolean ignorePath) {
         //If a zip file is loaded, this is the one to be used within it
         String zipFileName = null;
-
         if (fileName.charAt(0) == '/' || fileName.equals(backString))
         {
             //Take all but the first character of the fileName and add a directory
             //slash at the end in order to have the directory symbol at the end
             //of the string
-            if (!fileName.equals(backString))
-                curPath = curPath + fileName.substring(1) + "/";
+            if (!fileName.equals(backString)) {
+                if (!ignorePath)
+                    curPath = curPath + fileName.substring(1) + "/";
+                else
+                    curPath = fileName.substring(1) + "/";
+            }
             else
                 goBackDirectory();
             updateMenu();
             return;
         }
-        if (fileName.endsWith(".zip") || zipOpened) {
-            ArrayList<String> zipFileNames = FileHelper.readZipFile(curPath + fileName);
+        if (fileName.endsWith(".zip")) {
+            ArrayList<String> zipFileNames;
+            String tmp = curPath + fileName;
+            if (!ignorePath)
+               zipFileNames = FileHelper.readZipFile(curPath + fileName);
+            else
+                zipFileNames = FileHelper.readZipFile(fileName);
             if (zipFileNames == null) {
                 displayBackMessage(getText(R.string.bad_format_message).toString(), "Sorry");
                 return;
-            }
-            else if (zipOpened) {
-                zipFileName = fileName;
-                //Akward hack, we're already storing the full path in the curPath variable, so
-                //we don't want anything appended to the filename
-                fileName = "";
             }
             else if (zipFileNames.size() == 1) {
                 zipFileName = zipFileNames.get(0);
@@ -197,13 +212,28 @@ public class SelectFile extends FragmentActivity {
                 lv.setSelection(0);
                 fileNames = zipFileNames;
                 zipOpened = true;
-                curPath = curPath + fileName;
+                if (!ignorePath)
+                    curPath = curPath + fileName;
+                else
+                    curPath = fileName;
                 return;
             }
         }
+        else if (zipOpened) {
+            zipFileName = fileName;
+            //Akward hack, we're already storing the full path in the curPath variable, so
+            //we don't want anything appended to the filename
+            fileName = "";
+        }
+        launchMainActivity(fileName,zipFileName,ignorePath);
+    }
+    private void launchMainActivity(String fileName, String zipFileName, boolean ignorePath) {
         Intent intent = new Intent(SelectFile.this, ShowText.class);
         Bundle b = new Bundle();
-        b.putString("fileName", curPath + fileName); //Your id
+        if (!ignorePath)
+            b.putString("fileName", curPath + fileName); //Your id
+        else
+            b.putString("fileName",fileName);
         if (zipFileName != null)
             b.putString("zipFileName",zipFileName);
         intent.putExtras(b); //Put your id to your next Intent
