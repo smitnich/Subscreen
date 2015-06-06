@@ -27,8 +27,8 @@
 			<category android:name="android.intent.category.BROWSABLE" />
 			<action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
-			<data android:mimeType="*/*"/>
-			<data android:pathPattern=".*(srt|txt|sub|smi|sami|vtt|zip|ssa|ass)"/>
+			<data android:mimeType="text/*"/>
+			<data android:mimeType="application/zip"/>
 			<data android:scheme="file" />
 		</intent-filter>
     </activity>
