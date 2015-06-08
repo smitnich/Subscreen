@@ -25,4 +25,5 @@
     <string name="no_files_found">No files were found in $SUBTITLE_FOLDER$ folder.\nPlease place any subtitles that you wish to play there</string>
     <string name="subtitle_replace_string">$SUBTITLE_FOLDER$</string>
     <string name="no_files_found_title">No Files Found</string>
+    <string name="ok_button">OK</string>
 </resources>

@@ -81,7 +81,17 @@ public class SelectFile extends FragmentActivity {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-
+    }
+    void displayMessage(String message, String title) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setNeutralButton(this.getString(R.string.ok_button), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
     protected void onCreate(Bundle savedInstanceState) {
         backString =  this.getString(R.string.back_folder);
@@ -94,10 +104,11 @@ public class SelectFile extends FragmentActivity {
                         this.getString(R.string.storage_not_found_title));
             }
             File subDirectory = new File(dirPath);
-// have the object build the directory structure, if needed.
-            if (isMounted && subDirectory.mkdirs()) {
+            // have the object build the directory structure, if needed.
+            if (!(Intent.ACTION_VIEW.equals(action)) && isMounted && subDirectory.mkdirs()) {
                 //isMounted = false;
                 writeHelpFiles();
+                displayMessage(this.getString(R.string.folder_created),this.getString(R.string.folder_created_title));
             }
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_select_file);
@@ -132,7 +143,7 @@ public class SelectFile extends FragmentActivity {
         FileOutputStream helpFileOut = null;
         try {
             helpFileIn = getResources().getAssets().open("BasicUsageTutorial.srt");
-            helpFileOut = new FileOutputStream(curPath + "/Basic Usage");
+            helpFileOut = new FileOutputStream(curPath + "/Basic Usage.srt");
             byte[] buffer = new byte[1024];
             int length = 0;
             while ((length = helpFileIn.read(buffer)) > 0)
