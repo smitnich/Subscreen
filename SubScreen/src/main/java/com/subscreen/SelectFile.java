@@ -163,7 +163,10 @@ public class SelectFile extends FragmentActivity {
     }
     private void goBackDirectory() {
         //Don't allow for going back past the subtitles directory
-        if (curPath.compareTo(dirPath) == 0) {
+        /*if (curPath.compareTo(dirPath) == 0) {
+            return;
+        }*/
+        if (curPath.compareTo("/") == 0) {
             return;
         }
         int i;
@@ -284,7 +287,8 @@ public class SelectFile extends FragmentActivity {
         if (!isMounted || !dir.isDirectory())
             return out;
         //If we're at the root directory, don't allow the user to go back
-        if (!path.equals(dirPath))
+        //if (!path.equals(dirPath))
+        if (!path.equals("/"))
             out.add(backString);
         for (File f : dir.listFiles(textFilter)) {
             if (f.isDirectory())
