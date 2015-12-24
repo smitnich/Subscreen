@@ -284,12 +284,12 @@ public class SelectFile extends FragmentActivity {
             return out;
         }
         File dir = new File(path);
-        if (!isMounted || !dir.isDirectory())
-            return out;
         //If we're at the root directory, don't allow the user to go back
         //if (!path.equals(dirPath))
         if (!path.equals("/"))
             out.add(backString);
+        if (!isMounted || !dir.isDirectory() || !dir.canRead())
+            return out;
         for (File f : dir.listFiles(textFilter)) {
             if (f.isDirectory())
                 out.add("/" + f.getName());
