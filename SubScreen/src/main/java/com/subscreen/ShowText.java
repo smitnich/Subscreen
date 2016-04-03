@@ -16,6 +16,7 @@ import android.widget.Button;
 import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class ShowText extends FragmentActivity {
     static Button pauseButton;
@@ -26,11 +27,13 @@ public class ShowText extends FragmentActivity {
     static Button languageButton;
     static Button zoomOutButton;
     static Button zoomInButton;
+    static String lastFileName = null;
     SubtitlePlayer playerInstance = null;
     ListView frameRateListView;
     ListView languageListView;
     ArrayList<String> validFrameRates;
     ArrayList<Integer> indices;
+    static HashMap<String, SubtitlePlayer> cachedPlayers = new HashMap<String, SubtitlePlayer>();
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,9 +51,9 @@ public class ShowText extends FragmentActivity {
         Bundle b = getIntent().getExtras();
         String fileName = b.getString("fileName");
         String zipFileName = b.getString("zipFileName");
+        lastFileName = fileName + zipFileName;
         FileHelper.EncodingWrapper fileStream = FileHelper.readFile(fileName, zipFileName);
         BufferedInputStream fileData = new BufferedInputStream(fileStream.data);
-        playerInstance = new SubtitlePlayer();
         backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +90,17 @@ public class ShowText extends FragmentActivity {
                 zoomIn();
             }
         });
-        playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding);
+        if (!cachedPlayers.containsKey(fileName)) {
+            playerInstance = new SubtitlePlayer();
+            cachedPlayers.put(fileName, playerInstance);
+            playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding, fileName);
+        }
+        else
+        {
+            playerInstance = cachedPlayers.get(fileName);
+            playerInstance.playbackStarted = false;
+            playerInstance.resume(t, this.getApplicationContext(), fileData, this, fileStream.encoding);
+        }
     }
     private void zoomIn() {
         playerInstance.outputTo.zoomIn();

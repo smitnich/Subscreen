@@ -1,19 +1,17 @@
 package com.subscreen;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PushbackInputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.subscreen.Subtitles.ASSFormat;
@@ -47,15 +45,22 @@ public class SubtitlePlayer {
     ShowText parentActivity;
     Context context;
     public String srcCharset;
+    boolean loaded = false;
     public static String playString;
     //SMI allows for multiple languages in one file; check if the format is SMI and if so allow
     //for selecting languages
     public SMIFormat smiSub = null;
     public ArrayList<String> languages = null;
-	public void main(TextView toEdit, Context _context, BufferedInputStream fileData, Activity activity, String encoding) {
+    public String fileName;
+    private boolean resumed = false;
+	public void main(TextView toEdit, Context _context, BufferedInputStream fileData, Activity activity, String encoding, String _fileName) {
         context = _context;
+        fileName = _fileName;
         playString = context.getString(R.string.begin_play);
         parentActivity = (ShowText) activity;
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.screenBrightness = 0.1f;
+        activity.getWindow().setAttributes(params);
         SubtitleFormat subFile = pickFormat(fileData, encoding);
         if (subFile == null){
             parentActivity.displayBackMessage(
@@ -89,9 +94,57 @@ public class SubtitlePlayer {
             parentActivity.languageButton.setVisibility(View.GONE);
         }
         parentActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        // Check if this was already loaded beforehand
         initText();
         pause();
-	}
+        loaded = true;
+    }
+    public void resume(TextView toEdit, Context _context,
+                       BufferedInputStream fileData, Activity activity, String encoding) {
+        context = _context;
+        playString = context.getString(R.string.begin_play);
+        parentActivity = (ShowText) activity;
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.screenBrightness = 0.1f;
+        activity.getWindow().setAttributes(params);
+        SubtitleFormat subFile = pickFormat(fileData, encoding);
+        if (subFile == null){
+            parentActivity.displayBackMessage(
+                    context.getString(R.string.bad_format_message), context.getString(R.string.bad_format_title));
+            return;
+        }
+        Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
+        toEdit.setTypeface(test_font);
+        outputTo = new AndroidOutput(activity,context.getResources().getDimension(R.dimen.activity_text_size));
+        outputTo.setTextView(toEdit);
+        try {
+            blocks = subFile.readFile(fileData, srcCharset);
+            if (blocks.get(0).showFramerates()) {
+                parentActivity.convertFramerateButton.setEnabled(true);
+                parentActivity.convertFramerateButton.setVisibility(View.VISIBLE);
+                isFrameBased = true;
+            } else {
+                parentActivity.convertFramerateButton.setEnabled(false);
+                parentActivity.convertFramerateButton.setVisibility(View.INVISIBLE);
+            }
+        }
+        catch (Exception e){
+            parentActivity.displayBackMessage(
+                    context.getText(R.string.bad_format_message).toString(),"Sorry");
+            return;
+        }
+        if (smiSub != null) {
+            languages = smiSub.getAvailableLanguages();
+        }
+        if (smiSub == null || languages.size() <= 1) {
+            parentActivity.languageButton.setVisibility(View.GONE);
+        }
+        parentActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        loaded = true;
+        paused = true;
+        resumed = true;
+        pause();
+    }
     public double getCurrentFramerate() {
         return FrameBlock.currentFramerateMultiplier;
     }
@@ -100,7 +153,7 @@ public class SubtitlePlayer {
         TextBlock firstBlock = blocks.get(0);
         firstBlock.getText(outputTo);
     }
-    private void startThread()
+    public void startThread()
     {
         execThread = new Thread(new Runnable() {
             public void run() {
@@ -118,7 +171,7 @@ public class SubtitlePlayer {
         if (time > block.getEndValue() && block.getEndValue() != -1)
             return;
         while (Math.abs(start-end) > 1) {
-            block =  blocks.get(mid);
+            block = blocks.get(mid);
             if (time >= block.getStartValue()) {
                 if (time <= block.getEndValue())
                     break;
@@ -130,7 +183,6 @@ public class SubtitlePlayer {
         }
         subCount = mid;
         block = blocks.get(mid);
-        long endTime = blocks.get(mid).getEndValue();
         block.getText(outputTo);
         if (!paused) {
             execThread.interrupt();
@@ -191,8 +243,10 @@ public class SubtitlePlayer {
         if (!playbackStarted) {
             outputTo.out.setTextSize(outputTo.textSize);
             playbackStarted = true;
-            Date rootDate = new Date();
-            rootTime = rootDate.getTime();
+            if (!resumed) {
+                Date rootDate = new Date();
+                rootTime = rootDate.getTime();
+            }
             text = blocks.get(subCount);
             firstSubtitleStartTime = text.getStartTime();
             offset = -text.getStartTime();
@@ -273,7 +327,6 @@ public class SubtitlePlayer {
         char[] buffer = new char[bufferLength];
         int i = 0;
         try {
-            //srcCharset = determineEncoding(fileData);
             fis = new InputStreamReader(fileData, encoding);
             fis.read(buffer,0,bufferLength);
             fileData.reset();
