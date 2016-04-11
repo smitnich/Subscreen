@@ -1,11 +1,13 @@
 package com.subscreen;
 
 import android.net.Uri;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import android.content.Intent;
@@ -29,8 +33,10 @@ public class SelectFile extends FragmentActivity {
     ArrayList<String> fileNames = null;
     static final String dirPath =  System.getenv("EXTERNAL_STORAGE") + "/" + "Subtitles/";
     static String curPath = dirPath;
+    String downloadString;
     String backString;
     ArrayAdapter adp;
+    SubDownloader down = new SubDownloader();
     boolean zipOpened = false;
     boolean isMounted = true;
     FilenameFilter textFilter = new FilenameFilter() {
@@ -95,6 +101,7 @@ public class SelectFile extends FragmentActivity {
     }
     protected void onCreate(Bundle savedInstanceState) {
         backString =  this.getString(R.string.back_folder);
+        downloadString = "(Download)";
         final Intent intent = getIntent();
         final String action = intent.getAction();
             try {
@@ -187,6 +194,17 @@ public class SelectFile extends FragmentActivity {
     private void handleFileSelected(String fileName, boolean ignorePath) {
         //If a zip file is loaded, this is the one to be used within it
         String zipFileName = null;
+        // Url on OpenSubtitles to download from
+        URL url ;
+        if (fileName.equals(downloadString)) {
+            Intent intent = new Intent(SelectFile.this, Search.class);
+            Bundle b = new Bundle();
+            b.putString("path", curPath);
+            intent.putExtras(b);
+            startActivity(intent);
+            finish();
+            return;
+        }
         if (fileName.charAt(0) == '/' || fileName.equals(backString))
         {
             //Take all but the first character of the fileName and add a directory
@@ -205,7 +223,6 @@ public class SelectFile extends FragmentActivity {
         }
         if (fileName.endsWith(".zip")) {
             ArrayList<String> zipFileNames;
-            String tmp = curPath + fileName;
             if (!ignorePath)
                zipFileNames = FileHelper.readZipFile(curPath + fileName);
             else
@@ -241,16 +258,18 @@ public class SelectFile extends FragmentActivity {
         }
         launchMainActivity(fileName,zipFileName,ignorePath);
     }
+
+    
     private void launchMainActivity(String fileName, String zipFileName, boolean ignorePath) {
         Intent intent = new Intent(SelectFile.this, ShowText.class);
         Bundle b = new Bundle();
         if (!ignorePath)
-            b.putString("fileName", curPath + fileName); //Your id
+            b.putString("fileName", curPath + fileName);
         else
             b.putString("fileName",fileName);
         if (zipFileName != null)
             b.putString("zipFileName",zipFileName);
-        intent.putExtras(b); //Put your id to your next Intent
+        intent.putExtras(b);
         startActivity(intent);
         finish();
     }
@@ -288,6 +307,7 @@ public class SelectFile extends FragmentActivity {
         //if (!path.equals(dirPath))
         if (!path.equals("/"))
             out.add(backString);
+        out.add(downloadString);
         if (!isMounted || !dir.isDirectory() || !dir.canRead())
             return out;
         for (File f : dir.listFiles(textFilter)) {
