@@ -68,7 +68,7 @@ public class SubDownloader {
         Map<String, String> movieInfo = new HashMap<String, String>();
         Map<String, String> limit = new HashMap<String, String>();
         HashMap<String, Object[]> searchResult;
-        limit.put("limit", "5");
+        limit.put("limit", "25");
         movieInfo.put("sublanguageid", language);
         movieInfo.put("query", toSearch);
         searchInfo.put("1", movieInfo);
