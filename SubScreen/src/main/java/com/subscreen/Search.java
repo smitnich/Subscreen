@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.io.FileOutputStream;
 import java.net.MalformedURLException;
@@ -30,6 +31,7 @@ public class Search extends Activity {
     EditText searchString;
     ListView resultList;
     ArrayAdapter adp;
+    Spinner languageSelect;
     SubDownloader.Result[] results;
     String[] fileNames;
     AsyncTask<String, String, String> searchTask;
@@ -45,6 +47,7 @@ public class Search extends Activity {
         backButton = (Button) findViewById(R.id.backButton);
         searchButton = (Button) findViewById(R.id.startButton);
         resultList = (ListView) findViewById(R.id.resultsList);
+        languageSelect = (Spinner) findViewById(R.id.languages);
         currentActivity = this;
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -57,6 +60,14 @@ public class Search extends Activity {
                 returnToSelectScreen();
             }
         });
+        initLanguages();
+    }
+    private void initLanguages() {
+        Languages.Language[] allLanguages = Languages.allLanguages;
+        ArrayAdapter langAdp = new ArrayAdapter(this, android.R.layout.simple_spinner_item, allLanguages);
+        languageSelect.setAdapter(langAdp);
+        languageSelect.setSelection(1);
+        langAdp.notifyDataSetChanged();
     }
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -84,7 +95,8 @@ public class Search extends Activity {
                 return;
             }
         }
-        results = down.Search(toSearch, "eng");
+        Languages.Language currentLanguage = (Languages.Language) languageSelect.getSelectedItem();
+        results = down.Search(toSearch, currentLanguage.shortName);
         if (results.length == 0) {
             runOnUiThread(new Runnable() {
                 public void run() {
