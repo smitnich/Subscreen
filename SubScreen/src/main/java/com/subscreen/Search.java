@@ -51,6 +51,9 @@ public class Search extends Activity {
         currentActivity = this;
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                // Disable the search button while running the search so users know not
+                // to click on it
+                searchButton.setEnabled(false);
                 hideSoftKeyboard(currentActivity);
                 runSearchThread();
             }
@@ -147,6 +150,11 @@ public class Search extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    searchButton.setEnabled(true);
+                }
+            });
             return null;
         }
         @Override
