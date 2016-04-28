@@ -90,16 +90,18 @@ public class ShowText extends FragmentActivity {
                 zoomIn();
             }
         });
-        if (!cachedPlayers.containsKey(fileName)) {
-            playerInstance = new SubtitlePlayer();
-            cachedPlayers.put(fileName, playerInstance);
-            playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding, fileName);
-        }
-        else
-        {
-            playerInstance = cachedPlayers.get(fileName);
-            playerInstance.playbackStarted = false;
-            playerInstance.resume(t, this.getApplicationContext(), fileData, this, fileStream.encoding);
+        try {
+            if (!cachedPlayers.containsKey(fileName) || cachedPlayers.get(fileName).finished) {
+                playerInstance = new SubtitlePlayer();
+                cachedPlayers.put(fileName, playerInstance);
+                playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding, fileName);
+            } else {
+                playerInstance = cachedPlayers.get(fileName);
+                playerInstance.playbackStarted = false;
+                playerInstance.resume(t, this.getApplicationContext(), fileData, this, fileStream.encoding);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     private void zoomIn() {

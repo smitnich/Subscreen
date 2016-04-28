@@ -53,6 +53,7 @@ public class SubtitlePlayer {
     public ArrayList<String> languages = null;
     public String fileName;
     private boolean resumed = false;
+    public boolean finished = false;
 	public void main(TextView toEdit, Context _context, BufferedInputStream fileData, Activity activity, String encoding, String _fileName) {
         context = _context;
         fileName = _fileName;
@@ -97,6 +98,7 @@ public class SubtitlePlayer {
         // Check if this was already loaded beforehand
         initText();
         pause();
+        finished = false;
         loaded = true;
     }
     public void resume(TextView toEdit, Context _context,
@@ -309,6 +311,7 @@ public class SubtitlePlayer {
             }
         });
         outputTo.outputText(context.getString(R.string.finish_play));
+        finished = true;
         try {
             Thread.sleep(30 * 1000);
         }
