@@ -85,6 +85,15 @@ public class Search extends Activity {
     }
 
     private void doSearch() {
+        if (!checkNetworkState())
+        {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    displayMessage("No network connection found ", "No connection");
+                }
+            });
+            return;
+        }
         final String toSearch = searchString.getText().toString();
         if (down == null) {
             down = new SubDownloader();
@@ -202,11 +211,11 @@ public class Search extends Activity {
             // example showing ProgessDialog
         }
     }
-    public void checkNetworkState() {
+    public boolean checkNetworkState() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo mWifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo n = cm.getActiveNetworkInfo();
+        return (n != null && n.isConnectedOrConnecting());
     }
     void displayMessage(String message, String title) {
         new AlertDialog.Builder(this)
