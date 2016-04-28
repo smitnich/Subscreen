@@ -83,7 +83,37 @@ public class Search extends Activity {
         searchTask = new SearchTaskRunner();
         searchTask.execute();
     }
+    private void askToPlay(final String path, final String fileName) {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Launch the subtitle playing activity
+                        playSubtitles(path + fileName);
+                        break;
 
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //Do nothing
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(fileName + " was downloaded successfully. Play now?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener)
+                .setTitle("Play now?").setIcon(android.R.drawable.ic_dialog_alert).show();
+
+    }
+    private void playSubtitles(String path)
+    {
+        Intent intent = new Intent(Search.this, ShowText.class);
+        Bundle b = new Bundle();
+        b.putString("fileName", path);
+        intent.putExtras(b);
+        startActivity(intent);
+        finish();
+    }
     private void doSearch() {
         if (!checkNetworkState())
         {
@@ -103,7 +133,11 @@ public class Search extends Activity {
                 return;
             }
             if (down.Connect(downloadPath) == null) {
-                // error here
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        displayMessage("Unable to connect", "No connection");
+                    }
+                });
                 return;
             }
         }
@@ -112,7 +146,7 @@ public class Search extends Activity {
         if (results.length == 0) {
             runOnUiThread(new Runnable() {
                 public void run() {
-                    displayMessage("No results found for " + toSearch, "No results found");
+                    displayMessage("No results found for \"" + toSearch + "\"", "No results found");
                 }
             });
             return;
@@ -199,7 +233,7 @@ public class Search extends Activity {
             downloadTask = null;
             runOnUiThread(new Runnable() {
                 public void run() {
-                    displayMessage(toDownload.fileName + " was successfully downloaded.", "Download Complete");
+                    askToPlay(path, toDownload.fileName);
                 }
             });
             // execution of result of Long time consuming operation
