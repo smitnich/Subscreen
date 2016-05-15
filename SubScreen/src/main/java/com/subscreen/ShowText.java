@@ -54,7 +54,7 @@ public class ShowText extends FragmentActivity {
         lastFileName = fileName + zipFileName;
         FileHelper.EncodingWrapper fileStream = FileHelper.readFile(fileName, zipFileName);
         BufferedInputStream fileData = new BufferedInputStream(fileStream.data);
-        backButton = (Button) findViewById(R.id.backButton);
+        backButton = (Button) findViewById(R.id.doLoginButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +91,7 @@ public class ShowText extends FragmentActivity {
             }
         });
         try {
-            if (!cachedPlayers.containsKey(fileName) || cachedPlayers.get(fileName).finished) {
+            if (!cachedPlayers.containsKey(fileName) || cachedPlayers.get(fileName).finished || !cachedPlayers.get(fileName).playbackStarted) {
                 playerInstance = new SubtitlePlayer();
                 cachedPlayers.put(fileName, playerInstance);
                 playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding, fileName);
