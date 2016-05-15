@@ -86,7 +86,6 @@ public class Search extends Activity {
         Intent intent = new Intent(Search.this, Login.class);
         Bundle bundle = new Bundle();
         bundle.putString("path", path);
-        bundle.putSerializable("downloader", down);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

@@ -22,7 +22,7 @@ import de.timroes.axmlrpc.XMLRPCClient;
 import de.timroes.axmlrpc.XMLRPCException;
 import de.timroes.base64.Base64;
 
-public class SubDownloader implements Serializable {
+public class SubDownloader {
 	String path = "http://api.opensubtitles.org:80/xml-rpc";
 	XMLRPCClient cl;
 	URL url;
