@@ -25,8 +25,8 @@
         <Button
             android:layout_width="176dp"
             android:layout_height="wrap_content"
-            android:text="Back"
-            android:id="@+id/backButton"
+            android:text="Login"
+            android:id="@+id/doLoginButton"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"

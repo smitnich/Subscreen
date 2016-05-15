@@ -200,6 +200,9 @@ public class SelectFile extends FragmentActivity {
             Intent intent = new Intent(SelectFile.this, Search.class);
             Bundle b = new Bundle();
             b.putString("path", curPath);
+            b.putString("username", "");
+            b.putString("password", "");
+            b.putSerializable("downloader", null);
             intent.putExtras(b);
             startActivity(intent);
             finish();

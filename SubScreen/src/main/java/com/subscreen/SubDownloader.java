@@ -3,13 +3,16 @@ package com.subscreen;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Parcelable;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.EditText;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +22,7 @@ import de.timroes.axmlrpc.XMLRPCClient;
 import de.timroes.axmlrpc.XMLRPCException;
 import de.timroes.base64.Base64;
 
-public class SubDownloader {
+public class SubDownloader implements Serializable {
 	String path = "http://api.opensubtitles.org:80/xml-rpc";
 	XMLRPCClient cl;
 	URL url;
@@ -27,31 +30,45 @@ public class SubDownloader {
 	String token;
 	Boolean connected = false;
     String searchString = "";
+	String username;
+	String password;
 
-    public XMLRPCClient Connect(URL url) {
+    public boolean Connect(URL url) {
 		if (connected)
-			return cl;
+			return true;
 		cl = new XMLRPCClient(url);
 		try {
 			token = Login(cl);
 		} catch (XMLRPCException e) {
 			System.out.println("Unable to connect to server: " + e.getMessage());
-			return null;
+			return false;
 		}
+		if (token == null)
+			return false;
 		connected = true;
-		return cl;
+		return true;
 	}
 	private String Login(XMLRPCClient cl) throws XMLRPCException {
 		@SuppressWarnings("unchecked")
+		// This is what the status will be when an invalid username or password is entered
+		final String badUsernameStatus = "401 Unauthorized";
 		HashMap<String, Object> result;
 		try {
-			result = (HashMap<String, Object>) cl.call("LogIn", "", "", "english", testUser);
+			result = (HashMap<String, Object>) cl.call("LogIn", username, password, "english", testUser);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+		String status = (String) result.get("status");
+		if (status.compareTo(badUsernameStatus) == 0) {
+			return null;
+		}
 		return (String) result.get("token");
+	}
+	public void setUser(String _username, String _password) {
+		username = _username;
+		password = _password;
 	}
 	public void Disconnect() {
 		if (!connected)

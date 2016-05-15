@@ -24,9 +24,9 @@ import java.net.URL;
 
 public class Search extends Activity {
     String path = "";
-    SubDownloader down = null;
+    static SubDownloader down = null;
     Button searchButton;
-    Button backButton;
+    Button loginButton;
     static URL downloadPath;
     EditText searchString;
     ListView resultList;
@@ -36,6 +36,8 @@ public class Search extends Activity {
     String[] fileNames;
     AsyncTask<String, String, String> searchTask;
     AsyncTask<String, String, String> downloadTask;
+    String username;
+    String password;
     Activity currentActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +45,22 @@ public class Search extends Activity {
         setContentView(R.layout.activity_search);
         Bundle b = getIntent().getExtras();
         path = b.getString("path");
+        username = b.getString("username");
+        password = b.getString("password");
+        SubDownloader tmpDownloader = (SubDownloader) b.getSerializable("downloader");
+        if (tmpDownloader != null)
+            down = tmpDownloader;
         searchString = (EditText) findViewById(R.id.searchString);
-        backButton = (Button) findViewById(R.id.backButton);
+        loginButton = (Button) findViewById(R.id.doLoginButton);
         searchButton = (Button) findViewById(R.id.startButton);
         resultList = (ListView) findViewById(R.id.resultsList);
         languageSelect = (Spinner) findViewById(R.id.languages);
         currentActivity = this;
+        try {
+            downloadPath = new URL("http://api.opensubtitles.org:80/xml-rpc");
+        } catch (MalformedURLException e) {
+            return;
+        }
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // Disable the search button while running the search so users know not
@@ -58,12 +70,26 @@ public class Search extends Activity {
                 runSearchThread();
             }
         });
-        backButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                returnToSelectScreen();
+                gotoLoginScreen();
             }
         });
         initLanguages();
+    }
+    @Override
+    // Override the Back button behavior to make sure that we clean up any remaining threads
+    public void onBackPressed() {
+        returnToSelectScreen();
+    }
+    private void gotoLoginScreen() {
+        Intent intent = new Intent(Search.this, Login.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("path", path);
+        bundle.putSerializable("downloader", down);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
     private void initLanguages() {
         Languages.Language[] allLanguages = Languages.allLanguages;
@@ -109,6 +135,8 @@ public class Search extends Activity {
     {
         Intent intent = new Intent(Search.this, ShowText.class);
         Bundle b = new Bundle();
+        if (down != null)
+            down.Disconnect();
         b.putString("fileName", path);
         intent.putExtras(b);
         startActivity(intent);
@@ -127,12 +155,8 @@ public class Search extends Activity {
         final String toSearch = searchString.getText().toString();
         if (down == null) {
             down = new SubDownloader();
-            try {
-                downloadPath = new URL("http://api.opensubtitles.org:80/xml-rpc");
-            } catch (MalformedURLException e) {
-                return;
-            }
-            if (down.Connect(downloadPath) == null) {
+            down.setUser(username, password);
+            if (down.Connect(downloadPath) == false) {
                 runOnUiThread(new Runnable() {
                     public void run() {
                         displayMessage("Unable to connect", "No connection");
@@ -186,7 +210,6 @@ public class Search extends Activity {
     private class SearchTaskRunner extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            publishProgress("testing"); // Calls onProgressUpdate()
             // Do your long operations here and return the result
             try {
                 doSearch();
@@ -219,7 +242,6 @@ public class Search extends Activity {
         }
         @Override
         protected String doInBackground(String... params) {
-            publishProgress("testing"); // Calls onProgressUpdate()
             // Do your long operations here and return the result
             try {
                 down.Download(toDownload.id, new FileOutputStream(path + toDownload.fileName));
@@ -241,8 +263,6 @@ public class Search extends Activity {
 
         @Override
         protected void onPreExecute() {
-            // Things to be done before execution of long running operation. For
-            // example showing ProgessDialog
         }
     }
     public boolean checkNetworkState() {
