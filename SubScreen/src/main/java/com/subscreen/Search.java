@@ -198,6 +198,9 @@ public class Search extends Activity {
     }
     private void itemClicked(int position) {
         SubDownloader.Result result = results[position];
+        // Don't start another download if one is already running
+        if (downloadTask != null)
+            return;
         downloadTask = new DownloadTaskRunner();
         ((DownloadTaskRunner) downloadTask).setToDownload(result);
         try {

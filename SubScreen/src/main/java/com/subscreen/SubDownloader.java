@@ -3,6 +3,7 @@ package com.subscreen;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.text.InputType;
 import android.util.Log;
@@ -71,6 +72,9 @@ public class SubDownloader {
 		password = _password;
 	}
 	public void Disconnect() {
+		new DisconnectTaskRunner().execute();
+	}
+	private void DisconnectInternal() {
 		if (!connected)
 			return;
 		try {
@@ -170,6 +174,27 @@ public class SubDownloader {
         }
         return searchString;
     }
+	private class DisconnectTaskRunner extends AsyncTask<String, String, String> {
+		@Override
+		protected String doInBackground(String... params) {
+			// Do your long operations here and return the result
+			try {
+				DisconnectInternal();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		@Override
+		protected void onPostExecute(String result) {
+			// execution of result of Long time consuming operation
+		}
+		@Override
+		protected void onPreExecute() {
+			// Things to be done before execution of long running operation. For
+			// example showing ProgessDialog
+		}
+	}
 	public class Result {
 		HashMap<String, String> data;
 		public String name = "";
