@@ -36,6 +36,8 @@ public class VTTFormat implements SubtitleFormat {
     }
     public void readLines(BufferedReader in, ArrayList<TextBlock> blocks) throws Exception{
         int i = 0;
+        // Skip the header
+        in.readLine();
         while (in.ready()) {
                 TimeBlock block = parseBlock(in);
                 if (block != null)
@@ -51,7 +53,7 @@ public class VTTFormat implements SubtitleFormat {
         // Check if we have two :s in the input by finding the first one, then checking if one
         // exists beyond that one
         if (input.indexOf(':', input.indexOf(':')+1) != -1) {
-            Integer.parseInt(input.substring(0, count).trim());
+            hours = Integer.parseInt(input.substring(0, count).trim());
             nextCount = input.indexOf(":", count + 1);
             count += 1;
         }
@@ -68,7 +70,7 @@ public class VTTFormat implements SubtitleFormat {
         int seconds = Integer.parseInt(input.substring(count+1,nextCount).trim());
         int milliseconds = 0;
         if (input.length() > nextCount + 1)
-            milliseconds = Integer.parseInt(input.substring(nextCount+1,input.length()).trim());
+            milliseconds = Integer.parseInt(input.substring(nextCount+1).trim());
         return (hours*60*60*1000) + (minutes*60*1000) + (seconds*1000) + milliseconds;
     }
     // We don't want to deal with the voice tags for now...
@@ -82,9 +84,11 @@ public class VTTFormat implements SubtitleFormat {
     TimeBlock parseBlock(BufferedReader in) {
         try {
             String input = in.readLine();
+            if (input.length() == 0)
+                return null;
             // If we find a NOTE block, skip ahead to the next empty line
             if (input.startsWith(note)) {
-                while (in.readLine().length() > 0) ;
+                while (in.readLine().length() > 0);
                 return null;
             }
             // Skip past the optional block numbers, we don't need them
@@ -94,12 +98,15 @@ public class VTTFormat implements SubtitleFormat {
             }
             input = input.trim();
             String beginTimeString = input.substring(0,input.indexOf('-')).trim();
-            String endTimeString = input.substring(input.lastIndexOf('>')+2,input.length()).trim();
+            int tmpNum =  input.indexOf(' ', input.lastIndexOf('>')+2);
+            if (tmpNum == -1)
+                tmpNum = input.length();
+            String endTimeString = input.substring(input.lastIndexOf('>')+2, tmpNum).trim();
             long beginTime = parseTimeStamp(beginTimeString);
             long endTime = parseTimeStamp(endTimeString);
             input = in.readLine();
             String text = "";
-            while (!(isInt(input.toCharArray()) || input.length() == 0))
+            while (input != null && !(isInt(input.toCharArray()) || input.length() == 0))
             {
                 text += stripVoice(input.trim());
                 input = in.readLine();
