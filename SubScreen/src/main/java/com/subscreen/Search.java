@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -56,6 +57,7 @@ public class Search extends Activity {
         resultList = (ListView) findViewById(R.id.resultsList);
         languageSelect = (Spinner) findViewById(R.id.languages);
         currentActivity = this;
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         try {
             downloadPath = new URL("http://api.opensubtitles.org:80/xml-rpc");
         } catch (MalformedURLException e) {
