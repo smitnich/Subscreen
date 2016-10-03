@@ -41,10 +41,6 @@ public class FrameBlock implements TextBlock {
     {
         return showFramerates;
     }
-    public void addSyncMessage(String message)
-    {
-        text = message + text;
-    }
     public static void setFrameRate(int choice)
     {
         currentFramerateMultiplier = frameRateMultipliers[choice];
@@ -91,6 +87,7 @@ public class FrameBlock implements TextBlock {
     public long getEndValue() {
         return endFrame;
     }
+    public void setEndValue(long input) { endFrame = input; }
     public long checkFramerate(double newFPS, int index) {
         Date currentTime = new Date();
         double numFrames = (currentTime.getTime()-playerInstance.rootTime)/frameRateModifier-pauseTime;

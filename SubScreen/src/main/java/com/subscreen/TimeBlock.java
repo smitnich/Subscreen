@@ -69,4 +69,5 @@ public class TimeBlock implements TextBlock {
 	public long getEndValue() {
 		return endTime;
 	}
+	public void setEndValue(long input) { endTime = input; }
 }

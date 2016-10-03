@@ -13,7 +13,7 @@ import com.subscreen.TimeBlock;
 
 public class VTTFormat implements SubtitleFormat {
 
-    private static String note = "NOTE";
+    private static String[] toSkip = {"NOTE", "REGION", "STYLE"};
     public TextView writeTo;
     SubtitlePlayer playerInstance = null;
     public VTTFormat(SubtitlePlayer tmpPlayer)
@@ -32,6 +32,7 @@ public class VTTFormat implements SubtitleFormat {
         {
             return null;
         }
+        fixupTimeStamps(blocks);
         return blocks;
     }
     public void readLines(BufferedReader in, ArrayList<TextBlock> blocks) throws Exception{
@@ -86,10 +87,12 @@ public class VTTFormat implements SubtitleFormat {
             String input = in.readLine();
             if (input.length() == 0)
                 return null;
-            // If we find a NOTE block, skip ahead to the next empty line
-            if (input.startsWith(note)) {
-                while (in.readLine().length() > 0);
-                return null;
+            // If we find a block that we don't process, skip ahead to the next empty line
+            for (String skip : toSkip) {
+                if (input.startsWith(skip)) {
+                    while (in.readLine().length() > 0) ;
+                    return null;
+                }
             }
             // Skip past the optional block numbers, we don't need them
             while (isInt(input.toCharArray()) || input.length() == 0)
@@ -129,5 +132,17 @@ public class VTTFormat implements SubtitleFormat {
                 return false;
         }
         return true;
+    }
+    // Check for any overlapping timestamps, as VTT allows for multiple cues to be showing at once
+    // We can't support this, so just make the first cue stop when the second one starts
+    public void fixupTimeStamps(ArrayList<TextBlock> blocks) {
+        int i;
+        for (i = 0; i < blocks.size()-1; i++)
+        {
+            if (blocks.get(i).getEndValue() > blocks.get(i+1).getStartValue())
+            {
+                blocks.get(i).setEndValue(blocks.get(i+1).getStartValue());
+            }
+        }
     }
 }

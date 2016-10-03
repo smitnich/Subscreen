@@ -13,4 +13,5 @@ public interface TextBlock {
     public long getStartTime();
     public long getStartValue();
     public long getEndValue();
+    public void setEndValue(long input);
 }
