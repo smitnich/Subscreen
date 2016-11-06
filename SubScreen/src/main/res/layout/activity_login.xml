@@ -59,4 +59,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textSize="24dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:id="@+id/doBackButton"
+        android:textSize="32sp"
+        android:layout_alignTop="@+id/doLoginButton"
+        android:layout_toRightOf="@+id/doLoginButton"
+        android:layout_toEndOf="@id/doLoginButton" />
 </RelativeLayout>
