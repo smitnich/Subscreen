@@ -26,36 +26,41 @@ to manually resync the player for
 some reason, such as commercials.
 
 6
-00:00:14,001 --> 00:00:19,000
-A few sites that have subtitles for this program are:
+00:00:14,001 --> 00:00:16,500
+This program is capable of automatically
+
+7
+00:00:16,501 --> 00:00:19,000
+downloading subtitles from OpenSubtitles.org
 
 8
-00:00:17,001 --> 00:00:22,000
-opensubtitles.org
-moviesubtitles.org
-subscene.com
-tv-subs.com
+00:00:19,001 --> 00:00:22,000
+Just hit the (Download) button, and type
+the name of the movie or show.
 
 9
-00:00:22,001 --> 00:00:25,000
-All formats on those sites should work,
-including zip files.
+00:00:22,001 --> 00:00:24,500
+Optionally, you can login to your OpenSubtitles account
 
 10
-00:00:25,001 --> 00:00:30,000
-Subtitle files should be placed in:
-$SUBTITLE_FOLDER_PATH$
+00:00:24,501 --> 00:00:27,000
+or include only subtitles in a particular language.
 
 11
-00:00:30,001 --> 00:00:35,000
+00:00:27,001 --> 00:00:32,000
+Manually downloaded subtitle files should be placed in:
+$SUBTITLE_FOLDER_PATH$
+
+12
+00:00:32,001 --> 00:00:37,000
 Finally, you can use the + or - buttons
 to the left in order to adjust text size.
 
-11
-00:00:35,001 --> 00:00:38,000
+13
+00:00:37,001 --> 00:00:42,000
 Thank you for downloading this app!
 
-12
-00:00:38,001 --> 99:99:99,000
+14
+00:00:42,001 --> 99:99:99,000
 Press the Back button to return
 to the file selection menu.

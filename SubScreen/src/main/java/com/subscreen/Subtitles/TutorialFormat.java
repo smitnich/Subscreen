@@ -28,7 +28,7 @@ public class TutorialFormat implements SubtitleFormat {
             //Remove the play block so that the first instruction will automatically appear
             blocks.remove(0);
             //Replace the placeholder string with the actual path
-            TimeBlock block = (TimeBlock) blocks.get(8);
+            TimeBlock block = (TimeBlock) blocks.get(10);
             block.text = block.text.replace("$SUBTITLE_FOLDER_PATH$",folderPath);
         } catch (IOException e) {
             return null;
