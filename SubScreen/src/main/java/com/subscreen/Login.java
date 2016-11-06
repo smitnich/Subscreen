@@ -1,8 +1,10 @@
 package com.subscreen;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -14,6 +16,7 @@ import de.timroes.axmlrpc.XMLRPCClient;
 
 public class Login extends Activity {
     Button loginButton;
+    Button backButton;
     SubDownloader down;
     EditText usernameBox;
     EditText passwordBox;
@@ -26,6 +29,7 @@ public class Login extends Activity {
         loginButton = (Button) findViewById(R.id.doLoginButton);
         usernameBox = (EditText) findViewById(R.id.userText);
         passwordBox = (EditText) findViewById(R.id.passwordText);
+        backButton = (Button) findViewById(R.id.doBackButton);
         Bundle b = getIntent().getExtras();
         curPath = b.getString("path");
         down = (SubDownloader) b.getSerializable("downloader");
@@ -39,6 +43,19 @@ public class Login extends Activity {
                 task.execute();
             }
         });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                task = null;
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        returnToSearchActivity();
+                    }
+                });
+            }
+        });
+
+
     }
 
     private boolean tryLogin() {
@@ -54,6 +71,16 @@ public class Login extends Activity {
 
         @Override
         protected String doInBackground(String... params) {
+            task = null;
+            if (!Search.checkNetworkState((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)))
+            {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        displayMessage("No network connection found ", "No connection");
+                    }
+                });
+                return "";
+            }
             if (!tryLogin()) {
                 runOnUiThread(new Runnable() {
 
@@ -64,7 +91,6 @@ public class Login extends Activity {
                 });
                 return "";
             }
-            task = null;
             runOnUiThread(new Runnable() {
                 public void run() {
                     returnToSearchActivity();

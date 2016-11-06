@@ -143,7 +143,7 @@ public class Search extends Activity {
         finish();
     }
     private void doSearch() {
-        if (!checkNetworkState())
+        if (!checkNetworkState((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)))
         {
             runOnUiThread(new Runnable() {
                 public void run() {
@@ -268,9 +268,7 @@ public class Search extends Activity {
         protected void onPreExecute() {
         }
     }
-    public boolean checkNetworkState() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean checkNetworkState(ConnectivityManager cm) {
         NetworkInfo n = cm.getActiveNetworkInfo();
         return (n != null && n.isConnectedOrConnecting());
     }
