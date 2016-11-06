@@ -36,7 +36,6 @@ public class SelectFile extends FragmentActivity {
     String downloadString;
     String backString;
     ArrayAdapter adp;
-    SubDownloader down = new SubDownloader();
     boolean zipOpened = false;
     boolean isMounted = true;
     FilenameFilter textFilter = new FilenameFilter() {

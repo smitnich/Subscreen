@@ -17,7 +17,6 @@ import java.util.ArrayList;
  * Created by Nick on 12/27/2014.
  */
 public class SubViewerTwoFormat implements SubtitleFormat {
-    public TextView writeTo;
     SubtitlePlayer playerInstance = null;
     public SubViewerTwoFormat(SubtitlePlayer tmpPlayer)
     {

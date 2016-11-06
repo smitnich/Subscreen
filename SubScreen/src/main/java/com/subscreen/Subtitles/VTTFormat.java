@@ -14,7 +14,6 @@ import com.subscreen.TimeBlock;
 public class VTTFormat implements SubtitleFormat {
 
     private static String[] toSkip = {"NOTE", "REGION", "STYLE"};
-    public TextView writeTo;
     SubtitlePlayer playerInstance = null;
     public VTTFormat(SubtitlePlayer tmpPlayer)
     {

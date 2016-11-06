@@ -12,9 +12,6 @@ public class AndroidOutput implements Output {
 
 	TextView out = null;
     Activity activity;
-    Charset loadedCharset;
-    Charset destCharset;
-    String destCharsetString;
     String lastText;
 	public static float textSize = 0.0f;
 	static float minSize = 4.0f;

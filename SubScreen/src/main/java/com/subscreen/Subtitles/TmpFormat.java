@@ -17,7 +17,6 @@ import com.subscreen.TimeBlock;
 
 public class TmpFormat implements SubtitleFormat {
 
-	public TextView writeTo;
     public SubtitlePlayer playerInstance = null;
     public TmpFormat(SubtitlePlayer tmpPlayer)
     {

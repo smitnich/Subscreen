@@ -19,7 +19,6 @@ import java.util.ArrayList;
  * Created by Nick on 12/27/2014.
  */
 public class MPLFormat implements SubtitleFormat {
-    public TextView writeTo;
     SubtitlePlayer playerInstance = null;
     public MPLFormat(SubtitlePlayer tmpPlayer)
     {

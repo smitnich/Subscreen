@@ -14,7 +14,6 @@ import com.subscreen.TimeBlock;
 
 public class SrtFormat implements SubtitleFormat {
 
-	public TextView writeTo;
     SubtitlePlayer playerInstance = null;
     public SrtFormat(SubtitlePlayer tmpPlayer)
     {

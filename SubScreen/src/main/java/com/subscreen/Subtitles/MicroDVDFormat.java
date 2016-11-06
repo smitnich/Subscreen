@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
  * Created by Nick on 12/28/2014.
  */
 public class MicroDVDFormat implements SubtitleFormat {
-    public TextView writeTo;
     SubtitlePlayer playerInstance = null;
     public MicroDVDFormat(SubtitlePlayer tmpPlayer)
     {

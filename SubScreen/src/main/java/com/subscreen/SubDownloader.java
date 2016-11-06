@@ -24,10 +24,10 @@ import de.timroes.axmlrpc.XMLRPCException;
 import de.timroes.base64.Base64;
 
 public class SubDownloader {
-	String path = "http://api.opensubtitles.org:80/xml-rpc";
+	final static String path = "http://api.opensubtitles.org:80/xml-rpc";
 	XMLRPCClient cl;
 	URL url;
-	String testUser = "subscreen";
+	final static String testUser = "subscreen";
 	String token;
 	Boolean connected = false;
     String searchString = "";
@@ -142,38 +142,6 @@ public class SubDownloader {
 			}
 			return "";
 		}
-    public String GetSearchString(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Title");
-        searchString = "";
-        // Set up the input
-        final EditText input = new EditText(context);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(input);
-
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                searchString = input.getText().toString();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-        while (searchString.length() == 0) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {}
-        }
-        return searchString;
-    }
 	private class DisconnectTaskRunner extends AsyncTask<String, String, String> {
 		@Override
 		protected String doInBackground(String... params) {

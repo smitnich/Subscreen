@@ -42,4 +42,5 @@
         completions."
     </string>
     <string name="title_activity_login">Login to OpenSubtitles.org</string>
+    <string name="back">Back</string>
 </resources>

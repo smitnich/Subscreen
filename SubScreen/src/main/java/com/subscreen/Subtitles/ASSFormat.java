@@ -15,11 +15,11 @@ public class ASSFormat implements SubtitleFormat {
 
 	//The string that begins any dialogue data
 	//The number of commas before reaching the actual text to output
-	static int lastCommaCount = 9;
-	static String[] replaceTags = {"i0","i1","b0","b1","s0","s1"};
-    static String[] replaceTagsWith = {"</i>","<i>","</b>","<b>","</strike>","<strike>"};
-    static String[] replaceText = {"\\N",};
-	static String[] replaceTextWith = {"<br>","<i>","<i>",""};
+	final static int lastCommaCount = 9;
+	final static String[] replaceTags = {"i0","i1","b0","b1","s0","s1"};
+    final static String[] replaceTagsWith = {"</i>","<i>","</b>","<b>","</strike>","<strike>"};
+    final static String[] replaceText = {"\\N",};
+	final static String[] replaceTextWith = {"<br>","<i>","<i>",""};
     SubtitlePlayer playerInstance = null;
     public ASSFormat(SubtitlePlayer tmpPlayer)
     {
@@ -132,6 +132,7 @@ public class ASSFormat implements SubtitleFormat {
 				    blocks.add(new TimeBlock(buffer.trim(), beginTime, endTime, playerInstance));
 			}
 		} catch (IOException e) {
+            return;
 		}
 	}
     //SSA format stores colors in hex BBGGRR hex format; this is the opposite order of HTML, which

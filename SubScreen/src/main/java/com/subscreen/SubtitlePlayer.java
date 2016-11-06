@@ -110,14 +110,14 @@ public class SubtitlePlayer {
         params.screenBrightness = 0.1f;
         activity.getWindow().setAttributes(params);
         SubtitleFormat subFile = pickFormat(fileData, encoding);
-        if (subFile == null){
+        if (subFile == null) {
             parentActivity.displayBackMessage(
                     context.getString(R.string.bad_format_message), context.getString(R.string.bad_format_title));
             return;
         }
-        Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(),"DejaVuSans.ttf");
+        Typeface test_font = Typeface.createFromAsset(context.getResources().getAssets(), "DejaVuSans.ttf");
         toEdit.setTypeface(test_font);
-        outputTo = new AndroidOutput(activity,context.getResources().getDimension(R.dimen.activity_text_size));
+        outputTo = new AndroidOutput(activity, context.getResources().getDimension(R.dimen.activity_text_size));
         outputTo.setTextView(toEdit);
         try {
             blocks = subFile.readFile(fileData, srcCharset);
@@ -129,10 +129,9 @@ public class SubtitlePlayer {
                 parentActivity.convertFramerateButton.setEnabled(false);
                 parentActivity.convertFramerateButton.setVisibility(View.INVISIBLE);
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             parentActivity.displayBackMessage(
-                    context.getText(R.string.bad_format_message).toString(),"Sorry");
+                    context.getText(R.string.bad_format_message).toString(), "Sorry");
             return;
         }
         if (smiSub != null) {
@@ -143,9 +142,13 @@ public class SubtitlePlayer {
         }
         parentActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         loaded = true;
-        paused = true;
         resumed = true;
-        pause();
+        if (!paused) {
+            paused = true;
+            pause();
+        }
+        else
+            reloadSubtitle();
     }
     public double getCurrentFramerate() {
         return FrameBlock.currentFramerateMultiplier;
@@ -221,6 +224,19 @@ public class SubtitlePlayer {
         playbackStarted = false;
         parentActivity.updateButtons(subCount,blocks.size());
     }
+    private void reloadSubtitle()
+    {
+        if (!paused)
+            pause();
+        if (subCount+1 >= blocks.size() || subCount < 0)
+            return;
+        TextBlock currentBlock = blocks.get(subCount);
+        currentBlock.getText(outputTo);
+        playbackStarted = false;
+        parentActivity.updateButtons(subCount, blocks.size());
+        ShowText.setButton("▶");
+        rootTime = new Date().getTime();
+    }
     public void nextSubtitle()
     {
         if (!paused)
@@ -246,8 +262,7 @@ public class SubtitlePlayer {
             outputTo.out.setTextSize(outputTo.textSize);
             playbackStarted = true;
             if (!resumed) {
-                Date rootDate = new Date();
-                rootTime = rootDate.getTime();
+                rootTime = new Date().getTime();
             }
             text = blocks.get(subCount);
             firstSubtitleStartTime = text.getStartTime();

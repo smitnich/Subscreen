@@ -6,7 +6,6 @@ public class TimeBlock implements TextBlock {
 	public String text;
 	public long startTime;
 	public long endTime;
-    public long offset = 0;
     SubtitlePlayer playerInstance = null;
     public boolean showFramerates = false;
     public TimeBlock(String input, long s, long e, SubtitlePlayer tmpPlayer)
@@ -26,10 +25,6 @@ public class TimeBlock implements TextBlock {
     public boolean showFramerates()
     {
         return showFramerates;
-    }
-    public void addSyncMessage(String message)
-    {
-        text = message + text;
     }
 	public void firstDelay() throws InterruptedException
 	{

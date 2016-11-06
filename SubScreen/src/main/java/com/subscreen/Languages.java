@@ -3,6 +3,10 @@ package com.subscreen;
 /**
  * Created by Nick on 4/13/2016.
  */
+/*
+    A hardcoded list of currently available languages on OpenSubtitles.org. This is done so that we
+    don't have to connect to the site first in order for the user to be able to select a language
+ */
 public class Languages {
     public static class Language {
         Language(String _shortName, String _fullName) {
