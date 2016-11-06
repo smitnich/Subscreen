@@ -37,7 +37,6 @@ public class ShowText extends FragmentActivity {
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        float textSize = getResources().getDimension(R.dimen.activity_text_size);
 		setContentView(R.layout.activity_show_text);
 		TextView t = (TextView)findViewById(R.id.text);
         pauseButton = (Button) findViewById(R.id.pauseButton);
@@ -91,7 +90,11 @@ public class ShowText extends FragmentActivity {
             }
         });
         try {
-            if (!cachedPlayers.containsKey(fileName) || cachedPlayers.get(fileName).finished || !cachedPlayers.get(fileName).playbackStarted) {
+            SubtitlePlayer player = null;
+            if (cachedPlayers.containsKey(fileName))
+                player = cachedPlayers.get(fileName);
+            if (player == null || player.finished
+                    || (!player.playbackStarted && player.subCount == 0))  {
                 playerInstance = new SubtitlePlayer();
                 cachedPlayers.put(fileName, playerInstance);
                 playerInstance.main(t, this.getApplicationContext(), fileData, this, fileStream.encoding, fileName);
@@ -116,12 +119,12 @@ public class ShowText extends FragmentActivity {
     public void updateButtons(final int count, final int maxCount){
                 if (count == 0)
                     prevButton.setVisibility(View.GONE);
-                else if (count >= maxCount - 1)
-                    nextButton.setVisibility(View.GONE);
-                else {
+                else
                     prevButton.setVisibility(View.VISIBLE);
+                if (count >= maxCount - 1)
+                    nextButton.setVisibility(View.GONE);
+                else
                     nextButton.setVisibility(View.VISIBLE);
-                }
     }
     void displayBackMessage(String message, String title)
     {
