@@ -169,9 +169,9 @@ public class SelectFile extends FragmentActivity {
     }
     private void goBackDirectory() {
         //Don't allow for going back past the subtitles directory
-        /*if (curPath.compareTo(dirPath) == 0) {
+        if (curPath.compareTo(dirPath) == 0) {
             return;
-        }*/
+        }
         if (curPath.compareTo("/") == 0) {
             return;
         }
@@ -193,8 +193,6 @@ public class SelectFile extends FragmentActivity {
     private void handleFileSelected(String fileName, boolean ignorePath) {
         //If a zip file is loaded, this is the one to be used within it
         String zipFileName = null;
-        // Url on OpenSubtitles to download from
-        URL url ;
         if (fileName.equals(downloadString)) {
             Intent intent = new Intent(SelectFile.this, Search.class);
             Bundle b = new Bundle();
@@ -254,7 +252,7 @@ public class SelectFile extends FragmentActivity {
         }
         else if (zipOpened) {
             zipFileName = fileName;
-            //Akward hack, we're already storing the full path in the curPath variable, so
+            //Awkward hack, we're already storing the full path in the curPath variable, so
             //we don't want anything appended to the filename
             fileName = "";
         }
@@ -306,8 +304,7 @@ public class SelectFile extends FragmentActivity {
         }
         File dir = new File(path);
         //If we're at the root directory, don't allow the user to go back
-        //if (!path.equals(dirPath))
-        if (!path.equals("/"))
+        if (!path.equals(dirPath))
             out.add(backString);
         out.add(downloadString);
         if (!isMounted || !dir.isDirectory() || !dir.canRead())
