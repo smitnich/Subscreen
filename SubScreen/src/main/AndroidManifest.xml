@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.subscreen"
+    package="com.subscreenplus"
     android:versionCode="1.1"
     android:versionName="1.1">
 
@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -20,12 +19,12 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar">
         <activity
-            android:name=".ShowText"
+            android:name="com.subscreenplus.ShowText"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="unspecified" />
         <activity
-            android:name=".SelectFile"
+            android:name="com.subscreenplus.SelectFile"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="SubScreen"
             android:screenOrientation="unspecified">
@@ -39,7 +38,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
 
-                <data android:host="com.subscreen" />
+                <data android:host="com.subscreenplus" />
                 <data android:mimeType="text/*" />
                 <data android:mimeType="application/zip" />
                 <data android:path="/*" />
@@ -52,11 +51,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Search"
+            android:name="com.subscreenplus.Search"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_search" />
         <activity
-            android:name=".Login"
+            android:name="com.subscreenplus.Login"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_login"></activity>
     </application>

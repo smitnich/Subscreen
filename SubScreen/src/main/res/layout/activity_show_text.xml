@@ -8,7 +8,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.subscreen.ShowText" >
+    tools:context="com.subscreenplus.ShowText" >
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
