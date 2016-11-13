@@ -18,11 +18,9 @@ import de.timroes.base64.Base64;
 public class SubDownloader {
 	final static String path = "http://api.opensubtitles.org:80/xml-rpc";
 	XMLRPCClient cl;
-	URL url;
 	final static String testUser = "subscreen";
 	String token;
 	Boolean connected = false;
-    String searchString = "";
 	String username;
 	String password;
 
