@@ -52,10 +52,11 @@ public class Login extends Activity {
                 });
             }
         });
-
-
     }
-
+    @Override
+    public void onBackPressed() {
+        returnToSearchActivity();
+    }
     private boolean tryLogin() {
         String username = usernameBox.getText().toString();
         String password = passwordBox.getText().toString();
