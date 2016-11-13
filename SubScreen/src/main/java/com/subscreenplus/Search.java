@@ -205,13 +205,13 @@ public class Search extends Activity {
         // Don't start another download if one is already running
         if (downloadTask != null)
             return;
-        downloadTask = new DownloadTaskRunner();
-        File oldSubs = new File(result.fileName);
-        if (oldSubs != null)
+        File oldSubs = new File(path + result.fileName);
+        if (oldSubs.exists())
         {
             askToPlay(path, result.fileName, true);
             return;
         }
+        downloadTask = new DownloadTaskRunner();
         ((DownloadTaskRunner) downloadTask).setToDownload(result);
         try {
             downloadTask.execute();
