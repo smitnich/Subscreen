@@ -142,8 +142,8 @@ public class SubtitlePlayer {
         loaded = true;
         resumed = true;
         if (!paused) {
-            paused = true;
-            pause();
+            // Unpause
+            resumePlay();
         }
         else
             reloadSubtitle();
@@ -259,12 +259,12 @@ public class SubtitlePlayer {
         if (!playbackStarted) {
             outputTo.out.setTextSize(outputTo.textSize);
             playbackStarted = true;
+            text = blocks.get(subCount);
             if (!resumed) {
                 rootTime = new Date().getTime();
+                firstSubtitleStartTime = text.getStartTime();
+                offset = -text.getStartTime();
             }
-            text = blocks.get(subCount);
-            firstSubtitleStartTime = text.getStartTime();
-            offset = -text.getStartTime();
             text.getText(outputTo);
             try {
                 text.secondDelay();
@@ -411,6 +411,11 @@ public class SubtitlePlayer {
         }
         return null;
     }
+    private void resumePlay()
+    {
+        ShowText.setButton("▋▋");
+        startThread();
+    }
     public void pause()
     {
         long timeOffset = 0;
@@ -424,6 +429,7 @@ public class SubtitlePlayer {
             ShowText.setButton("▋▋");
             timeOffset = new Date().getTime() - pauseTime;
             offset += timeOffset;
+            resumed = false;
             startThread();
         }
         paused = !paused;
